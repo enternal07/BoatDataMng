@@ -1,0 +1,10 @@
+/application.properties
+/applicationContext-email.xml
+/applicationContext-jaxrs-server.xml
+/applicationContext-jms.xml
+/applicationContext-shiro.xml
+/applicationContext-soap-client.xml
+/applicationContext-soap-server.xml
+/applicationContext.xml
+/log4jdbc.properties
+/logback.xml
