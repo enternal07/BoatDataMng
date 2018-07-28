@@ -1,20 +1,17 @@
 package com.wisely.domain;
 
-import java.sql.Date;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.MappedSuperclass;
 import javax.persistence.Table;
-
 import org.hibernate.annotations.GenericGenerator;
 
 
-@Entity //
-//@MappedSuperclass
+@Entity 
+@Inheritance
 @Table(name="item")
 public class Item extends BaseModel{
 	
@@ -24,19 +21,22 @@ public class Item extends BaseModel{
 	private static final long serialVersionUID = 1L;
 
 	@Id //2
-//	@GeneratedValue //3
 	@GeneratedValue(generator = "mcid")
 	@GenericGenerator(name="mcid",strategy="uuid2")
 	private String pk;
 	
-	/*样品*/
-	//@Column(name="sample_name")
-	//private String samplename;
-	
-	//@Column(name="sample_pk")
 	@ManyToOne
-	@JoinColumn(name="samplepk")
-	private Demometadata samplPO;
+	@JoinColumn(name="small_pk")
+	private Demometadata smallPO;
+	
+//	@ManyToOne
+//	@JoinColumn(name="sample_pk")
+//	private BaseMetaSample samplePO;
+	
+//	@ManyToOne
+//	@JoinColumn(name="backing_pk")
+	//private BaseMetaBacking bakingPO;
+
 	
 	//频率						
 	private Integer rate;
@@ -49,13 +49,8 @@ public class Item extends BaseModel{
 	
 	//吸声系数
 	private Float bondacust;
-	
-	
-	
-	public Item() {
-		
-	}
-	
+
+
 	public String getPk() {
 		return pk;
 	}
@@ -64,37 +59,43 @@ public class Item extends BaseModel{
 		this.pk = pk;
 	}
 
-//	public String getSamplename() {
-//		return samplename;
+//	public BaseMetaSample getSamplePO() {
+//		return samplePO;
 //	}
 //
-//	public void setSamplename(String samplename) {
-//		this.samplename = samplename;
+//	public void setSamplePO(BaseMetaSample samplePO) {
+//		this.samplePO = samplePO;
 //	}
 
-	
+//	public BaseMetaBacking getBakingPO() {
+//		return bakingPO;
+//	}
+//
+//	public void setBakingPO(BaseMetaBacking bakingPO) {
+//		this.bakingPO = bakingPO;
+//	}
 
-	public int getRate() {
+	public Integer getRate() {
 		return rate;
 	}
 
-	public void setRate(int rate) {
+	public void setRate(Integer rate) {
 		this.rate = rate;
 	}
 
-	public float getRefect() {
+	public Float getRefect() {
 		return refect;
 	}
 
-	public void setRefect(float refect) {
+	public void setRefect(Float refect) {
 		this.refect = refect;
 	}
 
-	public float getTransmission() {
+	public Float getTransmission() {
 		return transmission;
 	}
 
-	public void setTransmission(float transmission) {
+	public void setTransmission(Float transmission) {
 		this.transmission = transmission;
 	}
 
@@ -106,19 +107,14 @@ public class Item extends BaseModel{
 		this.bondacust = bondacust;
 	}
 
-	public Demometadata getSamplPO() {
-		return samplPO;
+	public Demometadata getSmallPO() {
+		return smallPO;
 	}
 
-	public void setSamplPO(Demometadata samplPO) {
-		this.samplPO = samplPO;
+	public void setSmallPO(Demometadata samllPO) {
+		this.smallPO = samllPO;
 	}
-
-
 	
 	
-
 	
-	
-
 }

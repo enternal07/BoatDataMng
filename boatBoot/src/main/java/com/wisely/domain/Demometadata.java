@@ -1,10 +1,12 @@
 package com.wisely.domain;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.GenericGenerator;
 /**
@@ -34,6 +36,23 @@ public class Demometadata  extends BaseMeta{
 	
 	//区分大小样元数据
 	private boolean small=false;
+	
+	@Column(name="sample_pk")
+    private String samplepk;
+	
+    @Column(name="backing_pk")
+	private String bakingpk;
+	/**
+	 * 样品信息
+	 */
+	@Transient
+	BaseMetaSample  sample;
+	/**
+	 * 背衬信息
+	 */
+	@Transient
+	BaseMetaBacking  backing;
+	
 	
 	public String getPk() {
 		return pk;
@@ -84,6 +103,38 @@ public class Demometadata  extends BaseMeta{
 	public String toString() {
 		return "样品名称："+this.getSamplename()+",背衬："+this.getBackgroundtype()+",温度："+this.getTemparture()+",压力："+this.getPress();
 		
+	}
+
+	public BaseMetaSample getSample() {
+		return sample;
+	}
+
+	public void setSample(BaseMetaSample sample) {
+		this.sample = sample;
+	}
+
+	public BaseMetaBacking getBacking() {
+		return backing;
+	}
+
+	public void setBacking(BaseMetaBacking backing) {
+		this.backing = backing;
+	}
+
+	public String getSamplepk() {
+		return samplepk;
+	}
+
+	public void setSamplepk(String samplepk) {
+		this.samplepk = samplepk;
+	}
+
+	public String getBakingpk() {
+		return bakingpk;
+	}
+
+	public void setBakingpk(String bakingpk) {
+		this.bakingpk = bakingpk;
 	}
 
 }

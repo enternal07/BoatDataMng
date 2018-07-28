@@ -42,12 +42,8 @@ public class SmallDemoMetaDataService {
 		for(Demometadata li:list) {
 			JSONObject sample = new JSONObject();
 			JSONObject back = new JSONObject();
-			
 			sample.put("samplename", li.getSamplename());
-			sample.put("samplelogo", li.getSamplelogo());
-			sample.put("sampledesc", li.getSampledescription());
 			back.put("backgroundtype", li.getBackgroundtype());
-			back.put("backgroundtyplogo", li.getBackgroundtyplogo());
 			arraySample.add(sample);
 			arrayBack.add(back);
 		}

@@ -45,10 +45,7 @@ public class ContractionMetadataService{
 			JSONObject back = new JSONObject();
 			JSONObject ts = new JSONObject();
 			sample.put("samplename", li.getSamplename());
-			sample.put("samplelogo", li.getSamplelogo());
-			sample.put("sampledesc", li.getSampledescription());
 			back.put("backgroundtype", li.getBackgroundtype());
-			back.put("backgroundtyplogo", li.getBackgroundtyplogo());
 			ts.put("testtime", li.getTesttime());
 			arraySample.add(sample);
 			arrayBack.add(back);
