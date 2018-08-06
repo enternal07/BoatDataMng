@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html class="hb-loaded">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" type="text/css" href="../css/bootstrap.css">
+		<link rel="stylesheet" type="text/css" href="../css/main.css">
+		<link rel="stylesheet" type="text/css" href="../css/public.css">
+		<link rel="stylesheet" type="text/css" href="../css/demo.css">
+		<link rel="stylesheet" type="text/css" href="../css/style.css">
+		<link rel="shortcut icon" type="image/x-icon" href="../img/logo.png" />
+		<title>声学参数处理与分析系统-其他模型</title>
+		<script src="./ECharts Demo_files/hm.js"></script>
+
+	</head>
+		
+	<body>
+		<div class="content"> 
+			<div class="left_part">
+				<div class="left_part_logo">
+					<a href="#"><img class="logo_sys ml45 mt30" src="../img/logo.svg"></a>
+				</div>
+				<div class="nav">
+					 <div class="nav_list">
+					 	<a href="../html/index.html">
+					 		<div class="nav_list_mark"></div>
+						 	<img class="fl" src="../img/nav001.svg">
+						 	<span class="fl">声管小样数据</span>
+					 	</a>
+					 </div>
+					 <div class="nav_list">
+					 	<a href="../html/index2.html">
+						 	<div class="nav_list_mark"></div>
+						 	<img class="fl" src="../img/nav002.svg">
+						 	<span class="fl">水罐大样数据</span>
+						 </a>
+					 </div>
+					 <div class="nav_list">
+					 	<a href="../html/index3.html">
+						 	<div class="nav_list_mark"></div>
+						 	<img class="fl" src="../img/nav003.svg">
+						 	<span class="fl">缩比模型数据</span>
+						 </a>
+					 </div>
+					 <div class="nav_list nav_list_focus">
+					 	<a href="../html/index4.html">
+						 	<div class="nav_list_mark"></div>
+						 	<img class="fl" src="../img/nav004.svg">
+						 	<span class="fl">其他模型数据</span>
+						 </a>
+					 </div>
+				</div>
+			</div>
+			<div class="right_part">
+				<div class="right_topBar">
+					<div class="topBar_link">
+						<a href="#">
+							 <img class="fl" src="../img/icon_user.svg">
+							 <span class="fl">UserName001</span>
+						</a>
+					</div>
+					<div class="topBar_link mr30">
+						<a href="#">
+							 <img class="fl" src="../img/icon_logout.svg">
+							 <span class="fl">注销</span>
+						</a>
+					</div>
+					<div class="topBar_link mr30">
+						<a href="#">
+							 <img class="fl" src="../img/icon_management.svg">
+							 <span class="fl">后台管理</span>
+						</a>
+					</div>
+				</div>
+				<div class="right_tool">
+					<button type="button" href="#">
+						<span>生成报告</span>
+					</button>
+					<button type="button" href="#">
+						<span>数据导入</span>
+					</button>
+					<button type="button" href="#">
+						<span>模版下载</span>
+					</button>
+				</div>
+				<div class="main_part">
+					<div class="first_box">
+						<span>背衬选择</span>
+						<select class="select_style" name = "pronvince">
+							<option value ="bc0"  selected="selected">请选择背衬</option>
+							<option value ="bc1">背衬00001</option>
+							<option value ="bc2">背衬00002</option>
+						</select>
+						<span>样品选择</span>
+						<select class="select_style" name = "pronvince">
+							<option value ="bc0"  selected="selected">请选择样品</option>
+							<option value ="bc1">样品00001</option>
+							<option value ="bc2">样品00002</option>
+							<option value ="bc2">样品00003</option>
+							<option value ="bc2">样品00004</option>
+							<option value ="bc2">样品00005</option>
+						</select>
+					</div>
+					<div class="second_box">
+						<div class="second_left1">
+							<span class="title_orange">样品介绍</span>
+							<div class="title_box_orange"></div>
+							<div class="details_box">
+								<div class="details_box_img">
+									<img src="../img/img001.png">
+								</div>
+								<ul >
+									<li><span>名&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;称</span><span>阿波罗</span></li>
+									<li><span>密&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;度</span><span>1.05kg/cm3</span></li>
+									<li><span>弹性模量</span><span>50MPa</span></li>
+									<li><span>泊&nbsp;&nbsp;松&nbsp;&nbsp;比</span><span>0.497</span></li>
+									<li><span>声&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;速</span><span>1580m/s</span></li>
+									<li><span>厚&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;度</span><span>50mm</span></li>
+								</ul>
+							</div>
+						</div>
+						<div class="second_right1">
+							<span class="title_orange">背衬介绍</span>
+							<div class="title_box_orange"></div>
+							<div class="details_box">
+								<div class="details_box_img2">
+									<img src="../img/img005.svg">
+								</div>
+								<ul >
+									<li><span>水称</span><span>23%</span></li>
+									<li><span>样品</span><span>15%</span></li>
+									<li><span>钢板</span><span>30mm — 18%</span></li>
+									<li><span>空气</span><span>44%</span></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div class="third_box">
+						<span class="title_cyan">参数分析</span>
+						<div class="title_box_cyan"></div>
+						<div class="calculate_box">
+							<div class="calculate_left fl">
+								<div class="calculate_left_part1">
+									<span class="calculate_left_part1_title">参数设置</span>
+									<span class="calculate_left_part1_span">频率 f/Hz
+										<div class="grade_warp">
+											<div class="User_ratings User_grade" id="div_fraction0">
+												<div class="ratings_bars">
+													<span class="title2">MHz</span> 
+													<span id="title0">0</span> 
+													<span class="bars_10">0</span>
+													<div class="scale" id="bar0">
+														<div></div>
+														<span id="btn0"></span> 
+													</div>
+													<span class="bars_10">30M</span> 
+												</div>
+											</div> 
+										</div>
+									</span>								
+									<span class="calculate_left_part1_span">压力 P/Mpa
+										<div class="grade_warp">
+											<div class="User_ratings User_grade" id="div_fraction1">
+												<div class="ratings_bars">
+													<span class="title2">Mpa</span> 
+													<span id="title1">0</span> 
+													<span class="bars_10">0</span>
+													<div class="scale" id="bar1">
+														<div></div>
+														<span id="btn1"></span> 
+													</div>
+													<span class="bars_10">4.5</span> 
+												</div>
+											</div> 
+										</div>
+									</span>
+									<span class="calculate_left_part1_span">温度 T/度
+										<div class="grade_warp">
+											<div class="User_ratings User_grade" id="div_fraction2">
+												<div class="ratings_bars">
+													<span class="title2">度</span>  
+													<span id="title2">0</span>
+													<span class="bars_10">0</span>
+													<div class="scale" id="bar2">
+														<div></div>
+														<span id="btn2"></span> 
+													</div>
+													<span class="bars_10">30</span> 
+												</div>
+											</div> 
+										</div>
+									</span>
+									<div class="calculate_button_box">
+										<button class="btn_blue mr20">显示</button>
+										<button class="btn_white">加入对比</button>
+									</div>
+								</div>
+								<div class="calculate_left_part2">
+									<button class="btn_blue mt70 ml15 mr30 fl">计算</button>
+									<div class="calculate_sbox fl">
+										<ul >
+											<li><span>平均投射系数</span><span>###</span></li>
+											<li><span>平均反射系数</span><span>###</span></li>
+											<li><span>平均吸声系数</span><span>###</span></li>
+										</ul>
+									</div>
+								</div>
+							</div>
+							<div class="calculate_right fl">
+								
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="right_footer">
+				<div class="width300height40 auto">
+					<span class="fl line40">v2018.0.0.1 @yincxa</span>
+					<span class="fl line40 ml80">联系&nbsp;&nbsp;18634567890</span>
+				</div>
+			</div>			
+		</div>
+		<script type="text/javascript">
+			scale = function (btn, bar, title) {
+				this.btn = document.getElementById(btn);
+				this.bar = document.getElementById(bar);
+				this.title = document.getElementById(title);
+				this.step = this.bar.getElementsByTagName("DIV")[0];
+				this.init();
+			};
+			scale.prototype = {
+				init: function () {
+					var f = this, g = document, b = window, m = Math;
+					f.btn.onmousedown = function (e) {
+						var x = (e || b.event).clientX;
+						var l = this.offsetLeft;
+						var max = f.bar.offsetWidth - this.offsetWidth;
+						g.onmousemove = function (e) {
+							var thisX = (e || b.event).clientX;
+							var to = m.min(max, m.max(-2, l + (thisX - x)));
+							f.btn.style.left = to + 'px';
+							f.ondrag(m.round(m.max(0, to / max) * 30), to);
+							b.getSelection ? b.getSelection().removeAllRanges() : g.selection.empty();
+						};
+						g.onmouseup = new Function('this.onmousemove=null');
+					};
+				},
+				ondrag: function (pos, x) {
+					this.step.style.width = Math.max(0, x) + 'px';
+					this.title.innerHTML = pos / 1 + '';
+				}
+			}
+			new scale('btn0', 'bar0', 'title0');
+			new scale('btn2', 'bar2', 'title2');
+		</script>
+		<script type="text/javascript">
+			scale = function (btn, bar, title) {
+				this.btn = document.getElementById(btn);
+				this.bar = document.getElementById(bar);
+				this.title = document.getElementById(title);
+				this.step = this.bar.getElementsByTagName("DIV")[0];
+				this.init();
+			};
+			scale.prototype = {
+				init: function () {
+					var f = this, g = document, b = window, m = Math;
+					f.btn.onmousedown = function (e) {
+						var x = (e || b.event).clientX;
+						var l = this.offsetLeft;
+						var max = f.bar.offsetWidth - this.offsetWidth;
+						g.onmousemove = function (e) {
+							var thisX = (e || b.event).clientX;
+							var to = m.min(max, m.max(-2, l + (thisX - x)));
+							f.btn.style.left = to + 'px';
+							f.ondrag(m.round(m.max(0, to / max) * 45), to);
+							b.getSelection ? b.getSelection().removeAllRanges() : g.selection.empty();
+						};
+						g.onmouseup = new Function('this.onmousemove=null');
+					};
+				},
+				ondrag: function (pos, x) {
+					this.step.style.width = Math.max(0, x) + 'px';
+					this.title.innerHTML = pos / 10 + '';
+				}
+			}
+			new scale('btn1', 'bar1', 'title1');
+		</script>
+
+		<div class="clear"></div>
+	</body>
+</html>

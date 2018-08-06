@@ -22,8 +22,11 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.wisely.domain.BaseMetaBacking;
 import com.wisely.domain.BaseMetaSample;
+import com.wisely.domain.BigDemoMetadata;
 import com.wisely.domain.Demometadata;
 import com.wisely.domain.Item;
+import com.wisely.domain.TestModel;
+import com.wisely.domain.TestSystem;
 
 @Service
 public class ExcelService {
@@ -102,6 +105,66 @@ public class ExcelService {
         }
 		return pos;
    }
+    /**
+	 * 获取大样数据的元数据信息
+	 * 1——18行数据
+	 * @param isSmall
+	 * @return
+	 */
+    public BigDemoMetadata getBigMetaFromExcle(boolean isSmall) {
+		//获取前18行的数据
+      	BigDemoMetadata smallDemoMetaData= new BigDemoMetadata();
+        	//前7行是样品
+        	BaseMetaSample sample =  this.getSmapleFormExle();
+        	//8.9.10.11，12，13，14行是试验模型，	
+        	TestModel backing = this.getBigTestModel();		
+        	//15，16 是测试模型
+        	
+        	TestSystem testSystem = this.getSystem(); 
+       // 	剩余两行是温度和压力
+        		   Row row12 = sheet.getRow(11);
+        		   Cell cell12 = row12.getCell(1);
+        		   smallDemoMetaData.setTemparture(Float.parseFloat(getCellValue(cell12)));
+        		   Row row13 = sheet.getRow(12);
+        		   Cell cell13 = row13.getCell(1);
+        		   smallDemoMetaData.setPress(Integer.parseInt(getCellValue(cell13)));
+			  
+			   smallDemoMetaData.setSamplename(sample.getName());
+			   smallDemoMetaData.setBackgroundtype(backing.getName());
+			  
+			   smallDemoMetaData.setSample(sample);
+        		   return smallDemoMetaData;
+	}
+    /**系统测试
+     * 17~18行
+     * @return
+     */
+    private TestSystem getSystem() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	/**
+	 * 试验模型
+     * 8—～16行
+     * @return
+     */
+    public TestModel getBigTestModel() {
+          TestModel backing = new TestModel();
+	       Row row8 = sheet.getRow(7);
+		   Cell cell8 = row8.getCell(1);
+		   backing.setName(getCellValue(cell8));
+		   Row row9 = sheet.getRow(8);
+		   Cell cell9= row9.getCell(1);
+		   //backing.setFrontMedium(getCellValue(cell9));
+		   Row row10 = sheet.getRow(9);
+		   Cell cell10 = row10.getCell(1);
+		   //backing.setEndMedium(getCellValue(cell10));
+		   Row row11 = sheet.getRow(10);
+		   Cell cell11 = row11.getCell(1);
+		   backing.setOther(getCellValue(cell11));
+		   
+		   return backing;
+	}
 	
 	/**
 	 * 获取小样数据的元数据信息

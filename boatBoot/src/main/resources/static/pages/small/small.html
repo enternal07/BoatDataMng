@@ -1,0 +1,128 @@
+<div class="first_box">
+				<span>样品选择</span>
+						<select name="pronvince" id="SampleSe" class="select_style" data-bind="options: data.samples(),
+									  	optionsCaption:'请选择样品',
+									  	optionsText: 'name',
+									 	value: data.samplesSelected" style="max-width: 200px;"></select>
+			<span>背衬选择</span>
+				<select name="pronvince" id="backingSe" class="select_style" data-bind="options: data.backings(),
+									  	optionsCaption:'请选择背衬',
+									  	optionsText: 'name',
+									 	value: data.backingSelecte" style="max-width: 200px;"></select>
+								
+						
+								
+					</div>
+					<div class="second_box">
+						<div class="second_left1">
+							<span class="title_orange">样品介绍</span>
+							<div class="title_box_orange"></div>
+							<div class="details_box">
+								<div class="details_box_img">
+									<img src="../img/img001.png"></img>
+								</div>
+								<ul >
+									<li><span>名&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;称</span><span data-bind="text:data.samplesSelected()==undefined?'':data.samplesSelected().name">阿波罗</span></li>
+									<li><span>密&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;度</span><span data-bind="text:data.samplesSelected()==undefined?'':data.samplesSelected().density">1.05kg/cm3</span></li>
+									<li><span>弹性模量</span><span data-bind="text:data.samplesSelected()==undefined?'':data.samplesSelected().flexibleModel"> 50MPa</span></li>
+									<li><span>泊&nbsp;&nbsp;松&nbsp;&nbsp;比</span><span data-bind="text:data.samplesSelected()==undefined?'':data.samplesSelected().poissonRatio">0.497</span></li>
+									<li><span>声&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;速</span><span data-bind="text:data.samplesSelected()==undefined?'':data.samplesSelected().soundSpeed">1580m/s</span></li>
+									<li><span>厚&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;度</span><span data-bind="text:data.samplesSelected()==undefined?'':data.samplesSelected().thickness">50mm</span></li>
+								   <li><span>其&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;它</span><span data-bind="text:data.samplesSelected()==undefined?'':data.samplesSelected().other">50mm</span></li>
+								
+								</ul>
+							</div>
+						</div>
+						<div class="second_right1">
+							<span class="title_orange">背衬介绍</span>
+							<div class="title_box_orange"></div>
+							<div class="details_box">
+								<div class="details_box_img2">
+									<img src="../img/img005.svg"></img>
+								</div>
+								<ul>
+									<li><span>名称</span><span data-bind="text:data.backingSelecte()==undefined?'':data.backingSelecte().name">23%</span></li>
+									<li><span>水</span><span data-bind="text:data.backingSelecte()==undefined?'':data.backingSelecte().frontMedium">15%</span></li>
+									<li><span>空气</span><span data-bind="text:data.backingSelecte()==undefined?'':data.backingSelecte().endMedium">30mm — 18%</span></li>
+									<li><span>其他</span><span data-bind="text:data.backingSelecte()==undefined?'':data.backingSelecte().other">44%</span></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div class="third_box">
+						<span class="title_cyan">参数分析</span>
+						<div class="title_box_cyan"></div>
+						<div class="calculate_box">
+							<div class="calculate_left fl">
+								<div class="calculate_left_part1">
+									<span class="calculate_left_part1_title">参数设置</span>
+									<span class="calculate_left_part1_span">频率 f/Hz
+										<div class="grade_warp">
+											<div class="User_ratings User_grade" id="div_fraction0">
+												<div class="ratings_bars">
+													<span class="title2">MHz</span> 
+													<span id="title0">0</span> 
+													<span class="bars_10">0</span>
+													<div class="scale" id="bar0">
+														<div></div>
+														<span id="btn0"></span> 
+													</div>
+													<span class="bars_10">30M</span> 
+												</div>
+											</div> 
+										</div>
+									</span>								
+									<span class="calculate_left_part1_span">压力 P/Mpa
+										<div class="grade_warp">
+											<div class="User_ratings User_grade" id="div_fraction1">
+												<div class="ratings_bars">
+													<span class="title2">Mpa</span> 
+													<span id="title1">0</span> 
+													<span class="bars_10">0</span>
+													<div class="scale" id="bar1">
+														<div></div>
+														<span id="btn1"></span> 
+													</div>
+													<span class="bars_10">4.5</span> 
+												</div>
+											</div> 
+										</div>
+									</span>
+									<span class="calculate_left_part1_span">温度 T/度
+										<div class="grade_warp">
+											<div class="User_ratings User_grade" id="div_fraction2">
+												<div class="ratings_bars">
+													<span class="title2">度</span>  
+													<span id="title2">0</span>
+													<span class="bars_10">0</span>
+													<div class="scale" id="bar2">
+														<div></div>
+														<span id="btn2"></span> 
+													</div>
+													<span class="bars_10">30</span> 
+												</div>
+											</div> 
+										</div>
+									</span>
+									<div class="calculate_button_box">
+										<button class="btn_blue mr20" data-bind="click:search">显示</button>
+										<button class="btn_white">加入对比</button>
+									</div>
+								</div>
+								<div class="calculate_left_part2">
+									<!--  Sbutton class="btn_blue mt70 ml15 mr30 fl" data-bind="click:caluation">计算</button-->
+									<div class="calculate_sbox fl">
+										<ul >
+											<li><span>平均投射系数</span><span data-bind="text:smallViewModel.data.arverg().traAvrg"></span></li>
+											<li><span>平均反射系数</span><span data-bind="text:smallViewModel.data.arverg().refectAvrg"></span></li>
+											<li><span>平均吸声系数</span><span data-bind="text:smallViewModel.data.arverg().bondAvrg"></span></li>
+										</ul>
+									</div>
+								</div>
+							</div>
+							<div class="calculate_right fl" id="echar">
+								
+							</div>
+						</div>
+					</div>
+				

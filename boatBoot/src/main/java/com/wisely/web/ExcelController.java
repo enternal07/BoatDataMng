@@ -44,7 +44,13 @@ import com.wisely.service.ItemService;
 import com.wisely.service.SmallDemoMetaDataService;
 
 import until.constant.Constants;
-
+/**
+ * 小样模型
+ * 大样模型
+ * 
+ * @author dingqi
+ *
+ */
 
 @Controller
 @RequestMapping(value = "/excelUpload")
@@ -139,7 +145,9 @@ public class ExcelController {
 		ResultVO re = new ResultVO();
 		List<ItemBig> items = new ArrayList<ItemBig>();
 		 //先取原数据
-		 Demometadata demoMeta = getSmallMetaFromExcle(false);
+		 //Demometadata demoMeta = getSmallMetaFromExcle(false);
+		 //先取原数据
+		 Demometadata demoMeta = excelService.getSmallMetaFromExcle(true);
 		 if(!service.ifExits(demoMeta)) {
 			
 			 items= getItemDataBig(demoMeta);

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+	<title>ʹ�����Ż�</title>
+    <link href="static/images/apistore/A.png" rel="icon">
+     <link rel="stylesheet" href="${ctx}/static/lib/bootstrap/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="${ctx}/static/lib/uui/css/u.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="${ctx}/static/css/common.css" />
+    <link rel="stylesheet" href="${ctx}/static/lib/jquery-confirm/dist/jquery-confirm.min.css"> 
+    <link rel="stylesheet" href="${ctx}/static/css/menu.css" />
+    <link rel="stylesheet" href="${ctx}/static/css/totalCommon.css" />
+	<script src="${ctx}/static/lib/jquery/jquery-1.9.1.min.js"></script>
+    <script src="${ctx}/static/js/header.js" ></script>
+	<script src="${ctx}/static/js/common.js"></script>
+	<script>
+		window.$ctx = '${ctx}';
+		window.$cusername = '${cusername}';
+	    window.$userPk = '${userPk}';
+	    window.$myDataShow = '${myDataShow}';
+	    window.$isYYUser='{$isYYUser}';
+	    <#if yhtServletPath?exists>
+	    window.$yhtServletPath = '${yhtServletPath}'
+	    </#if>
+	    window.$buyAgainStus='apiLink';
+		<#if currentUser.providerStatus?exists>
+		window.$providerStatus =  '${currentUser.providerStatus}';
+		<#else>
+		window.$providerStatus = "undfined";
+		</#if>
+		window.$ts = '${ts!''}';
+	</script>
+</head>
+<body  class="allH" style=" background: #fff;">	
+	<div class="allH" style="  padding-top: 60px;width: 80%;">
+		<!-- left -->
+		<div class="leftpanel main" style="overflow: visible;">
+			<ul class="left-menu left-menu-add" style="border-bottom: 1px solid #f3f3f3;">
+						<h3 style="display: none;">ʹ�����Ż�</h3>
+						<!-- <li id="userInfo">
+							<a class="menu-parent" href="#/mgr/usermanage/userInfoMsg">
+							<span class="menu-parent-title"> <i class="iconfont icon-yonghu"></i>&nbsp;&nbsp;�û���Ϣ</span> </a>
+						</li> -->
+					    <li  id="orders"> 
+							<a class="menu-parent" href="#/apiworks/orderMng/orders/orderList">
+							<span class="menu-parent-title"> <i class="iconfont icon-wodedingdan"></i>&nbsp;&nbsp;�ҵĶ���</span> </a>
+						</li>
+					    <li id="myData">
+							<a class="menu-parent" href="#/apiworks/orderMng/userUsingData/userUsingDataList">
+							<span class="menu-parent-title"> <i class="iconfont icon-wodeAPI"></i>&nbsp;&nbsp;�ҵ�API</span> </a>
+						</li>
+						<li>
+							<a class="menu-parent" href="#/logs/userlog/userStatisticsLog">
+							<span class="menu-parent-title"><i class="iconfont icon-shujujiankong"></i>&nbsp;&nbsp;���ݼ���</span> </a>
+						</li>
+						<li>
+							<a class="menu-parent" href="#/logs/userlog/userDetailLog">
+							<span class="menu-parent-title"> <i class="iconfont icon-rizhichaxun"></i>&nbsp;&nbsp;��־��ѯ</span> </a>
+						</li>
+					    <li>
+							<a class="menu-parent" href="#/collection/collectionlist">
+							<span class="menu-parent-title"> <i class="iconfont icon-wodeshoucang"></i>&nbsp;&nbsp;�ҵ��ղ�</span> </a>
+						</li>
+					    <li>
+							<a class="menu-parent" href="#/userCenter/serviceWhiteList">
+							<span class="menu-parent-title"> <i class="iconfont icon-baimingdan"></i>&nbsp;&nbsp;������</span> </a>
+						</li>
+						<li>
+							<a class="menu-parent" href="#/downloadsdk/loadServiceList">
+							<span class="menu-parent-title"> <i class="iconfont icon-SDK"></i>&nbsp;&nbsp;SDK�ĵ�</span> </a>
+						</li>
+					    <li>
+							<a class="menu-parent" href="#/userCenter/notification">
+							<span class="menu-parent-title"> <i class="iconfont icon-wodexiaoxi"></i>&nbsp;&nbsp;�ҵ���Ϣ</span> </a>
+						</li>
+						<li>
+							<a class="menu-parent" href="#/findApi/findApiList">
+							<span class="menu-parent-title"> <i class="iconfont icon-faxian"></i>&nbsp;&nbsp;����API</span> </a>
+						</li>
+						<li>
+							<a class="menu-parent" href="#/comment/commentList">
+							<span class="menu-parent-title"> <i class="iconfont">&#xe662;</i>&nbsp;&nbsp;�ҵ�����</span> </a>
+						</li>
+						<li>
+							<a class="menu-parent" href="#/apiworks/application/authorization">
+							<span class="menu-parent-title"> <i class="iconfont">&#xe65a;</i>&nbsp;&nbsp;Ӧ����Ȩ</span> </a>
+						</li>
+						<li>
+							<a class="menu-parent" href="#/userCenter/identification">
+							<span class="menu-parent-title"> <i class="iconfont">&#xe627;</i>&nbsp;&nbsp;�û���֤</span> </a>
+						</li>
+					</ul>
+	
+		</div>
+		<!-- content -->
+		<div class="content"  id="content"  style="position: relative;margin-left: 10px;"></div>
+		</div>
+	
+	
+	<script src="${ctx}/static/lib/requirejs/require.js"></script>
+	<script src="${ctx}/static/js/config.js"></script>
+	<script src="${ctx}/static/js/userInfo.js"></script>
+	<#if isSuperAdmin?exists && isSuperAdmin>
+		<input type="hidden" value="true" id="adminItem" />
+	</#if>
+	<input type="hidden" id="topLogoImg" value="logo_user.svg" logoText="ʹ�����Ż�"/>
+</body>
+
+</html>

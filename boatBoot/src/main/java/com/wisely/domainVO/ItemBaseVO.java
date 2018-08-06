@@ -1,6 +1,8 @@
 package com.wisely.domainVO;
 
 import java.io.Serializable;
+import java.util.List;
+import java.util.Map;
 
 public class ItemBaseVO  implements Serializable{
 	    /**
@@ -19,6 +21,14 @@ public class ItemBaseVO  implements Serializable{
 		
 		//频率						
 		private Integer rate;
+		
+		private List<Integer> rates;
+		
+		private Map<Integer,Float> refects;
+		
+		private Map<Integer,Float> transmissions;
+		
+		private Map<Integer,Float> bondacusts;
 
 		public Float getRefect() {
 			return refect;
@@ -50,6 +60,38 @@ public class ItemBaseVO  implements Serializable{
 
 		public void setRate(Integer rate) {
 			this.rate = rate;
+		}
+
+		public List<Integer> getRates() {
+			return rates;
+		}
+
+		public void setRates(List<Integer> rates) {
+			this.rates = rates;
+		}
+
+		public Map<Integer, Float> getRefects() {
+			return refects;
+		}
+
+		public void setRefects(Map<Integer, Float> refects) {
+			this.refects = (Map<Integer, Float>) refects;
+		}
+
+		public Map<Integer, Float> getTransmissions() {
+			return transmissions;
+		}
+
+		public void setTransmissions(Map<Integer, Float> transmissions) {
+			this.transmissions = transmissions;
+		}
+
+		public Map<Integer, Float> getBondacusts() {
+			return bondacusts;
+		}
+
+		public void setBondacusts(Map<Integer, Float> bondacusts) {
+			this.bondacusts = bondacusts;
 		} 
 	
 }
