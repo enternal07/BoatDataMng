@@ -20,25 +20,33 @@ public class TestModel extends BaseModel{
 	@GenericGenerator(name="mcid",strategy="uuid2")
 	private String pk;
 	
+	//试验模型名称
 	@Column(name="testmodel_name")
 	private String name;
 	
+	//尺寸
 	private String size;
 	
+	//双层壳间距
 	@Column(name = "double_shell_spacing")
 	private String doubleShellSpacing;
 	
+	//内壳厚度
 	@Column(name = "inner_shell_thickness")
 	private String innerShellThickness;
 	
+	//外壳厚度
 	@Column(name = "shell_thickness")
 	private String  shellThickness;
 	
+	//内壳后端
 	@Column(name = "inner_shell_backend")
 	private String innerShellBackend;
 	
+	//其他
 	private String other;
 	
+	//logo
 	private String logo;
 
 	public String getPk() {

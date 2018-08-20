@@ -31,6 +31,7 @@ import com.wisely.domain.ItemBig;
 import com.wisely.domain.ItemContraction;
 import com.wisely.domain.BaseMetaBacking;
 import com.wisely.domain.BaseMetaSample;
+import com.wisely.domain.BigDemoMetadata;
 import com.wisely.domain.ContractionMetadata;
 import com.wisely.domain.Demometadata;
 import com.wisely.domainVO.ResultVO;
@@ -147,16 +148,15 @@ public class ExcelController {
 		 //先取原数据
 		 //Demometadata demoMeta = getSmallMetaFromExcle(false);
 		 //先取原数据
-		 Demometadata demoMeta = excelService.getSmallMetaFromExcle(true);
-		 if(!service.ifExits(demoMeta)) {
-			
-			 items= getItemDataBig(demoMeta);
-			demoMeta = service.saveEntity(demoMeta);
-			serviceItemBig.saveAll(items);
-			re.setMessage("处理样品"+demoMeta.getSamplename()+"下面的"+items.size()+"条信息完毕");
-		 }else {
-			 re.setMessage(demoMeta.toString()+"的数据已经导入，请勿重复导入");
-		 }
+		BigDemoMetadata demoMeta = excelService.getBigMetaFromExcle(true);
+//		 if(!service.ifExits(demoMeta)) {
+//			 items= getItemDataBig(demoMeta);
+//			demoMeta = service.saveEntity(demoMeta);
+//			serviceItemBig.saveAll(items);
+//			re.setMessage("处理样品"+demoMeta.getSamplename()+"下面的"+items.size()+"条信息完毕");
+//		 }else {
+//			 re.setMessage(demoMeta.toString()+"的数据已经导入，请勿重复导入");
+//		 }
 		 	re.setSuccess(true);
 		return re;
 	}

@@ -21,7 +21,7 @@ public class ViewController {
 	
 	
 	 @RequestMapping("/test")
-		public String index(Model model){
+		public String test(Model model){
 			Person single = new Person("aa",11);
 			
 			List<Person> people = new ArrayList<Person>();
@@ -35,6 +35,11 @@ public class ViewController {
 			model.addAttribute("singlePerson", single);
 			model.addAttribute("people", people);
 			
+			return "index";
+		}
+	 @RequestMapping("/index11")
+		public String index(Model model){
+		
 			return "index";
 		}
 	
