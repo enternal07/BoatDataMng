@@ -29,6 +29,8 @@ import org.springframework.web.multipart.MultipartFile;
 import com.wisely.domain.Item;
 import com.wisely.domain.ItemBig;
 import com.wisely.domain.ItemContraction;
+import com.wisely.domain.TestModel;
+import com.wisely.domain.TestSystem;
 import com.wisely.domain.BaseMetaBacking;
 import com.wisely.domain.BaseMetaSample;
 import com.wisely.domain.BigDemoMetadata;
@@ -37,12 +39,15 @@ import com.wisely.domain.Demometadata;
 import com.wisely.domainVO.ResultVO;
 import com.wisely.service.BaseMetaBackingService;
 import com.wisely.service.BaseMetaSampleService;
+import com.wisely.service.BigDemoMetadataService;
 import com.wisely.service.ContractionMetadataService;
 import com.wisely.service.ExcelService;
 import com.wisely.service.ItemBigService;
 import com.wisely.service.ItemContractionService;
 import com.wisely.service.ItemService;
 import com.wisely.service.SmallDemoMetaDataService;
+import com.wisely.service.TestModelService;
+import com.wisely.service.TestSystemService;
 
 import until.constant.Constants;
 /**
@@ -81,6 +86,14 @@ public class ExcelController {
 	
 	@Autowired
 	private ItemContractionService serviceItemCon;
+	
+	@Autowired
+	private BigDemoMetadataService bigDemoMetadataService;
+	
+	@Autowired
+	private TestModelService   testmodelService;
+	@Autowired
+	private TestSystemService testSysService;
 	
 	  private Sheet sheet;
 	  private List<List<String>> listData;
@@ -146,17 +159,18 @@ public class ExcelController {
 		ResultVO re = new ResultVO();
 		List<ItemBig> items = new ArrayList<ItemBig>();
 		 //先取原数据
-		 //Demometadata demoMeta = getSmallMetaFromExcle(false);
-		 //先取原数据
 		BigDemoMetadata demoMeta = excelService.getBigMetaFromExcle(true);
-//		 if(!service.ifExits(demoMeta)) {
-//			 items= getItemDataBig(demoMeta);
-//			demoMeta = service.saveEntity(demoMeta);
-//			serviceItemBig.saveAll(items);
-//			re.setMessage("处理样品"+demoMeta.getSamplename()+"下面的"+items.size()+"条信息完毕");
-//		 }else {
-//			 re.setMessage(demoMeta.toString()+"的数据已经导入，请勿重复导入");
-//		 }
+		 if(!bigDemoMetadataService.ifExist(demoMeta)) {
+			    baseMetaSampleService.saveEntity(demoMeta.getSample());
+				testmodelService.saveEntity(demoMeta.getTestModel());
+				testSysService.saveEntity(demoMeta.getTestSystem());
+			    demoMeta = bigDemoMetadataService.saveEntity(demoMeta);
+				items= excelService.getBigItemData(demoMeta);
+			    serviceItemBig.saveAll(items);
+			re.setMessage("处理样品"+demoMeta.getSamplename()+"下面的"+items.size()+"条信息完毕");
+		 }else {
+			 re.setMessage(demoMeta.toString()+"的数据已经导入，请勿重复导入");
+		 }
 		 	re.setSuccess(true);
 		return re;
 	}
@@ -171,7 +185,7 @@ public class ExcelController {
 		 //先取原数据
 		 Demometadata demoMeta = excelService.getSmallMetaFromExcle(true);
 		 if(!service.ifExits(demoMeta)) {
-			 demoMeta = service.saveEntity(demoMeta);
+			demoMeta = service.saveEntity(demoMeta);
 			BaseMetaSample sample = baseMetaSampleService.saveEntity(demoMeta.getSample());
 			BaseMetaBacking backing = demoMeta.getBacking();
 			backing.setSamplePk(sample.getPk());
@@ -182,7 +196,6 @@ public class ExcelController {
 			serviceItem.saveAll(items);
 			demoMeta = service.saveEntity(demoMeta);
 			 re.setMessage("处理样品"+demoMeta.getSamplename()+"下面的"+items.size()+"条信息完毕");
-			 
 		 }else {
 			 re.setMessage(demoMeta.toString()+"的数据已经导入，请勿重复导入");
 		 }

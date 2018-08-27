@@ -104,6 +104,26 @@ public class ItemService {
 		res.put("traAvrg", tatoulTra/tatoulRef);
 		return res;
 	}
+	
+
+	public List<ItemBaseVO> findByQueryCondtionOld(QueryVO queryVO){
+		System.out.println(queryVO.getSamplename()+
+				queryVO.getBackgroundtype()+queryVO.getRateMin()+queryVO.getRateMax()+
+				queryVO.getTemparture()+queryVO.getPress());
+		List<Item> list = 	dao.getObjectListByContions(queryVO.getRateMin(), queryVO.getRateMax(),
+				queryVO.getSamplename(), queryVO.getBackgroundtype(), queryVO.getPress(),queryVO.getTemparture());
+		List<ItemBaseVO> vos = new ArrayList<ItemBaseVO>();
+		
+		for(Item li:list) {
+			ItemBaseVO vi = new ItemBaseVO();
+			vi.setRate(li.getRate());
+			vi.setBondacust(li.getBondacust());
+			vi.setTransmission(li.getTransmission());
+			vi.setRefect(li.getRefect());
+			vos.add(vi);
+		}
+		return vos;
+	}
 	public List<Item> saveAll(List<Item> pos){
 		return dao.save(pos);
 	}

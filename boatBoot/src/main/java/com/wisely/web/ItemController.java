@@ -68,7 +68,7 @@ public class ItemController {
 	@RequestMapping(value = "/pageSearchCondition",method = RequestMethod.POST)
 	public @ResponseBody ResultVO searchItemSmallCondition(@RequestBody QueryVO queryVO,HttpServletRequest req){
 		ResultVO re = new ResultVO(true);
-		re.setData(service.findByQueryCondtion(queryVO));
+		re.setData(service.findByQueryCondtionOld(queryVO));
 		return re;
 	}
 	

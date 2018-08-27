@@ -25,6 +25,7 @@ import com.wisely.domain.BaseMetaSample;
 import com.wisely.domain.BigDemoMetadata;
 import com.wisely.domain.Demometadata;
 import com.wisely.domain.Item;
+import com.wisely.domain.ItemBig;
 import com.wisely.domain.TestModel;
 import com.wisely.domain.TestSystem;
 
@@ -70,7 +71,6 @@ public class ExcelService {
    	 System.out.println("带持久化的数据有"+numOfRows);
    	 for (int i = 14; i < numOfRows; i++) {
             Row row = sheet.getRow(i);
-            Map<String, String> map = new HashMap<String, String>();
             List<String> list = new ArrayList<String>();
             if (row != null) {
             	Item item = new Item();
@@ -289,4 +289,56 @@ public class ExcelService {
         }
         return cellValue.trim();
     }
+	/**
+	 * 7列数据
+	 * @param demoMeta
+	 * @return
+	 */
+	public List<ItemBig> getBigItemData(BigDemoMetadata demoMeta) {
+		 List<ItemBig> pos = new  ArrayList<ItemBig>();
+	   	 int numOfRows = sheet.getLastRowNum() ;
+	   	 System.out.println("带持久化的大样数据有"+numOfRows);
+	   	 for (int i = 14; i < numOfRows; i++) {
+	            Row row = sheet.getRow(i);
+	            List<String> list = new ArrayList<String>();
+	            if (row != null) {
+	            	ItemBig item = new ItemBig();
+	            //	System.out.println("带处理的行"+row.getLastCellNum());
+	                for (int j = 0; j < 4; j++) {
+	                    Cell cell = row.getCell(j);
+	                    	String value = getCellValue(cell);
+	                    	if("".equals(value)) {
+	                    		value = "0";
+	                    	}
+	                    	//快速排序ֵ
+	                    	//偶数0、2.4.6.
+	                    	if(j%2==0){
+	                    	  if(j==0) {
+	                    		  item.setRate(Integer.parseInt(value));
+	                    	  }else if(j%2<2){
+	                    		item.setTransmission(Float.parseFloat(value));
+	                    	  }else if(j%2>2){
+	                    		  item.setRadiationlose(Float.parseFloat(value));;
+	                    	  }else {
+	                    		  item.setEchoes(Float.parseFloat(value));
+	                    	  }
+	                    	}else {//1、3、5
+	                    		if(j<3){
+	                    			  item.setRefect(Float.parseFloat(value));
+	                    		}else if(j==3){
+	                    			item.setBondacust(Float.parseFloat(value));
+	                    		}else {
+	                    			item.setRadiation(Integer.parseInt(value));
+	                    		}
+	                    	}
+	                    list.add(this.getCellValue(cell));
+	                }
+	               
+//	                item.setSamplPO(demoMeta);;
+//	                item.setSamplPO(samplPO);
+	                pos.add(item);
+	            }
+	        }
+			return pos;
+	}
 }
