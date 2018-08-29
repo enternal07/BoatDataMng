@@ -11,7 +11,7 @@ import javax.persistence.Transient;
 import org.hibernate.annotations.GenericGenerator;
 /**
  * 记录bigDemo的原数据信息,
- * 一张大样excle表的元信息。
+ * 一张大样excle表的元数据信息。
  * @author dingqi
  *
  */

@@ -160,7 +160,8 @@ public class ExcelController {
 		List<ItemBig> items = new ArrayList<ItemBig>();
 		 //先取原数据
 		BigDemoMetadata demoMeta = excelService.getBigMetaFromExcle(true);
-		 if(!bigDemoMetadataService.ifExist(demoMeta)) {
+		ResultVO res = bigDemoMetadataService.ifExist(demoMeta);
+		 if(!res.isSuccess()) {
 			    baseMetaSampleService.saveEntity(demoMeta.getSample());
 				testmodelService.saveEntity(demoMeta.getTestModel());
 				testSysService.saveEntity(demoMeta.getTestSystem());
@@ -169,7 +170,8 @@ public class ExcelController {
 			    serviceItemBig.saveAll(items);
 			re.setMessage("处理样品"+demoMeta.getSamplename()+"下面的"+items.size()+"条信息完毕");
 		 }else {
-			 re.setMessage(demoMeta.toString()+"的数据已经导入，请勿重复导入");
+			 String oldPk = (String) res.getData();
+			 
 		 }
 		 	re.setSuccess(true);
 		return re;
@@ -202,8 +204,8 @@ public class ExcelController {
 			 String oldPK = (String) res.getData();
 			 serviceItem.deleteAll(oldPK);
 			 demoMeta.setPk(oldPK);
-			items= excelService.getItemData(demoMeta);
-			serviceItem.saveAll(items);
+			 items= excelService.getItemData(demoMeta);
+			 serviceItem.saveAll(items);
 		 }
 		re.setSuccess(true);
 		return re;

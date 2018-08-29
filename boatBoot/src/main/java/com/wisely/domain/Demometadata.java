@@ -11,7 +11,7 @@ import javax.persistence.Transient;
 import org.hibernate.annotations.GenericGenerator;
 /**
  * 记录smallDemo的原数据信息,
- * 小样和大样共有同一个元数据信息。
+ * 小样数据的元数据信息。
  * @author dingqi
  *
  */
