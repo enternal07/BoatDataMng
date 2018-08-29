@@ -68,13 +68,10 @@ public class ExcelService {
     public List<Item> getItemData(Demometadata demoMeta) {
    	 List<Item> pos = new  ArrayList<Item>();
    	 int numOfRows = sheet.getLastRowNum() ;
-   	 System.out.println("带持久化的数据有"+numOfRows);
    	 for (int i = 14; i < numOfRows; i++) {
             Row row = sheet.getRow(i);
-            List<String> list = new ArrayList<String>();
             if (row != null) {
             	Item item = new Item();
-            //	System.out.println("带处理的行"+row.getLastCellNum());
                 for (int j = 0; j < 4; j++) {
                     Cell cell = row.getCell(j);
                     	String value = getCellValue(cell);
@@ -96,9 +93,7 @@ public class ExcelService {
                     			item.setBondacust(Float.parseFloat(value));
                     		}
                     	}
-                    list.add(this.getCellValue(cell));
                 }
-               
                 item.setSmallPO(demoMeta);
                 pos.add(item);
             }
@@ -113,24 +108,29 @@ public class ExcelService {
 	 */
 	public BigDemoMetadata getBigMetaFromExcle(boolean isSmall) {
 		// 获取前18行的数据
-		BigDemoMetadata smallDemoMetaData = new BigDemoMetadata();
+		BigDemoMetadata bigDemoMetaData = new BigDemoMetadata();
 		// 前7行是样品
 		BaseMetaSample sample = this.getSmapleFormExle();
 		// 8.9.10.11，12，13，14行是试验模型，
-		TestModel backing = this.getBigTestModel();
+		TestModel testModel = this.getBigTestModel();
 		// 15，16 是测试模型
 		TestSystem testSystem = this.getSystem();
 		// 剩余两行是温度和压力
 
 		Row row16 = sheet.getRow(16);
 		Cell cell16 = row16.getCell(1);
-		smallDemoMetaData.setPress(Integer.parseInt(getCellValue(cell16)));
+		bigDemoMetaData.setPress(Integer.parseInt(getCellValue(cell16)));
 
-		Row row17 = sheet.getRow(16);
+		Row row17 = sheet.getRow(17);
 		Cell cell17 = row17.getCell(1);
-		smallDemoMetaData.setTemparture(Float.parseFloat(getCellValue(cell17)));
-		smallDemoMetaData.setSample(sample);
-		return smallDemoMetaData;
+		bigDemoMetaData.setTemparture(Float.parseFloat(getCellValue(cell17)));
+		bigDemoMetaData.setSample(sample);
+		bigDemoMetaData.setSampleName(sample.getName());
+		bigDemoMetaData.setTestModel(testModel);
+		bigDemoMetaData.setTestmodelName(testModel.getName());
+		bigDemoMetaData.setTestSystem(testSystem);
+		bigDemoMetaData.setTestsystemName(testSystem.getName());
+		return bigDemoMetaData;
 	}
     /**系统测试
      * 14~15行
@@ -290,7 +290,7 @@ public class ExcelService {
         return cellValue.trim();
     }
 	/**
-	 * 7列数据
+	 *前19行都是元数据，第20行开始基础数据，从0开始计算，所以下面是19
 	 * @param demoMeta
 	 * @return
 	 */
@@ -298,13 +298,11 @@ public class ExcelService {
 		 List<ItemBig> pos = new  ArrayList<ItemBig>();
 	   	 int numOfRows = sheet.getLastRowNum() ;
 	   	 System.out.println("带持久化的大样数据有"+numOfRows);
-	   	 for (int i = 14; i < numOfRows; i++) {
+	   	 for (int i = 19; i < numOfRows; i++) {
 	            Row row = sheet.getRow(i);
-	            List<String> list = new ArrayList<String>();
 	            if (row != null) {
 	            	ItemBig item = new ItemBig();
-	            //	System.out.println("带处理的行"+row.getLastCellNum());
-	                for (int j = 0; j < 4; j++) {
+	                for (int j = 0; j < 7; j++) {
 	                    Cell cell = row.getCell(j);
 	                    	String value = getCellValue(cell);
 	                    	if("".equals(value)) {
@@ -315,9 +313,9 @@ public class ExcelService {
 	                    	if(j%2==0){
 	                    	  if(j==0) {
 	                    		  item.setRate(Integer.parseInt(value));
-	                    	  }else if(j%2<2){
+	                    	  }else if(j==2){
 	                    		item.setTransmission(Float.parseFloat(value));
-	                    	  }else if(j%2>2){
+	                    	  }else if(j==6){
 	                    		  item.setRadiationlose(Float.parseFloat(value));;
 	                    	  }else {
 	                    		  item.setEchoes(Float.parseFloat(value));
@@ -331,11 +329,8 @@ public class ExcelService {
 	                    			item.setRadiation(Integer.parseInt(value));
 	                    		}
 	                    	}
-	                    list.add(this.getCellValue(cell));
 	                }
-	               
-//	                item.setSamplPO(demoMeta);;
-//	                item.setSamplPO(samplPO);
+	                item.setBigDemoMetadata(demoMeta);
 	                pos.add(item);
 	            }
 	        }

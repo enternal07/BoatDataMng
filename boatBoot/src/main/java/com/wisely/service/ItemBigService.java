@@ -29,7 +29,7 @@ public class ItemBigService {
 	
 	public List<ItemBigVO> getItemBigList(QueryVO queryVO){
 		List<ItemBig> list = dao.getItemBigListByContions(queryVO.getRateMin(), queryVO.getRateMax(), 
-				queryVO.getSamplename(), queryVO.getBackgroundtype(), queryVO.getPress());
+				queryVO.getSamplename(), queryVO.getBackgroundtype(),queryVO.getBackgroundtype(), queryVO.getPress());
 		List<ItemBigVO> vos =  new ArrayList<ItemBigVO>();
 		for(ItemBig li:list) {
 			ItemBigVO vo = new ItemBigVO();
@@ -44,5 +44,10 @@ public class ItemBigService {
 		}
 		
 		return vos;
+	}
+	
+	public void deleteAll(String metaPk){
+		dao.deleteByBigMetaPK(metaPk);
+		dao.flush();
 	}
 }

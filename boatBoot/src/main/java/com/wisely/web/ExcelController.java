@@ -1,7 +1,6 @@
 package com.wisely.web;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -15,8 +14,6 @@ import org.apache.poi.ss.usermodel.DataFormatter;
 import org.apache.poi.ss.usermodel.DateUtil;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,16 +23,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.wisely.domain.Item;
-import com.wisely.domain.ItemBig;
-import com.wisely.domain.ItemContraction;
-import com.wisely.domain.TestModel;
-import com.wisely.domain.TestSystem;
 import com.wisely.domain.BaseMetaBacking;
 import com.wisely.domain.BaseMetaSample;
 import com.wisely.domain.BigDemoMetadata;
 import com.wisely.domain.ContractionMetadata;
 import com.wisely.domain.Demometadata;
+import com.wisely.domain.Item;
+import com.wisely.domain.ItemBig;
+import com.wisely.domain.ItemContraction;
+import com.wisely.domain.TestModel;
+import com.wisely.domain.TestSystem;
 import com.wisely.domainVO.ResultVO;
 import com.wisely.service.BaseMetaBackingService;
 import com.wisely.service.BaseMetaSampleService;
@@ -162,16 +159,23 @@ public class ExcelController {
 		BigDemoMetadata demoMeta = excelService.getBigMetaFromExcle(true);
 		ResultVO res = bigDemoMetadataService.ifExist(demoMeta);
 		 if(!res.isSuccess()) {
-			    baseMetaSampleService.saveEntity(demoMeta.getSample());
-				testmodelService.saveEntity(demoMeta.getTestModel());
-				testSysService.saveEntity(demoMeta.getTestSystem());
+			   BaseMetaSample smamp = baseMetaSampleService.saveEntity(demoMeta.getSample());
+				TestModel testModle = testmodelService.saveEntity(demoMeta.getTestModel());
+				TestSystem testStye = testSysService.saveEntity(demoMeta.getTestSystem());
+				demoMeta.setSamplepk(smamp.getPk());
+				demoMeta.setTestModelPk(testModle.getPk());
+				demoMeta.setTestSystemPk(testStye.getPk());
 			    demoMeta = bigDemoMetadataService.saveEntity(demoMeta);
 				items= excelService.getBigItemData(demoMeta);
 			    serviceItemBig.saveAll(items);
-			re.setMessage("处理样品"+demoMeta.getSamplename()+"下面的"+items.size()+"条信息完毕");
+			re.setMessage("处理样品"+demoMeta.getSampleName()+"下面的"+items.size()+"条信息完毕");
 		 }else {
 			 String oldPk = (String) res.getData();
-			 
+			 demoMeta.setPk(oldPk);
+			 //删除旧数据
+			 serviceItemBig.deleteAll(oldPk);
+			 items= excelService.getBigItemData(demoMeta);
+			  serviceItemBig.saveAll(items);
 		 }
 		 	re.setSuccess(true);
 		return re;
@@ -260,49 +264,7 @@ public class ExcelController {
         }
 		return pos;
    }
-    public List<ItemBig> getItemDataBig(Demometadata demoMeta) {
-   	 List<ItemBig> pos = new  ArrayList<ItemBig>();
-   	 int numOfRows = sheet.getLastRowNum() + 1;
-   	 for (int i = 5; i < numOfRows; i++) {
-            Row row = sheet.getRow(i);
-            Map<String, String> map = new HashMap<String, String>();
-            List<String> list = new ArrayList<String>();
-            if (row != null) {
-            	ItemBig item = new ItemBig();
-                for (int j = 0; j < row.getLastCellNum(); j++) {
-                    Cell cell = row.getCell(j);
-                    	String value = getCellValue(cell);
-                    	//快速排序ֵ
-                    	//偶数0.2.4.6
-                    	if(j%2==0){
-                    	  if(j<2) {
-                    		  item.setRate(Integer.parseInt(value));
-                    	  }else if(j>2){
-                    		 if(j>4) {
-                    			 item.setEchoes(Float.parseFloat(value)); 
-                    		 }else {
-                    			 item.setRadiationlose(Float.parseFloat(value));
-                    		 }
-                    	  }else {
-                    		  item.setTransmission(Float.parseFloat(value));
-                    	  }
-                    	}else {//奇数：1.3.5
-                    		if(j<3){
-                    			  item.setRefect(Float.parseFloat(value));
-                    		}else if(j>3) {
-                    			item.setRadiation(Integer.parseInt(value));
-                    		}else {
-                    			item.setBondacust(Float.parseFloat(value));
-                    		}
-                    	}
-                    list.add(this.getCellValue(cell));
-                }
-                item.setSamplPO(demoMeta);
-                pos.add(item);
-            }
-        }
-		return pos;
-   }
+    
    
     public List<Item> getItemData(Demometadata demoMeta) {
     	 List<Item> pos = new  ArrayList<Item>();

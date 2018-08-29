@@ -18,7 +18,7 @@ import org.hibernate.annotations.GenericGenerator;
 @Entity 
 @Inheritance
 @Table(name="bigmetadata")
-public class BigDemoMetadata  extends BaseMeta{
+public class BigDemoMetadata  extends BaseModel{
 	/**
 	 * 
 	 */
@@ -34,13 +34,13 @@ public class BigDemoMetadata  extends BaseMeta{
 	
 	private Integer press;
 	
-	@Column(name="sample_nme")
-	private String sampleNme;
+	@Column(name="sample_name")
+	private String sampleName;
 	
 	@Column(name="testmodel_name")
 	private String testmodelName;
 	
-	@Column(name="testsystem_nname")
+	@Column(name="testsystem_name")
 	private String testsystemName;
 	
 	
@@ -109,7 +109,7 @@ public class BigDemoMetadata  extends BaseMeta{
 	}
 
 	public String toString() {
-		return "样品名称："+this.getSamplename()+",背衬："+this.getBackgroundtype()+",温度："+this.getTemparture()+",压力："+this.getPress();
+		return "样品名称："+this.getSampleName()+",温度："+this.getTemparture()+",压力："+this.getPress();
 		
 	}
 
@@ -131,12 +131,12 @@ public class BigDemoMetadata  extends BaseMeta{
 		this.samplepk = samplepk;
 	}
 
-	public String getSampleNme() {
-		return sampleNme;
+	public String getSampleName() {
+		return sampleName;
 	}
 
-	public void setSampleNme(String sampleNme) {
-		this.sampleNme = sampleNme;
+	public void setSampleName(String sampleNme) {
+		this.sampleName = sampleNme;
 	}
 
 	public String getTestmodelName() {

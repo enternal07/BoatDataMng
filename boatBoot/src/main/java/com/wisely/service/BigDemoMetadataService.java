@@ -24,7 +24,7 @@ public class BigDemoMetadataService{
 	}
 	public ResultVO ifExist(BigDemoMetadata entity) {
 		
-		List<Object> resEntity = dao.CountBySamplenameAndTempartureAndPressAndTestNames(entity.getSamplename(), entity.getTemparture(), 
+		List<Object> resEntity = dao.CountBySamplenameAndTempartureAndPressAndTestNames(entity.getSampleName(), entity.getTemparture(), 
 				entity.getPress(), entity.getTestmodelName(), entity.getTestsystemName());
 		ResultVO res = new ResultVO();
 		  Object ress=resEntity.get(0);

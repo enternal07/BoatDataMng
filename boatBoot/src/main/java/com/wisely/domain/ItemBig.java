@@ -29,7 +29,7 @@ public class ItemBig  extends BaseModel{
 	//@Column(name="sample_pk")
 	@ManyToOne
 	@JoinColumn(name="samplepk")
-	private Demometadata samplPO;
+	private BigDemoMetadata bigDemoMetadata;
 	
 	//频率						
 	private Integer rate;
@@ -88,12 +88,12 @@ public class ItemBig  extends BaseModel{
 		this.pk = pk;
 	}
 
-	public Demometadata getSamplPO() {
-		return samplPO;
+	public BigDemoMetadata getBigDemoMetadata() {
+		return bigDemoMetadata;
 	}
 
-	public void setSamplPO(Demometadata samplPO) {
-		this.samplPO = samplPO;
+	public void setBigDemoMetadata(BigDemoMetadata bigDemoMetadata) {
+		this.bigDemoMetadata = bigDemoMetadata;
 	}
 
 	public Integer getRate() {
