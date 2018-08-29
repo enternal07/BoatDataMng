@@ -111,6 +111,7 @@ public class ExcelService {
 		BigDemoMetadata bigDemoMetaData = new BigDemoMetadata();
 		// 前7行是样品
 		BaseMetaSample sample = this.getSmapleFormExle();
+		sample.setSmall(false);
 		// 8.9.10.11，12，13，14行是试验模型，
 		TestModel testModel = this.getBigTestModel();
 		// 15，16 是测试模型

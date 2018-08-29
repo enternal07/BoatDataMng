@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.wisely.domain.Item;
+import com.wisely.domainVO.QueryBigVO;
 import com.wisely.domainVO.QueryVO;
 import com.wisely.domainVO.ResultVO;
 import com.wisely.service.ItemBigService;
@@ -81,7 +82,7 @@ public class ItemController {
 	 * @return
 	 */
 	@RequestMapping(value = "/pageSearchBigCondition",method = RequestMethod.POST)
-	public @ResponseBody ResultVO searchItemBigCondition(@RequestBody QueryVO queryVO,HttpServletRequest req){
+	public @ResponseBody ResultVO searchItemBigCondition(@RequestBody QueryBigVO queryVO,HttpServletRequest req){
 		ResultVO re = new ResultVO(true);
 		re.setData(bigservice.getItemBigList(queryVO));
 		return re;

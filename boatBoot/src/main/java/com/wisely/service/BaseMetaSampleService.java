@@ -26,4 +26,12 @@ public class BaseMetaSampleService{
 	public List<BaseMetaSample> findAll() {
 		return  dao.findAll();
 	}
+	
+	public List<BaseMetaSample> findSmall() {
+		return  dao.findBySmall(true);
+	}
+	
+	public List<BaseMetaSample> findBig() {
+		return  dao.findBySmall(false);
+	}
 }

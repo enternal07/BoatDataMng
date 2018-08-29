@@ -2,19 +2,14 @@ package com.wisely.service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.wisely.dao.ItemBigDao;
-import com.wisely.dao.ItemDao;
-import com.wisely.domain.Item;
 import com.wisely.domain.ItemBig;
 import com.wisely.domainVO.ItemBigVO;
-import com.wisely.domainVO.QueryVO;
+import com.wisely.domainVO.QueryBigVO;
 
 @Service
 public class ItemBigService {
@@ -27,9 +22,9 @@ public class ItemBigService {
 		return dao.save(pos);
 	}
 	
-	public List<ItemBigVO> getItemBigList(QueryVO queryVO){
+	public List<ItemBigVO> getItemBigList(QueryBigVO queryVO){
 		List<ItemBig> list = dao.getItemBigListByContions(queryVO.getRateMin(), queryVO.getRateMax(), 
-				queryVO.getSamplename(), queryVO.getBackgroundtype(),queryVO.getBackgroundtype(), queryVO.getPress());
+				queryVO.getSampleName(), queryVO.getTestModelName(),queryVO.getTestSystemName(), queryVO.getPress());
 		List<ItemBigVO> vos =  new ArrayList<ItemBigVO>();
 		for(ItemBig li:list) {
 			ItemBigVO vo = new ItemBigVO();
