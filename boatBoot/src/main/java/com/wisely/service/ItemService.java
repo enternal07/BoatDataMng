@@ -127,4 +127,8 @@ public class ItemService {
 	public List<Item> saveAll(List<Item> pos){
 		return dao.save(pos);
 	}
+	public void deleteAll(String metaPk){
+		dao.deleteByMetaPK(metaPk);
+		dao.flush();
+	}
 }

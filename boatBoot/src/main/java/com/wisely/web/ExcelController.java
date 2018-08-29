@@ -184,7 +184,8 @@ public class ExcelController {
 		List<Item> items = new ArrayList<Item>();
 		 //先取原数据
 		 Demometadata demoMeta = excelService.getSmallMetaFromExcle(true);
-		 if(!service.ifExits(demoMeta)) {
+		 ResultVO res = service.ifExits(demoMeta);
+		 if(!res.isSuccess()) {
 			demoMeta = service.saveEntity(demoMeta);
 			BaseMetaSample sample = baseMetaSampleService.saveEntity(demoMeta.getSample());
 			BaseMetaBacking backing = demoMeta.getBacking();
@@ -197,7 +198,12 @@ public class ExcelController {
 			demoMeta = service.saveEntity(demoMeta);
 			 re.setMessage("处理样品"+demoMeta.getSamplename()+"下面的"+items.size()+"条信息完毕");
 		 }else {
-			 re.setMessage(demoMeta.toString()+"的数据已经导入，请勿重复导入");
+			 //先删除旧数据，再存入新数据
+			 String oldPK = (String) res.getData();
+			 serviceItem.deleteAll(oldPK);
+			 demoMeta.setPk(oldPK);
+			items= excelService.getItemData(demoMeta);
+			serviceItem.saveAll(items);
 		 }
 		re.setSuccess(true);
 		return re;

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.wisely.dao.SmallDemoMetaDataDao;
 import com.wisely.domain.Demometadata;
+import com.wisely.domainVO.ResultVO;
 
 import net.minidev.json.JSONArray;
 import net.minidev.json.JSONObject;
@@ -18,15 +19,23 @@ public class SmallDemoMetaDataService {
 	@Autowired
 	private SmallDemoMetaDataDao dao;
 	
-	public boolean ifExits(Demometadata entity) {
-		int size = dao.CountBySamplenameAndTempartureAndPressAndBackgroundType(entity.getSamplename(), entity.getTemparture(), entity.getPress(), entity.getBackgroundtype(),entity.isSmall());
-		if(size>0) {
-			return true;
+	public ResultVO ifExits(Demometadata entity) {
+		List<Object> resObj = dao.CountBySamplenameAndTempartureAndPressAndBackgroundType(entity.getSamplename(), entity.getTemparture(), entity.getPress(), entity.getBackgroundtype(),entity.isSmall());
+		ResultVO res = new ResultVO();
 			
-		}else {
-			return false;
+			for(Object met:resObj) {
+				Object[] mest =(Object[]) met;
+				long size = (long) mest[0];
+				if(size>0) {
+					res.setSuccess(true);
+					res.setData(mest[1]);
+				}else {
+					res.setSuccess(false);
+				}
+				
+			}
+			return res;
 			
-		}
 	}
 	public Demometadata saveEntity(Demometadata entity) {
 		return dao.save(entity);
