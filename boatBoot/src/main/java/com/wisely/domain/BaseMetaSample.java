@@ -35,22 +35,28 @@ public class BaseMetaSample extends BaseModel implements Serializable {
 	@GenericGenerator(name="mcid",strategy="uuid2")
 	private String pk;
 	
+	//名称
 	@Column(name = "sample_name")
 	private String name; 
 
 	private String logo;
 	
+	//密度
 	private String  density;
 	
+	//弹性模型
 	@Column(name = "flexible_model")
 	private String flexibleModel;
 	
+	//松柏比
 	@Column(name = "poisson_ratio")
 	private String poissonRatio;
 	
+	//声速
 	@Column(name = "sound_speed")
 	private String  soundSpeed;
 	
+	//厚度
 	private String thickness;
 	
 	private String other;
