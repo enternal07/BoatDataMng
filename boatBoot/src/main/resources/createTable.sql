@@ -332,3 +332,25 @@ UNLOCK TABLES;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
 -- Dump completed on 2018-08-29 23:23:47
+
+
+-- ----------------------------
+-- Table structure for spha_base_user
+-- ----------------------------
+DROP TABLE IF EXISTS spha_base_user;
+CREATE TABLE spha_base_user (
+  id int(11) NOT NULL AUTO_INCREMENT,
+  username varchar(60) DEFAULT NULL COMMENT '用户名',
+  pass varchar(60) DEFAULT NULL COMMENT '密码',
+  usertype varchar(60) DEFAULT NULL COMMENT '用户类别',
+  updatetime varchar(30) DEFAULT NULL COMMENT '更新时间',
+  ts timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (id)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of spha_base_user
+-- ----------------------------
+INSERT INTO spha_base_user VALUES (1, 'admin', 'admin', '管理员', null, '2018-08-31 20:46:28');
+INSERT INTO spha_base_user VALUES (2, 'user', 'user', '普通用户', null, '2018-08-31 20:46:41');
+
