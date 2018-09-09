@@ -14,6 +14,11 @@ import org.hibernate.annotations.GenericGenerator;
 @Table(name="testmodel")
 public class TestModel extends BaseModel{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id //2
 //	@GeneratedValue //3
 	@GeneratedValue(generator = "mcid")

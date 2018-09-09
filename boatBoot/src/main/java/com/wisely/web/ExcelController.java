@@ -17,10 +17,9 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.wisely.domain.BaseMetaBacking;
@@ -33,29 +32,36 @@ import com.wisely.domain.ItemBig;
 import com.wisely.domain.ItemContraction;
 import com.wisely.domain.TestModel;
 import com.wisely.domain.TestSystem;
+import com.wisely.domain.scale.ItemScalePO;
+import com.wisely.domain.scale.LayingSchemePO;
+import com.wisely.domain.scale.ScaleMataPO;
+import com.wisely.domain.scale.TestConditionPO;
+import com.wisely.domain.scale.TestModelObjPO;
 import com.wisely.domainVO.ResultVO;
 import com.wisely.service.BaseMetaBackingService;
 import com.wisely.service.BaseMetaSampleService;
 import com.wisely.service.BigDemoMetadataService;
-import com.wisely.service.ContractionMetadataService;
 import com.wisely.service.ExcelService;
 import com.wisely.service.ItemBigService;
-import com.wisely.service.ItemContractionService;
 import com.wisely.service.ItemService;
 import com.wisely.service.SmallDemoMetaDataService;
 import com.wisely.service.TestModelService;
 import com.wisely.service.TestSystemService;
+import com.wisely.service.scale.ItemScaleService;
+import com.wisely.service.scale.LayingSchemeService;
+import com.wisely.service.scale.ScaleMataService;
+import com.wisely.service.scale.TestConditionService;
+import com.wisely.service.scale.TestModelObjService;
 
 import until.constant.Constants;
 /**
  * 小样模型
  * 大样模型
- * 
+ * 缩比模型
  * @author dingqi
- *
  */
 
-@Controller
+@RestController
 @RequestMapping(value = "/excelUpload")
 public class ExcelController {
 
@@ -63,8 +69,6 @@ public class ExcelController {
 
 	@Autowired
 	private SmallDemoMetaDataService service;
-	@Autowired
-	private ContractionMetadataService serviceConMeta;
 	
 	@Autowired
 	private ItemService serviceItem;
@@ -82,15 +86,29 @@ public class ExcelController {
 	private BaseMetaSampleService  baseMetaSampleService;
 	
 	@Autowired
-	private ItemContractionService serviceItemCon;
-	
-	@Autowired
 	private BigDemoMetadataService bigDemoMetadataService;
 	
 	@Autowired
 	private TestModelService   testmodelService;
 	@Autowired
 	private TestSystemService testSysService;
+	
+	@Autowired
+	private ScaleMataService scaleMataService;
+	
+	@Autowired
+	private TestModelObjService testModelObjService;
+	
+	@Autowired
+	private TestConditionService testConditionService;
+	
+	@Autowired
+	private LayingSchemeService layingSchemeService;
+	
+	@Autowired
+	private ItemScaleService itemScaleService;
+	
+	
 	
 	  private Sheet sheet;
 	  private List<List<String>> listData;
@@ -99,7 +117,7 @@ public class ExcelController {
 	  
 	
 	@RequestMapping(value="uploadExcle",method = RequestMethod.POST)
-	public @ResponseBody ResultVO UploadExcle(MultipartFile file, String catalog,  HttpServletRequest request) throws IOException{
+	public  ResultVO UploadExcle(MultipartFile file, String catalog,  HttpServletRequest request) throws IOException{
 		ResultVO res = new ResultVO(false,"",null);
 		if(file==null) {
 			res.setMessage("没有上传文件，请选着文件上传");
@@ -132,19 +150,31 @@ public class ExcelController {
 	@Transactional
 	 private ResultVO getConDemo() {
 		ResultVO re = new ResultVO();
-		List<ItemContraction> items = new ArrayList<ItemContraction>();
+		List<ItemScalePO> items = new ArrayList<ItemScalePO>();
 		 //先取原数据
-		 ContractionMetadata demoMeta = getConDemoFromExcle();
-		 if(!serviceConMeta.ifExits(demoMeta)) {
-			
-			 items= getItemConData(demoMeta);
-			demoMeta = serviceConMeta.saveEntity(demoMeta);
-			serviceItemCon.saveAll(items);
-			 re.setMessage("处理样品"+demoMeta.getSamplename()+"下面的"+items.size()+"条信息完毕");
+		ScaleMataPO demoMeta = excelService.getScaleMetaFromExcle();
+		ResultVO res = scaleMataService.ifExist(demoMeta);
+		 if(!res.isSuccess()) {
+			 TestConditionPO testConditionPO = testConditionService.saveEntity(demoMeta.getTestConditionPO());
+			 TestModelObjPO testModelObjPO = testModelObjService.saveEntity(demoMeta.getTestModelObjPO());
+			 LayingSchemePO layingSchemePO = layingSchemeService.saveEntity(demoMeta.getLayingSchemePO());
+				demoMeta.setLayingSchemePk(layingSchemePO.getPk());
+				demoMeta.setTestModelObjPk(testModelObjPO.getPk());
+				demoMeta.setTestConditionPk(testConditionPO.getPk());
+			    demoMeta = scaleMataService.saveEntity(demoMeta);
+				items= excelService.getItemScaleData(demoMeta);
+				itemScaleService.saveAll(items);
+			re.setMessage("处理缩比样品"+demoMeta.getTestModelObjName()+"下面的"+items.size()+"条信息完毕");
 		 }else {
-			 re.setMessage(demoMeta.toString()+"的数据已经导入，请勿重新导入");
+			 String oldPk = (String) res.getData();
+			 demoMeta.setPk(oldPk);
+			 //删除旧数据
+			 itemScaleService.deleteAll(oldPk);
+			 items= excelService.getItemScaleData(demoMeta);
+			 itemScaleService.saveAll(items);
+			 re.setMessage("处理缩比样品"+demoMeta.getTestModelObjName()+"下面的"+items.size()+"条信息完毕");
 		 }
-		 re.setSuccess(true);
+		 	re.setSuccess(true);
 		return re;
 	}
 	/*

@@ -18,9 +18,11 @@ import com.wisely.domain.Item;
 import com.wisely.domainVO.QueryBigVO;
 import com.wisely.domainVO.QueryVO;
 import com.wisely.domainVO.ResultVO;
+import com.wisely.domainVO.SacleQueryVO;
 import com.wisely.service.ItemBigService;
 import com.wisely.service.ItemContractionService;
 import com.wisely.service.ItemService;
+import com.wisely.service.scale.ItemScaleService;
 
 @RestController
 @RequestMapping("/item")
@@ -33,7 +35,7 @@ public class ItemController {
 	private ItemBigService bigservice;
 	
 	@Autowired
-	private ItemContractionService conservice;
+	private ItemScaleService itemScaleService;
 
 	@RequestMapping("/page")
 	public Page<Item> page(@RequestParam(value = "pageindx", defaultValue = "1") int pageIndex,
@@ -96,10 +98,10 @@ public class ItemController {
 	 * @param samplepk
 	 * @return
 	 */
-	@RequestMapping(value = "/pageSearchConCondition",method = RequestMethod.POST)
-	public @ResponseBody ResultVO searchItemConCondition(@RequestBody QueryVO queryVO,HttpServletRequest req){
+	@RequestMapping(value = "/pageSearchScaleCondition",method = RequestMethod.POST)
+	public @ResponseBody ResultVO searchItemScaleCondition(@RequestBody SacleQueryVO queryVO,HttpServletRequest req){
 		ResultVO re = new ResultVO(true);
-		re.setData( conservice.getItemConList(queryVO));
+		re.setData( itemScaleService.getItemScaleList(queryVO));
 		return re;
 	}
 
