@@ -34,6 +34,8 @@ public class ItemScaleVO  implements Serializable{
 		//辐射声功率插入损失
 		@Column(name = "reduction_sp")
 		private float reductionSP ;
+		
+		private int  rate;
 
 		public float getLightShellTS() {
 			return lightShellTS;
@@ -81,6 +83,14 @@ public class ItemScaleVO  implements Serializable{
 
 		public void setReductionSP(float reductionSP) {
 			this.reductionSP = reductionSP;
+		}
+
+		public int getRate() {
+			return rate;
+		}
+
+		public void setRate(int rate) {
+			this.rate = rate;
 		}
 
 

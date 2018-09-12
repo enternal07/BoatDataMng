@@ -12,7 +12,7 @@ public class QueryBigVO implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	private String sampleName;
+	private String samplename;
 	
 	private String testModelName;
 	
@@ -26,12 +26,12 @@ public class QueryBigVO implements Serializable{
 	
 	private  Integer rateMax;
 
-	public String getSampleName() {
-		return sampleName;
+	public String getSamplename() {
+		return samplename;
 	}
 
-	public void setSampleName(String samplename) {
-		this.sampleName = samplename;
+	public void setSamplename(String samplename) {
+		this.samplename = samplename;
 	}
 
 

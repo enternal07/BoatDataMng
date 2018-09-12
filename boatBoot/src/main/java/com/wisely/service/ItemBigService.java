@@ -24,7 +24,7 @@ public class ItemBigService {
 	
 	public List<ItemBigVO> getItemBigList(QueryBigVO queryVO){
 		List<ItemBig> list = dao.getItemBigListByContions(queryVO.getRateMin(), queryVO.getRateMax(), 
-				queryVO.getSampleName(), queryVO.getTestModelName(),queryVO.getTestSystemName(), queryVO.getPress());
+				queryVO.getSamplename(), queryVO.getTestModelName(),queryVO.getTestSystemName(), queryVO.getPress(),queryVO.getTemparture());
 		List<ItemBigVO> vos =  new ArrayList<ItemBigVO>();
 		for(ItemBig li:list) {
 			ItemBigVO vo = new ItemBigVO();

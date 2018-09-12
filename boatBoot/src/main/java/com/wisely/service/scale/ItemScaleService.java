@@ -42,6 +42,7 @@ public class ItemScaleService {
 			vo.setLightShellSP(li.getLightShellSP());
 			vo.setReductionSP(li.getReductionSP());
 			vo.setReductionTS(li.getReductionTS());
+			vo.setRate(li.getRate());
 			vos.add(vo);
 		}
 		
