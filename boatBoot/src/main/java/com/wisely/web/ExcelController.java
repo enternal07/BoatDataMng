@@ -22,21 +22,19 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.wisely.domain.BaseMetaBacking;
-import com.wisely.domain.BaseMetaSample;
-import com.wisely.domain.BigDemoMetadata;
-import com.wisely.domain.ContractionMetadata;
-import com.wisely.domain.Demometadata;
-import com.wisely.domain.Item;
-import com.wisely.domain.ItemBig;
-import com.wisely.domain.ItemContraction;
-import com.wisely.domain.TestModel;
-import com.wisely.domain.TestSystem;
+import com.wisely.domain.big.BigDemoMetadata;
+import com.wisely.domain.big.ItemBig;
+import com.wisely.domain.big.TestModel;
+import com.wisely.domain.big.TestSystem;
+import com.wisely.domain.common.BaseMetaSample;
 import com.wisely.domain.scale.ItemScalePO;
 import com.wisely.domain.scale.LayingSchemePO;
 import com.wisely.domain.scale.ScaleMataPO;
 import com.wisely.domain.scale.TestConditionPO;
 import com.wisely.domain.scale.TestModelObjPO;
+import com.wisely.domain.small.BaseMetaBacking;
+import com.wisely.domain.small.Demometadata;
+import com.wisely.domain.small.Item;
 import com.wisely.domainVO.ResultVO;
 import com.wisely.service.BaseMetaBackingService;
 import com.wisely.service.BaseMetaSampleService;
@@ -259,42 +257,7 @@ public class ExcelController {
        // getItemData(numOfRows);
 //        return res;
     }
-    public List<ItemContraction> getItemConData(ContractionMetadata demoMeta) {
-   	 List<ItemContraction> pos = new  ArrayList<ItemContraction>();
-   	 int numOfRows = sheet.getLastRowNum() + 1;
-   	 for (int i = 4; i < numOfRows; i++) {
-            Row row = sheet.getRow(i);
-            Map<String, String> map = new HashMap<String, String>();
-            List<String> list = new ArrayList<String>();
-            if (row != null) {
-            	ItemContraction item = new ItemContraction();
-                for (int j = 0; j < row.getLastCellNum(); j++) {
-                    Cell cell = row.getCell(j);
-                    	String value = getCellValue(cell);
-                    	//快速排序ֵ
-                    	//偶数2.4.6.8.10.12.1
-                    	if(j%2==0){
-                    	  if(j==0) {
-                    		  item.setRate(Integer.parseInt(value));
-                    	  }else {
-                    		  item.setRadiation(Integer.parseInt(value));
-                    	  }
-                    	}else {
-                    		if(j<3){
-                    			item.setTarget(Float.parseFloat(value));
-                    		}else{
-                    			item.setRadiationlose(Float.parseFloat(value));;
-                    		}
-                    	}
-                    list.add(this.getCellValue(cell));
-                }
-                item.setSamplPO(demoMeta);
-                pos.add(item);
-            }
-        }
-		return pos;
-   }
-    
+   
    
     public List<Item> getItemData(Demometadata demoMeta) {
     	 List<Item> pos = new  ArrayList<Item>();
@@ -395,22 +358,7 @@ public class ExcelController {
 			   smallDemoMetaData.setSample(sample);
         		   return smallDemoMetaData;
 	}
-	private ContractionMetadata getConDemoFromExcle() {
-		//获取前四行的数据
-        	ContractionMetadata smallDemoMetaData= new ContractionMetadata();
-        		   Row row1 = sheet.getRow(0);
-        		   Cell cell1 = row1.getCell(1);
-        		   smallDemoMetaData.setSamplename(getCellValue(cell1));
-        		   Row row2 = sheet.getRow(1);
-        		   Cell cell2 = row2.getCell(1);
-        		   smallDemoMetaData.setBackgroundtype(getCellValue(cell2));
-        		   Row row3 = sheet.getRow(2);
-        		   Cell cell3 = row3.getCell(1);
-        		   smallDemoMetaData.setTesttime(getCellValue(cell3));
-        		   
-        		   System.out.println("元数据："+smallDemoMetaData.getSamplename()+smallDemoMetaData.getBackgroundtype()+smallDemoMetaData.getTesttime());
-        		   return smallDemoMetaData;
-	}
+	
 	private String getCellValue(Cell cell) {
         String cellValue = "";
         DataFormatter formatter = new DataFormatter();

@@ -10,7 +10,7 @@ import javax.persistence.Transient;
 
 import org.hibernate.annotations.GenericGenerator;
 
-import com.wisely.domain.BaseModel;
+import com.wisely.domain.common.BaseModel;
 
 /**
  * 缩比模型的元数据，一组excle表的唯一标识

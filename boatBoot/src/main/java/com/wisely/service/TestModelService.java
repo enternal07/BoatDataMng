@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.wisely.dao.TestModelDao;
-import com.wisely.domain.TestModel;
+import com.wisely.domain.big.TestModel;
 
 @Service
 public class TestModelService{

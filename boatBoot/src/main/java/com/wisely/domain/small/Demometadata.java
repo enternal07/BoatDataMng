@@ -1,4 +1,4 @@
-package com.wisely.domain;
+package com.wisely.domain.small;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,6 +9,9 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import org.hibernate.annotations.GenericGenerator;
+
+import com.wisely.domain.common.BaseMetaSample;
+import com.wisely.domain.common.BaseModel;
 /**
  * 记录smallDemo的原数据信息,
  * 小样数据的元数据信息。
@@ -18,7 +21,7 @@ import org.hibernate.annotations.GenericGenerator;
 @Entity 
 @Inheritance
 @Table(name="smallmetadata")
-public class Demometadata  extends BaseMeta{
+public class Demometadata  extends BaseModel{
 	/**
 	 * 
 	 */
@@ -53,6 +56,31 @@ public class Demometadata  extends BaseMeta{
 	@Transient
 	BaseMetaBacking  backing;
 	
+private String samplename; 
+	
+	private String backgroundtype;
+
+	
+	
+	
+   public String getBackgroundtype() {
+		return backgroundtype;
+	}
+
+	public void setBackgroundtype(String backgroundtype) {
+		this.backgroundtype = backgroundtype;
+	}
+
+
+
+	public String getSamplename() {
+		return samplename;
+	}
+
+	public void setSamplename(String samplename) {
+		this.samplename = samplename;
+	}
+
 	
 	public String getPk() {
 		return pk;

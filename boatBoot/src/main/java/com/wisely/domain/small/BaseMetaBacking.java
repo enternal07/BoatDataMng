@@ -1,4 +1,4 @@
-package com.wisely.domain;
+package com.wisely.domain.small;
 
 import java.io.Serializable;
 
@@ -11,6 +11,8 @@ import javax.persistence.MappedSuperclass;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
+
+import com.wisely.domain.common.BaseModel;
 
 /**
  * 背衬模型

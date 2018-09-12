@@ -7,8 +7,8 @@ import org.springframework.stereotype.Service;
 
 import com.wisely.dao.BigDemoMetadataDao;
 import com.wisely.dao.TestModelDao;
-import com.wisely.domain.BigDemoMetadata;
-import com.wisely.domain.TestModel;
+import com.wisely.domain.big.BigDemoMetadata;
+import com.wisely.domain.big.TestModel;
 import com.wisely.domainVO.ResultVO;
 
 @Service

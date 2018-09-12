@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.wisely.dao.BaseMetaSampleDao;
-import com.wisely.domain.BaseMetaSample;
+import com.wisely.domain.common.BaseMetaSample;
 
 @Service
 public class BaseMetaSampleService{

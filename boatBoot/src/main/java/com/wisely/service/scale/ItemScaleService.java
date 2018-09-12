@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.wisely.dao.scale.ItemScaleDao;
-import com.wisely.domain.ItemBig;
+import com.wisely.domain.big.ItemBig;
 import com.wisely.domain.scale.ItemScalePO;
 import com.wisely.domainVO.ItemBigVO;
 import com.wisely.domainVO.ItemScaleVO;

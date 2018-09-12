@@ -9,7 +9,7 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
-import com.wisely.domain.BaseModel;
+import com.wisely.domain.common.BaseModel;
 
 
 @Entity

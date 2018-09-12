@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.wisely.domain.Item;
+import com.wisely.domain.small.Item;
 import com.wisely.support.CustomRepository;
 
 public interface ItemDao extends CustomRepository<Item, String> {

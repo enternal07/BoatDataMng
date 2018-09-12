@@ -14,13 +14,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.wisely.domain.Item;
+import com.wisely.domain.small.Item;
 import com.wisely.domainVO.QueryBigVO;
 import com.wisely.domainVO.QueryVO;
 import com.wisely.domainVO.ResultVO;
 import com.wisely.domainVO.SacleQueryVO;
 import com.wisely.service.ItemBigService;
-import com.wisely.service.ItemContractionService;
 import com.wisely.service.ItemService;
 import com.wisely.service.scale.ItemScaleService;
 

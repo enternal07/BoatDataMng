@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.wisely.dao.SmallDemoMetaDataDao;
-import com.wisely.domain.Demometadata;
+import com.wisely.domain.small.Demometadata;
 import com.wisely.domainVO.ResultVO;
 
 import net.minidev.json.JSONArray;

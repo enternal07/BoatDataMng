@@ -1,4 +1,4 @@
-package com.wisely.domain;
+package com.wisely.domain.big;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,11 +10,13 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import com.wisely.domain.common.BaseModel;
+
 
 @Entity //
-@Table(name="itemcontraction")
+@Table(name="itembig")
 @Inheritance
-public class ItemContraction  extends BaseModel{
+public class ItemBig  extends BaseModel{
 	
 	@Id //2
 //	@GeneratedValue //3
@@ -22,20 +24,33 @@ public class ItemContraction  extends BaseModel{
 	@GenericGenerator(name="mcid",strategy="uuid2")
 	private String pk;
 	
+	/*样品*/
+	//@Column(name="sample_name")
+	//private String samplename;
 	
+	//@Column(name="sample_pk")
 	@ManyToOne
 	@JoinColumn(name="samplepk")
-	private ContractionMetadata samplPO;
+	private BigDemoMetadata bigDemoMetadata;
 	
 	//频率						
 	private Integer rate;
+	
+	//反射系数
+	private Float refect;
+	
+	//透射系数
+	private Float transmission;
+	
+	//吸声系数
+	private Float bondacust;
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
-	//目标强度
-	private Float target;
+	//回声降低
+	private Float echoes;
 	
 	//辐射声功率/dB
 	private int radiation;
@@ -43,7 +58,13 @@ public class ItemContraction  extends BaseModel{
 	//辐射声功率插入损失
 	private Float radiationlose;
 	
-	
+	public Float getEchoes() {
+		return echoes;
+	}
+
+	public void setEchoes(Float echoes) {
+		this.echoes = echoes;
+	}
 
 	public int getRadiation() {
 		return radiation;
@@ -69,7 +90,13 @@ public class ItemContraction  extends BaseModel{
 		this.pk = pk;
 	}
 
-	
+	public BigDemoMetadata getBigDemoMetadata() {
+		return bigDemoMetadata;
+	}
+
+	public void setBigDemoMetadata(BigDemoMetadata bigDemoMetadata) {
+		this.bigDemoMetadata = bigDemoMetadata;
+	}
 
 	public Integer getRate() {
 		return rate;
@@ -79,20 +106,28 @@ public class ItemContraction  extends BaseModel{
 		this.rate = rate;
 	}
 
-	public Float getTarget() {
-		return target;
+	public Float getRefect() {
+		return refect;
 	}
 
-	public void setTarget(Float target) {
-		this.target = target;
+	public void setRefect(Float refect) {
+		this.refect = refect;
 	}
 
-	public ContractionMetadata getSamplPO() {
-		return samplPO;
+	public Float getTransmission() {
+		return transmission;
 	}
 
-	public void setSamplPO(ContractionMetadata samplPO) {
-		this.samplPO = samplPO;
+	public void setTransmission(Float transmission) {
+		this.transmission = transmission;
+	}
+
+	public Float getBondacust() {
+		return bondacust;
+	}
+
+	public void setBondacust(Float bondacust) {
+		this.bondacust = bondacust;
 	}
 
 	

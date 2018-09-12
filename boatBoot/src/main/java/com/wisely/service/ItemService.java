@@ -15,7 +15,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.wisely.dao.ItemDao;
-import com.wisely.domain.Item;
+import com.wisely.domain.small.Item;
 import com.wisely.domainVO.ItemBaseVO;
 import com.wisely.domainVO.QueryVO;
 

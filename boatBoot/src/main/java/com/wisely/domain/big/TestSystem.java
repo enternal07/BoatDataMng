@@ -1,4 +1,4 @@
-package com.wisely.domain;
+package com.wisely.domain.big;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,6 +9,9 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import com.wisely.domain.common.BaseModel;
+
+//大样模型测试系统
 @Entity
 @Inheritance
 @Table(name="testsystem")

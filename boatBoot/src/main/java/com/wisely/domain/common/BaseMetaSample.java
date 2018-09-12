@@ -1,4 +1,4 @@
-package com.wisely.domain;
+package com.wisely.domain.common;
 
 import java.io.Serializable;
 
@@ -12,6 +12,8 @@ import javax.persistence.Table;
 import org.hibernate.annotations.GenericGenerator;
 
 /**
+ * 
+ * 大样和小样公用一个长表，通过字段small字段区别
  * 样品模型
  * 名称：阿波罗 
 密度：1.05kg/cm3 

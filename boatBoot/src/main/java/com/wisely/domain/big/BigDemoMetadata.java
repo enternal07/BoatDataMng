@@ -1,4 +1,4 @@
-package com.wisely.domain;
+package com.wisely.domain.big;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,6 +9,9 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import org.hibernate.annotations.GenericGenerator;
+
+import com.wisely.domain.common.BaseMetaSample;
+import com.wisely.domain.common.BaseModel;
 /**
  * 记录bigDemo的原数据信息,
  * 一张大样excle表的元数据信息。

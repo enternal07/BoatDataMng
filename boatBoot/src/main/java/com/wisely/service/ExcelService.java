@@ -20,19 +20,19 @@ import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.wisely.domain.BaseMetaBacking;
-import com.wisely.domain.BaseMetaSample;
-import com.wisely.domain.BigDemoMetadata;
-import com.wisely.domain.Demometadata;
-import com.wisely.domain.Item;
-import com.wisely.domain.ItemBig;
-import com.wisely.domain.TestModel;
-import com.wisely.domain.TestSystem;
+import com.wisely.domain.big.BigDemoMetadata;
+import com.wisely.domain.big.ItemBig;
+import com.wisely.domain.big.TestModel;
+import com.wisely.domain.big.TestSystem;
+import com.wisely.domain.common.BaseMetaSample;
 import com.wisely.domain.scale.ItemScalePO;
 import com.wisely.domain.scale.LayingSchemePO;
 import com.wisely.domain.scale.ScaleMataPO;
 import com.wisely.domain.scale.TestConditionPO;
 import com.wisely.domain.scale.TestModelObjPO;
+import com.wisely.domain.small.BaseMetaBacking;
+import com.wisely.domain.small.Demometadata;
+import com.wisely.domain.small.Item;
 
 @Service
 public class ExcelService {

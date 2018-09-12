@@ -8,6 +8,8 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.Table;
 
+import com.wisely.domain.common.BaseModel;
+
 /**
  * 用户表
  * @author liqz

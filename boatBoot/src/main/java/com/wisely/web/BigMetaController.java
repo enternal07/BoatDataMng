@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.wisely.domain.BaseMetaSample;
-import com.wisely.domain.TestModel;
-import com.wisely.domain.TestSystem;
+import com.wisely.domain.big.TestModel;
+import com.wisely.domain.big.TestSystem;
+import com.wisely.domain.common.BaseMetaSample;
 import com.wisely.domainVO.ResultVO;
 import com.wisely.service.BaseMetaSampleService;
 import com.wisely.service.SmallDemoMetaDataService;

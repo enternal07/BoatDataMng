@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.wisely.dao.BaseMetaBackingDao;
-import com.wisely.domain.BaseMetaBacking;
+import com.wisely.domain.small.BaseMetaBacking;
 
 @Service
 public class BaseMetaBackingService{

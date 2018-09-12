@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.Query;
 
-import com.wisely.domain.Demometadata;
+import com.wisely.domain.small.Demometadata;
 import com.wisely.support.CustomRepository;
 
 public interface SmallDemoMetaDataDao extends CustomRepository<Demometadata, String> {
