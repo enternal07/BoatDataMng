@@ -338,3 +338,17 @@ CREATE TABLE `testsystem` (
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
 -- Dump completed on 2018-09-09 10:16:58
+DROP TABLE IF EXISTS `spha_base_user`;
+CREATE TABLE `spha_base_user` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(60) DEFAULT NULL COMMENT '用户名',
+  `pass` varchar(60) DEFAULT NULL COMMENT '密码',
+  `usertype` varchar(60) DEFAULT NULL COMMENT '用户类别',
+  `updatetime` varchar(30) DEFAULT NULL COMMENT '更新时间',
+  `ts` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+INSERT INTO `mysql_dingqi`.`spha_base_user` (`id`, `username`, `pass`, `usertype`, `updatetime`, `ts`) VALUES ('1', 'admin', 'admin', '管理员', NULL, '2018-08-31 20:46:28');
+INSERT INTO `mysql_dingqi`.`spha_base_user` (`id`, `username`, `pass`, `usertype`, `updatetime`, `ts`) VALUES ('2', 'user', 'user', '普通用户', NULL, '2018-08-31 20:46:41');
+
