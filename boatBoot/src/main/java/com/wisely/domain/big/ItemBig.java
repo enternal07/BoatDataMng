@@ -12,7 +12,9 @@ import org.hibernate.annotations.GenericGenerator;
 
 import com.wisely.domain.common.BaseModel;
 
-
+/**
+ * 大样数据Item
+ */
 @Entity //
 @Table(name="itembig")
 @Inheritance

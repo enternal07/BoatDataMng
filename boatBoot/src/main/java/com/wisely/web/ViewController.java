@@ -16,6 +16,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.wisely.dao.PersonRepository;
 import com.wisely.domain.Person;
 
+/**
+ * Just For Test
+ * */
 @Controller
 public class ViewController {
 	

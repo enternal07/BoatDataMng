@@ -14,6 +14,9 @@ import org.hibernate.annotations.GenericGenerator;
 import com.wisely.domain.common.BaseModel;
 
 
+/**
+ * 缩放模型Item
+ */
 @Entity
 @Inheritance
 @Table(name="item_scale")

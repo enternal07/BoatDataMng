@@ -13,8 +13,8 @@ import org.hibernate.annotations.GenericGenerator;
 import com.wisely.domain.common.BaseMetaSample;
 import com.wisely.domain.common.BaseModel;
 /**
- * 记录smallDemo的原数据信息,
  * 小样数据的元数据信息。
+ * 记录smallDemo的原数据信息,
  * @author dingqi
  *
  */

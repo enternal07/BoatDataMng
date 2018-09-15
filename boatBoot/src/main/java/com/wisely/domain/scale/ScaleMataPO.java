@@ -47,7 +47,7 @@ public class ScaleMataPO extends BaseModel{
 	
 	@Transient
 	private LayingSchemePO layingSchemePO;
-	
+	//试验情况
 	@Transient
 	private TestConditionPO testConditionPO;
 	

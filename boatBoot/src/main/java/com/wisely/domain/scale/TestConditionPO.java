@@ -11,7 +11,9 @@ import org.hibernate.annotations.GenericGenerator;
 
 import com.wisely.domain.common.BaseModel;
 
-
+/**
+ * 试验情况
+ */
 @Entity
 @Inheritance
 @Table(name="test_condition")

@@ -22,15 +22,19 @@ import com.wisely.service.SmallDemoMetaDataService;
 import com.wisely.service.TestModelService;
 import com.wisely.service.TestSystemService;
 
-
+/**
+ * 大样数据
+ * @author liqz
+ *
+ */
 @Controller
 @RequestMapping(value = "/bigmetaMng")
 public class BigMetaController {
 
 	protected final Logger logger = LoggerFactory.getLogger(getClass());
 
-	@Autowired
-	private SmallDemoMetaDataService service;
+	/*@Autowired
+	private SmallDemoMetaDataService service;*/
 	
 	@Autowired
 	private  BaseMetaSampleService  sampleService;

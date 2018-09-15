@@ -20,7 +20,9 @@ import com.wisely.service.scale.LayingSchemeService;
 import com.wisely.service.scale.TestConditionService;
 import com.wisely.service.scale.TestModelObjService;
 
-
+/**
+ * 缩放模型管理
+ */
 @Controller
 @RequestMapping(value = "/scaleMataMng")
 public class ScaleMetaController {

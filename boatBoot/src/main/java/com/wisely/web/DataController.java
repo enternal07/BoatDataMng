@@ -15,6 +15,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.wisely.dao.PersonRepository;
 import com.wisely.domain.Person;
 
+/**
+ * Just For Test
+ */
 @RestController
 public class DataController {
 	//1 Spring Data JPA已自动为你注册bean，所以可自动注入

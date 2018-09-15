@@ -11,6 +11,10 @@ import org.hibernate.annotations.GenericGenerator;
 
 import com.wisely.domain.common.BaseModel;
 
+/**
+ * 大样数据试验模型
+ * */
+
 //大样模型的测试模型
 @Entity
 @Inheritance

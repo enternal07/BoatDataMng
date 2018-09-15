@@ -12,6 +12,9 @@ import org.hibernate.annotations.GenericGenerator;
 import com.wisely.domain.common.BaseModel;
 
 
+/**
+ * 敷设方案
+ */
 
 @Entity
 @Inheritance

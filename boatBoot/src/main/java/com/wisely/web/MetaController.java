@@ -22,7 +22,9 @@ import com.wisely.service.SmallDemoMetaDataService;
 
 import net.minidev.json.JSONObject;
 
-
+/**
+ *小样数据
+ */
 @Controller
 @RequestMapping(value = "/metaMng")
 public class MetaController {
@@ -37,9 +39,6 @@ public class MetaController {
 	
 	@Autowired
 	private  BaseMetaBackingService  bankService;
-	
-
-	
 
 	@RequestMapping(value="small/sample")
 	public @ResponseBody ResultVO getSmallSamlple(HttpServletRequest req) {

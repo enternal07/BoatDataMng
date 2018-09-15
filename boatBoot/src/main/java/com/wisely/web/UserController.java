@@ -14,6 +14,11 @@ import com.wisely.domainVO.ResultVO;
 import com.wisely.service.ISysUserService;
 import com.wisely.util.Toolkit;
 
+/**
+ * User Login
+ * @author liqz
+ *
+ */
 @RestController
 @RequestMapping("user")
 public class UserController{
