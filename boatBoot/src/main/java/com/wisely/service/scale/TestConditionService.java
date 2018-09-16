@@ -1,11 +1,14 @@
 package com.wisely.service.scale;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.wisely.dao.PhotoDao;
 import com.wisely.dao.scale.TestConditionDao;
+import com.wisely.domain.common.Photo;
 import com.wisely.domain.scale.TestConditionPO;
 import com.wisely.util.Toolkit;
 
@@ -15,30 +18,73 @@ public class TestConditionService{
 	@Autowired
 	private TestConditionDao dao;
 	
-	public  TestConditionPO saveEntity(TestConditionPO entity) {
-		return dao.save(entity);
-	}
+	@Autowired
+	private PhotoDao photoDao;
 	/**
-	 * 修改试验情况数据实体
+	 * 保存实体
+	 * @param entity
+	 * @return
+	 */
+	public TestConditionPO saveEntity(TestConditionPO entity) {
+		TestConditionPO result = null;
+		if(Toolkit.notEmpty(entity)){
+			List<Photo> photos = entity.getPhotos();
+			entity.setPhotos(null); 
+			result = dao.save(entity);
+			if(Toolkit.notEmpty(result)){
+				savePhoto(result.getPk(),photos);
+			}
+		}
+		return result;
+	}
+	private void savePhoto(String modelPK,List<Photo> photos){
+		if(Toolkit.notEmpty(photos) && photos.size()>0){
+			List<String> photoPKs = new ArrayList<>();
+			for (Photo photo : photos) {
+				photoPKs.add(photo.getPk());
+			}
+			photoDao.modifyModelPK(modelPK, photoPKs);
+		}
+	}
+	
+	/**
+	 * 修改实体
 	 * @param entity
 	 * @return
 	 */
 	public TestConditionPO updateEntity(TestConditionPO entity){
 		TestConditionPO result = null ; 
-		if(Toolkit.notEmpty(entity.getPk())){
+		if(Toolkit.notEmpty(entity)||Toolkit.notEmpty(entity.getPk())){
+			List<Photo> photos = entity.getPhotos();
 			TestConditionPO temp = dao.findOne(entity.getPk());
 			if(Toolkit.notEmpty(temp)){
-				result = dao.save(entity);
+				entity.setPhotos(null); 
+				result = dao.save(entity); 
+				if(Toolkit.notEmpty(result)){
+					updatePhoto(result.getPk(), photos);
+				}
 			}
 		}
 		return result;
 	}
+	
+	private void updatePhoto(String modelPK,List<Photo> photos ){
+		List<String> photoPKs = new ArrayList<>();
+		if(Toolkit.notEmpty(photos) || photos.size()>0){
+			for (Photo photo : photos) {
+				photoPKs.add(photo.getPk());
+			}
+			photoDao.modifyDeleted(modelPK,1);
+			photoDao.modifyModelPK(modelPK, photoPKs);
+		}
+	}
 	/**
-	 * 删除试验情况
+	 * 删除实体
 	 * @param pk
 	 */
 	public void deleteEntity(String pk){
 		if(Toolkit.notEmpty(pk)){
+			photoDao.modifyDeleted(pk,1);
 			dao.delete(pk);
 		}
 	}

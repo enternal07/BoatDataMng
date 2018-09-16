@@ -23,7 +23,11 @@ public class BaseMetaBackingService{
 	
 	@Autowired
 	private PhotoDao photoDao;
-	
+	/**
+	 * 保存实体
+	 * @param entity
+	 * @return
+	 */
 	public BaseMetaBacking saveEntity(BaseMetaBacking entity) {
 		BaseMetaBacking result = null;
 		if(Toolkit.notEmpty(entity)){
@@ -47,7 +51,7 @@ public class BaseMetaBackingService{
 	}
 	
 	/**
-	 * 修改背衬模型数据实体
+	 * 修改实体
 	 * @param entity
 	 * @return
 	 */
@@ -78,7 +82,7 @@ public class BaseMetaBackingService{
 		}
 	}
 	/**
-	 * 删除背衬实体
+	 * 删除实体
 	 * @param pk
 	 */
 	public void deleteEntity(String pk){
