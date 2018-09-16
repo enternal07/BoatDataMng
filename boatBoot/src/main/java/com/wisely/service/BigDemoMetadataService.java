@@ -6,10 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.wisely.dao.BigDemoMetadataDao;
-import com.wisely.dao.TestModelDao;
 import com.wisely.domain.big.BigDemoMetadata;
-import com.wisely.domain.big.TestModel;
 import com.wisely.domainVO.ResultVO;
+import com.wisely.util.Toolkit;
 
 @Service
 public class BigDemoMetadataService{
@@ -17,10 +16,38 @@ public class BigDemoMetadataService{
 	@Autowired
 	private BigDemoMetadataDao dao;
 	
-	
+	/**
+	 * 添加大样数据实体
+	 * @param entity
+	 * @return
+	 */
 	public BigDemoMetadata saveEntity(BigDemoMetadata entity) {
 		return dao.save(entity);
 		
+	}
+	/**
+	 * 修改大样数据实体
+	 * @param entity
+	 * @return
+	 */
+	public BigDemoMetadata updateEntity(BigDemoMetadata entity){
+		BigDemoMetadata result = null ; 
+		if(Toolkit.notEmpty(entity.getPk())){
+			BigDemoMetadata temp = dao.findOne(entity.getPk());
+			if(Toolkit.notEmpty(temp)){
+				result = dao.save(entity);
+			}
+		}
+		return result;
+	}
+	/**
+	 * 删除大样实体
+	 * @param pk
+	 */
+	public void deleteEntity(String pk){
+		if(Toolkit.notEmpty(pk)){
+			dao.delete(pk);
+		}
 	}
 	public ResultVO ifExist(BigDemoMetadata entity) {
 		

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.wisely.dao.SmallDemoMetaDataDao;
 import com.wisely.domain.small.Demometadata;
 import com.wisely.domainVO.ResultVO;
+import com.wisely.util.Toolkit;
 
 import net.minidev.json.JSONArray;
 import net.minidev.json.JSONObject;
@@ -39,7 +40,30 @@ public class SmallDemoMetaDataService {
 	}
 	public Demometadata saveEntity(Demometadata entity) {
 		return dao.save(entity);
-		
+	}
+	/**
+	 * 修改小样实体
+	 * @param entity
+	 * @return
+	 */
+	public Demometadata updateEntity(Demometadata entity){
+		Demometadata result = null ; 
+		if(Toolkit.notEmpty(entity.getPk())){
+			Demometadata temp = dao.findOne(entity.getPk());
+			if(Toolkit.notEmpty(temp)){
+				result = dao.save(entity);
+			}
+		}
+		return result;
+	}
+	/**
+	 * 删除小样实体
+	 * @param pk
+	 */
+	public void deleteEntity(String pk){
+		if(Toolkit.notEmpty(pk)){
+			dao.delete(pk);
+		}
 	}
 	
 	public JSONObject findBySmall(boolean small) {

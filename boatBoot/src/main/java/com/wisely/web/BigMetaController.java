@@ -9,7 +9,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -18,14 +17,11 @@ import com.wisely.domain.big.TestSystem;
 import com.wisely.domain.common.BaseMetaSample;
 import com.wisely.domainVO.ResultVO;
 import com.wisely.service.BaseMetaSampleService;
-import com.wisely.service.SmallDemoMetaDataService;
 import com.wisely.service.TestModelService;
 import com.wisely.service.TestSystemService;
 
 /**
  * 大样数据
- * @author liqz
- *
  */
 @Controller
 @RequestMapping(value = "/bigmetaMng")

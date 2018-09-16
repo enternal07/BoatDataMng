@@ -6,8 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.wisely.dao.scale.ScaleMataDao;
+import com.wisely.domain.big.BigDemoMetadata;
 import com.wisely.domain.scale.ScaleMataPO;
 import com.wisely.domainVO.ResultVO;
+import com.wisely.util.Toolkit;
 
 @Service
 public class ScaleMataService {
@@ -30,9 +32,41 @@ public class ScaleMataService {
 			}
 			return res;
 		}
-
+	/**
+	 * 添加缩放模型数据实体
+	 * @param demoMeta
+	 * @return
+	 */
 	public ScaleMataPO saveEntity(ScaleMataPO demoMeta) {
 		return dao.save(demoMeta);
 	}
 
+	/**
+	 * 修改缩放模型数据实体
+	 * @param entity
+	 * @return
+	 */
+	public ScaleMataPO updateEntity(ScaleMataPO entity){
+		ScaleMataPO result = null ; 
+		if(Toolkit.notEmpty(entity.getPk())){
+			ScaleMataPO temp = dao.findOne(entity.getPk());
+			if(Toolkit.notEmpty(temp)){
+				result = dao.save(entity);
+			}
+		}
+		return result;
+	}
+	/**
+	 * 删除大样实体
+	 * @param pk
+	 */
+	public void deleteEntity(String pk){
+		if(Toolkit.notEmpty(pk)){
+			dao.delete(pk);
+		}
+	}
+	
+	
+	
+	
 }
