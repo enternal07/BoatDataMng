@@ -1,5 +1,7 @@
 package com.wisely.web.mng.data;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.wisely.domain.scale.ItemScalePO;
 import com.wisely.domain.scale.ScaleMataPO;
 import com.wisely.domainVO.ResultVO;
 import com.wisely.service.scale.ScaleMataService;
@@ -27,14 +30,14 @@ public class ScaleMngController {
 
 	protected final Logger logger = LoggerFactory.getLogger(getClass());
 	@Autowired
-	private ScaleMataService scaleMataService;
+	private ScaleMataService service;
 	
 	@RequestMapping(value = "/saveScale",method = RequestMethod.POST)
 	public @ResponseBody ResultVO addScale(@RequestBody ScaleMataPO scaleMataPO,HttpServletRequest req){
 		ResultVO re = new ResultVO(true);
 		ScaleMataPO tempDemoData = null ; 
 		try {
-			tempDemoData = scaleMataService.saveEntity(scaleMataPO) ;
+			tempDemoData = service.saveEntity(scaleMataPO) ;
 			re.setData(tempDemoData);
 		} catch (Exception e) {
 			re.setSuccess(false);
@@ -48,7 +51,7 @@ public class ScaleMngController {
 		ResultVO re = new ResultVO(true);
 		ScaleMataPO tempDemoData = null ; 
 		try {
-			tempDemoData = scaleMataService.updateEntity(scaleMataPO) ;
+			tempDemoData = service.updateEntity(scaleMataPO) ;
 			re.setData(tempDemoData);
 		} catch (Exception e) {
 			re.setSuccess(false);
@@ -61,23 +64,80 @@ public class ScaleMngController {
 	public @ResponseBody ResultVO deleteScale(@PathVariable(value="pk")String pk,HttpServletRequest req){
 		ResultVO re = new ResultVO(true);
 		try {
-			scaleMataService.deleteEntity(pk) ;
+			service.deleteEntity(pk) ;
 		} catch (Exception e) {
 			re.setSuccess(false);
 			logger.error("delete entity error", e);
 		} 
 		return re;
 	}
+	/*Items Action*/
+	
+	@RequestMapping(value = "/saveItem",method = RequestMethod.POST)
+	public @ResponseBody ResultVO saveItem(@RequestBody ItemScalePO item,HttpServletRequest req){
+		ResultVO re = new ResultVO(true);
+		ItemScalePO tempItem = null ; 
+		try {
+			tempItem = service.saveItem(item) ;
+			re.setData(tempItem);
+		} catch (Exception e) {
+			re.setSuccess(false);
+			logger.error("save entity error", e);
+		} 
+		return re;
+	}
+	
+	@RequestMapping(value = "/modifyItem",method = RequestMethod.POST)
+	public @ResponseBody ResultVO modifyItem(@RequestBody ItemScalePO item,HttpServletRequest req){
+		ResultVO re = new ResultVO(true);
+		ItemScalePO tempItem = null ; 
+		try {
+			tempItem = service.updateItem(item) ;
+			re.setData(tempItem);
+		} catch (Exception e) {
+			re.setSuccess(false);
+			logger.error("update entity error", e);
+		} 
+		return re;
+	}
+	
+	@RequestMapping(value = "/deleteItem/{pk}",method = RequestMethod.POST)
+	public @ResponseBody ResultVO deleteItem(@PathVariable(value="pk") String pk,HttpServletRequest req){
+		ResultVO re = new ResultVO(true);
+		try {
+			service.deleteItem(pk);
+		} catch (Exception e) {
+			re.setSuccess(false);
+			logger.error("delete entity error", e);
+		} 
+		return re;
+	}
+	
+	@RequestMapping(value = "/deleteItems",method = RequestMethod.POST)
+	public @ResponseBody ResultVO deleteItem(@RequestBody List<String> pks,HttpServletRequest req){
+		ResultVO re = new ResultVO(true);
+		try {
+			service.deleteItems(pks);
+		} catch (Exception e) {
+			re.setSuccess(false);
+			logger.error("delete entity error", e);
+		} 
+		return re;
+	}
+	
+	
 	@RequestMapping(value = "/queryAll",method = RequestMethod.POST)
 	public @ResponseBody ResultVO queryAll(HttpServletRequest req){
 		ResultVO re = new ResultVO(true);
 		try {
-			re.setData(scaleMataService.findAllItem()) ;
+			re.setData(service.findAllItem()) ;
 		} catch (Exception e) {
 			re.setSuccess(false);
 			logger.error("query all entity error", e);
 		} 
 		return re;
 	}
+	
+	
 	
 }

@@ -61,28 +61,16 @@ public class Demometadata  extends BaseModel{
 	private String backgroundtype;
 	
 	
-   public String getBackgroundtype() {
-		return backgroundtype;
-	}
 
-	public void setBackgroundtype(String backgroundtype) {
-		this.backgroundtype = backgroundtype;
-	}
-
-
-
-	public String getSamplename() {
-		return samplename;
-	}
-
-	public void setSamplename(String samplename) {
-		this.samplename = samplename;
-	}
-
+	
 	
 	public String getPk() {
 		return pk;
 	}
+
+
+
+
 
 	public void setPk(String pk) {
 		this.pk = pk;
@@ -90,30 +78,12 @@ public class Demometadata  extends BaseModel{
 
 
 
-	public float getTemparture() {
+
+
+	public Float getTemparture() {
 		return temparture;
 	}
 
-	public void setTemparture(float temparture) {
-		this.temparture = temparture;
-	}
-
-	public int getPress() {
-		return press;
-	}
-
-	public void setPress(int press) {
-		this.press = press;
-	}
-
-
-	public boolean isSmall() {
-		return small;
-	}
-
-	public void setSmall(boolean small) {
-		this.small = small;
-	}
 
 
 
@@ -122,45 +92,140 @@ public class Demometadata  extends BaseModel{
 		this.temparture = temparture;
 	}
 
+
+
+
+
+	public Integer getPress() {
+		return press;
+	}
+
+
+
+
+
 	public void setPress(Integer press) {
 		this.press = press;
 	}
 
-	public String toString() {
-		return "样品名称："+this.getSamplename()+",背衬："+this.getBackgroundtype()+",温度："+this.getTemparture()+",压力："+this.getPress();
-		
+
+
+
+
+	public boolean isSmall() {
+		return small;
 	}
 
-	public BaseMetaSample getSample() {
-		return sample;
+
+
+
+
+	public void setSmall(boolean small) {
+		this.small = small;
 	}
 
-	public void setSample(BaseMetaSample sample) {
-		this.sample = sample;
-	}
 
-	public BaseMetaBacking getBacking() {
-		return backing;
-	}
 
-	public void setBacking(BaseMetaBacking backing) {
-		this.backing = backing;
-	}
+
 
 	public String getSamplepk() {
 		return samplepk;
 	}
 
+
+
+
+
 	public void setSamplepk(String samplepk) {
 		this.samplepk = samplepk;
 	}
+
+
+
+
 
 	public String getBakingpk() {
 		return bakingpk;
 	}
 
+
+
+
+
 	public void setBakingpk(String bakingpk) {
 		this.bakingpk = bakingpk;
 	}
 
+
+
+
+
+	public BaseMetaSample getSample() {
+		return sample;
+	}
+
+
+
+
+
+	public void setSample(BaseMetaSample sample) {
+		this.sample = sample;
+	}
+
+
+
+
+
+	public BaseMetaBacking getBacking() {
+		return backing;
+	}
+
+
+
+
+
+	public void setBacking(BaseMetaBacking backing) {
+		this.backing = backing;
+	}
+
+
+
+
+
+	public String getSamplename() {
+		return samplename;
+	}
+
+
+
+
+
+	public void setSamplename(String samplename) {
+		this.samplename = samplename;
+	}
+
+
+
+
+
+	public String getBackgroundtype() {
+		return backgroundtype;
+	}
+
+
+
+
+
+	public void setBackgroundtype(String backgroundtype) {
+		this.backgroundtype = backgroundtype;
+	}
+
+
+
+
+
+	public String toString() {
+		return "样品名称："+this.getSamplename()+",背衬："+this.getBackgroundtype()+",温度："+this.getTemparture()+",压力："+this.getPress();
+		
+	}
 }

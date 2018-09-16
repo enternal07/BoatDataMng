@@ -19,4 +19,10 @@ public interface ItemDao extends CustomRepository<Item, String> {
 	@Query("delete from Item item where item.smallPO.pk = ?1")
 	int deleteByMetaPK(String metaPK);
 	
+	@Modifying
+	@Transactional
+	@Query("delete from Item item where item.pk in (?1) ")
+	int deleteByPks(List<String> pks);
+	
+	
 }

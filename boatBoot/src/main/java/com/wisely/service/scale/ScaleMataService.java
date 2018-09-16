@@ -10,6 +10,7 @@ import com.wisely.dao.scale.ItemScaleDao;
 import com.wisely.dao.scale.ScaleMataDao;
 import com.wisely.domain.scale.ItemScalePO;
 import com.wisely.domain.scale.ScaleMataPO;
+import com.wisely.domain.small.Item;
 import com.wisely.domainVO.ResultVO;
 import com.wisely.domainVO.mng.data.ScaleItemVO;
 import com.wisely.util.Toolkit;
@@ -21,7 +22,7 @@ public class ScaleMataService {
 	private ScaleMataDao dao;
 
 	@Autowired
-	private ItemScaleDao itemScaleDao;
+	private ItemScaleDao itemDao;
 	
 	public ResultVO ifExist(ScaleMataPO entity) {
 		
@@ -75,7 +76,7 @@ public class ScaleMataService {
 	 * 查询所有
 	 */
 	public List<ScaleItemVO> findAllItem(){
-		List<ItemScalePO> allItems = itemScaleDao.findAll();
+		List<ItemScalePO> allItems = itemDao.findAll();
 		List<ScaleItemVO> result = new ArrayList<>() ; 
 		if(Toolkit.notEmpty(allItems)){
 			for (ItemScalePO item : allItems) {
@@ -99,6 +100,32 @@ public class ScaleMataService {
 		return result;
 	}
 	
+	public ItemScalePO saveItem(ItemScalePO item){
+		return itemDao.save(item);
+	}
+	
+	public ItemScalePO updateItem(ItemScalePO item){
+		ItemScalePO result = null ; 
+		if(Toolkit.notEmpty(item.getPk())){
+			ItemScalePO temp = itemDao.findOne(item.getPk());
+			if(Toolkit.notEmpty(temp)){
+				result = itemDao.save(item);
+			}
+		}
+		return result;
+	}
+	
+	public void deleteItem(String pk){
+		if(Toolkit.notEmpty(pk)){
+			itemDao.delete(pk);
+		}
+	}
+	
+	public void deleteItems(List<String> pks){
+		if(Toolkit.notEmpty(pks)){
+			itemDao.deleteByPks(pks);
+		}
+	}
 	
 	
 	

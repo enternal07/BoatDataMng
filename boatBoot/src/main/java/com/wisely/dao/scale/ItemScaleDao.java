@@ -19,4 +19,10 @@ public interface ItemScaleDao extends CustomRepository<ItemScalePO, String> {
 	@Query("delete from ItemScalePO item where item.scaleMataPO.pk = ?1")
 	int deleteByScaleMetaPK(String metaPK);
 	
+	@Modifying
+	@Transactional
+	@Query("delete from ItemScalePO item where item.pk in (?1) ")
+	int deleteByPks(List<String> pks);
+	
+	
 }

@@ -18,5 +18,11 @@ public interface ItemBigDao extends CustomRepository<ItemBig, String> {
 	@Transactional
 	@Query("delete from ItemBig item where item.bigDemoMetadata.pk = ?1")
 	int deleteByBigMetaPK(String metaPK);
+	
+	@Modifying
+	@Transactional
+	@Query("delete from ItemBig item where item.pk in (?1) ")
+	int deleteByPks(List<String> pks);
+	
 
 }

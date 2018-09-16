@@ -122,5 +122,31 @@ public class SmallDemoMetaDataService {
 		return res;
 	}
 	
+	public Item saveItem(Item item){
+		return itemDao.save(item);
+	}
+	
+	public Item updateItem(Item item){
+		Item result = null ; 
+		if(Toolkit.notEmpty(item.getPk())){
+			Item temp = itemDao.findOne(item.getPk());
+			if(Toolkit.notEmpty(temp)){
+				result = itemDao.save(item);
+			}
+		}
+		return result;
+	}
+	
+	public void deleteItem(String pk){
+		if(Toolkit.notEmpty(pk)){
+			itemDao.delete(pk);
+		}
+	}
+	
+	public void deleteItems(List<String> pks){
+		if(Toolkit.notEmpty(pks)){
+			itemDao.deleteByPks(pks);
+		}
+	}
 	
 }
