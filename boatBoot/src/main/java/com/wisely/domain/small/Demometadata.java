@@ -56,11 +56,9 @@ public class Demometadata  extends BaseModel{
 	@Transient
 	BaseMetaBacking  backing;
 	
-private String samplename; 
+	private String samplename; 
 	
 	private String backgroundtype;
-
-	
 	
 	
    public String getBackgroundtype() {

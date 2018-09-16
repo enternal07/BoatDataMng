@@ -1,14 +1,19 @@
 package com.wisely.service;
 
+import java.util.ArrayList;
 import java.util.List;
-
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.wisely.dao.BaseMetaBackingDao;
+import com.wisely.dao.ItemDao;
 import com.wisely.dao.SmallDemoMetaDataDao;
+import com.wisely.domain.small.BaseMetaBacking;
 import com.wisely.domain.small.Demometadata;
+import com.wisely.domain.small.Item;
 import com.wisely.domainVO.ResultVO;
+import com.wisely.domainVO.mng.data.SmallItemVO;
 import com.wisely.util.Toolkit;
 
 import net.minidev.json.JSONArray;
@@ -19,6 +24,12 @@ public class SmallDemoMetaDataService {
 
 	@Autowired
 	private SmallDemoMetaDataDao dao;
+	
+	@Autowired
+	private ItemDao itemDao;
+	
+	@Autowired
+	private BaseMetaBackingDao backingDao;
 	
 	public ResultVO ifExits(Demometadata entity) {
 		List<Object> resObj = dao.CountBySamplenameAndTempartureAndPressAndBackgroundType(entity.getSamplename(), entity.getTemparture(), entity.getPress(), entity.getBackgroundtype(),entity.isSmall());
@@ -64,6 +75,32 @@ public class SmallDemoMetaDataService {
 		if(Toolkit.notEmpty(pk)){
 			dao.delete(pk);
 		}
+	}
+	/**
+	 * 查询所有
+	 */
+	public List<SmallItemVO> findAllItem(){
+		List<Item> allItems = itemDao.findAll();
+		List<SmallItemVO> result = new ArrayList<>() ; 
+		if(Toolkit.notEmpty(allItems)){
+			for (Item item : allItems) {
+				SmallItemVO smallItemVO = new SmallItemVO();
+				Demometadata smallVO = item.getSmallPO(); 
+				BaseMetaBacking backingVO = backingDao.findOne(smallVO.getBakingpk());
+				smallItemVO.setSamplename(smallVO.getSamplename());
+				smallItemVO.setSamplepk(smallVO.getSamplepk());
+				smallItemVO.setBackingname(backingVO.getName());
+				smallItemVO.setBakingpk(smallVO.getBakingpk());
+				smallItemVO.setTemparture(smallVO.getTemparture());
+				smallItemVO.setPress(smallVO.getPress());
+				smallItemVO.setBondacust(item.getBondacust());
+				smallItemVO.setRate(item.getRate());
+				smallItemVO.setRefect(item.getRefect());
+				smallItemVO.setTransmission(item.getTransmission());
+				result.add(smallItemVO);
+			}
+		}
+		return result;
 	}
 	
 	public JSONObject findBySmall(boolean small) {

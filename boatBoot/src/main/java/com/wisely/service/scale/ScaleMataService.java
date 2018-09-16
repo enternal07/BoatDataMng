@@ -1,14 +1,17 @@
 package com.wisely.service.scale;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.wisely.dao.scale.ItemScaleDao;
 import com.wisely.dao.scale.ScaleMataDao;
-import com.wisely.domain.big.BigDemoMetadata;
+import com.wisely.domain.scale.ItemScalePO;
 import com.wisely.domain.scale.ScaleMataPO;
 import com.wisely.domainVO.ResultVO;
+import com.wisely.domainVO.mng.data.ScaleItemVO;
 import com.wisely.util.Toolkit;
 
 @Service
@@ -17,6 +20,9 @@ public class ScaleMataService {
 	@Autowired
 	private ScaleMataDao dao;
 
+	@Autowired
+	private ItemScaleDao itemScaleDao;
+	
 	public ResultVO ifExist(ScaleMataPO entity) {
 		
 		List<Object> resEntity = dao.CountByames(entity.getTestModelObjName(), entity.getLayingSchemeName(), entity.getTestConditionName());
@@ -64,6 +70,33 @@ public class ScaleMataService {
 		if(Toolkit.notEmpty(pk)){
 			dao.delete(pk);
 		}
+	}
+	/**
+	 * 查询所有
+	 */
+	public List<ScaleItemVO> findAllItem(){
+		List<ItemScalePO> allItems = itemScaleDao.findAll();
+		List<ScaleItemVO> result = new ArrayList<>() ; 
+		if(Toolkit.notEmpty(allItems)){
+			for (ItemScalePO item : allItems) {
+				ScaleItemVO bigItemVO = new ScaleItemVO();
+				ScaleMataPO bigVO = item.getScaleMataPO();
+				bigItemVO.setTestModelObjName(bigVO.getTestModelObjName());
+				bigItemVO.setTestModelObjPk(bigVO.getTestModelObjPk());
+				bigItemVO.setLayingSchemeName(bigVO.getLayingSchemeName());
+				bigItemVO.setLayingSchemePk(bigVO.getLayingSchemePk());
+				bigItemVO.setTestConditionName(bigVO.getTestConditionName());
+				bigItemVO.setTestConditionPk(bigVO.getTestConditionPk());
+				bigItemVO.setLightShellTS(item.getLightShellTS());
+				bigItemVO.setLightShellSP(item.getLightShellSP());
+				bigItemVO.setLayingShellTS(item.getLayingShellTS());
+				bigItemVO.setLayingShellSP(item.getLayingShellSP());
+				bigItemVO.setReductionSP(item.getReductionSP());
+				bigItemVO.setReductionTS(item.getReductionTS());
+				result.add(bigItemVO);
+			}
+		}
+		return result;
 	}
 	
 	

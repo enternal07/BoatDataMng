@@ -3,6 +3,7 @@ package com.wisely.web.mng.data;
 import javax.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -24,6 +25,7 @@ public class BigMngController {
 
 	protected final Logger logger = LoggerFactory.getLogger(getClass());
 	
+	@Autowired
 	private BigDemoMetadataService service ; 
 	
 	@RequestMapping(value = "/saveSmall",method = RequestMethod.POST)
@@ -62,6 +64,17 @@ public class BigMngController {
 		} catch (Exception e) {
 			re.setSuccess(false);
 			logger.error("delete entity error", e);
+		} 
+		return re;
+	}
+	@RequestMapping(value = "/queryAll",method = RequestMethod.POST)
+	public @ResponseBody ResultVO queryAll(HttpServletRequest req){
+		ResultVO re = new ResultVO(true);
+		try {
+			re.setData(service.findAllItem()) ;
+		} catch (Exception e) {
+			re.setSuccess(false);
+			logger.error("query all entity error", e);
 		} 
 		return re;
 	}

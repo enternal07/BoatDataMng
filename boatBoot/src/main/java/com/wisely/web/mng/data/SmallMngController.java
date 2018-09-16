@@ -70,4 +70,16 @@ public class SmallMngController {
 		return re;
 	}
 	
+	@RequestMapping(value = "/queryAll",method = RequestMethod.POST)
+	public @ResponseBody ResultVO queryAll(HttpServletRequest req){
+		ResultVO re = new ResultVO(true);
+		try {
+			re.setData(service.findAllItem()) ;
+		} catch (Exception e) {
+			re.setSuccess(false);
+			logger.error("query all entity error", e);
+		} 
+		return re;
+	}
+	
 }
