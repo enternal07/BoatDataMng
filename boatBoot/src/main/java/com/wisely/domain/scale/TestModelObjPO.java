@@ -12,7 +12,7 @@ import org.hibernate.annotations.GenericGenerator;
 import com.wisely.domain.common.BaseModel;
 
 /***
- * 试验模型
+ * 外场试验模型
  */
 @Entity
 @Inheritance
