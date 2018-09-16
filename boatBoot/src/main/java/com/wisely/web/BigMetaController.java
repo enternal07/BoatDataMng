@@ -28,9 +28,6 @@ import com.wisely.service.TestSystemService;
 public class BigMetaController {
 
 	protected final Logger logger = LoggerFactory.getLogger(getClass());
-
-	/*@Autowired
-	private SmallDemoMetaDataService service;*/
 	
 	@Autowired
 	private  BaseMetaSampleService  sampleService;
@@ -40,7 +37,6 @@ public class BigMetaController {
 	
 	@Autowired
 	private TestModelService serviceTestModel;
-	
 
 	@RequestMapping(value="big/sample")
 	public @ResponseBody ResultVO getBigSamlple(HttpServletRequest req) {

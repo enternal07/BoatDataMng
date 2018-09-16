@@ -352,3 +352,12 @@ CREATE TABLE `spha_base_user` (
 INSERT INTO `mysql_dingqi`.`spha_base_user` (`id`, `username`, `pass`, `usertype`, `updatetime`, `ts`) VALUES ('1', 'admin', 'admin', '管理员', NULL, '2018-08-31 20:46:28');
 INSERT INTO `mysql_dingqi`.`spha_base_user` (`id`, `username`, `pass`, `usertype`, `updatetime`, `ts`) VALUES ('2', 'user', 'user', '普通用户', NULL, '2018-08-31 20:46:41');
 
+DROP TABLE IF EXISTS spha_photo;
+CREATE TABLE if not exists spha_photo (
+  pk varchar(36) NOT NULL primary key,
+  infotype varchar(10) not NULL comment '数据类别',
+  model_pk varchar(50) not NULL comment '模型pk',
+  picname varchar(100) default null , 
+  url varchar(255) not null comment '文件路径',
+  ts timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP()
+);
