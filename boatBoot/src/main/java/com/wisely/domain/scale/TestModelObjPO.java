@@ -9,7 +9,7 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
-import com.wisely.domain.common.BaseModel;
+import com.wisely.domain.common.BasePhotoModel;
 
 /***
  * 外场试验模型
@@ -17,7 +17,7 @@ import com.wisely.domain.common.BaseModel;
 @Entity
 @Inheritance
 @Table(name="test_model_obj")
-public class TestModelObjPO  extends BaseModel{
+public class TestModelObjPO  extends BasePhotoModel{
 	
 	@Id //2
 	@GeneratedValue(generator = "mcid")

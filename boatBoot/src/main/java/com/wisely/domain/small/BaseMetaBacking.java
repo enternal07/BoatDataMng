@@ -7,12 +7,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
-import javax.persistence.MappedSuperclass;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
-import com.wisely.domain.common.BaseModel;
+import com.wisely.domain.common.BasePhotoModel;
 
 /**
  * 背衬模型
@@ -27,7 +26,7 @@ import com.wisely.domain.common.BaseModel;
 @Entity
 @Inheritance
 @Table(name="samllbacking")
-public class BaseMetaBacking extends BaseModel implements Serializable {
+public class BaseMetaBacking extends BasePhotoModel {  //BaseModel
 	
 
 	@Id //2

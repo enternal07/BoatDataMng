@@ -356,8 +356,11 @@ DROP TABLE IF EXISTS spha_photo;
 CREATE TABLE if not exists spha_photo (
   pk varchar(36) NOT NULL primary key,
   infotype varchar(10) not NULL comment '数据类别',
-  model_pk varchar(50) not NULL comment '模型pk',
-  picname varchar(100) default null , 
-  url varchar(255) not null comment '文件路径',
+  model_pk varchar(50) comment '模型pk',
+  name varchar(200) default null comment '文件名', 
+  prevname varchar(200) default null comment '源文件名' , 
+  location varchar(255) not null comment '文件路径',
+  deleted int default 0 comment '是否删除，默认未删除',
+  updatetime varchar(20) comment '更新时间',
   ts timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP()
 );

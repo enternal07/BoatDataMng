@@ -9,7 +9,7 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
-import com.wisely.domain.common.BaseModel;
+import com.wisely.domain.common.BasePhotoModel;
 
 /**
  * 大样数据测试系统
@@ -18,7 +18,7 @@ import com.wisely.domain.common.BaseModel;
 @Entity
 @Inheritance
 @Table(name="testsystem")
-public class TestSystem  extends BaseModel{
+public class TestSystem  extends BasePhotoModel{
 	/**
 	 * 
 	 */

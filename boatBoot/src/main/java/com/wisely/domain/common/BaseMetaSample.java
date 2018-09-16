@@ -1,7 +1,5 @@
 package com.wisely.domain.common;
 
-import java.io.Serializable;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -28,7 +26,7 @@ import org.hibernate.annotations.GenericGenerator;
 @Entity
 @Inheritance
 @Table(name="sample")
-public class BaseMetaSample extends BaseModel implements Serializable {
+public class BaseMetaSample extends BasePhotoModel {
 
 
 	@Id //2

@@ -1,11 +1,14 @@
 package com.wisely.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.wisely.dao.BaseMetaBackingDao;
+import com.wisely.dao.PhotoDao;
+import com.wisely.domain.common.Photo;
 import com.wisely.domain.small.BaseMetaBacking;
 import com.wisely.util.Toolkit;
 
@@ -18,8 +21,29 @@ public class BaseMetaBackingService{
 	@Autowired
 	private BaseMetaBackingDao dao;
 	
+	@Autowired
+	private PhotoDao photoDao;
+	
 	public BaseMetaBacking saveEntity(BaseMetaBacking entity) {
-		return dao.save(entity);
+		BaseMetaBacking result = null;
+		if(Toolkit.notEmpty(entity)){
+			List<Photo> photos = entity.getPhotos();
+			entity.setPhotos(null); 
+			result = dao.save(entity);
+			if(Toolkit.notEmpty(result)){
+				savePhoto(result.getPk(),photos);
+			}
+		}
+		return result;
+	}
+	private void savePhoto(String modelPK,List<Photo> photos){
+		if(Toolkit.notEmpty(photos) && photos.size()>0){
+			List<String> photoPKs = new ArrayList<>();
+			for (Photo photo : photos) {
+				photoPKs.add(photo.getPk());
+			}
+			photoDao.modifyModelPK(modelPK, photoPKs);
+		}
 	}
 	
 	/**
@@ -29,13 +53,29 @@ public class BaseMetaBackingService{
 	 */
 	public BaseMetaBacking updateEntity(BaseMetaBacking entity){
 		BaseMetaBacking result = null ; 
-		if(Toolkit.notEmpty(entity.getPk())){
+		if(Toolkit.notEmpty(entity)||Toolkit.notEmpty(entity.getPk())){
+			List<Photo> photos = entity.getPhotos();
 			BaseMetaBacking temp = dao.findOne(entity.getPk());
 			if(Toolkit.notEmpty(temp)){
-				result = dao.save(entity);
+				entity.setPhotos(null); 
+				result = dao.save(entity); 
+				if(Toolkit.notEmpty(result)){
+					updatePhoto(result.getPk(), photos);
+				}
 			}
 		}
 		return result;
+	}
+	
+	private void updatePhoto(String modelPK,List<Photo> photos ){
+		List<String> photoPKs = new ArrayList<>();
+		if(Toolkit.notEmpty(photos) || photos.size()>0){
+			for (Photo photo : photos) {
+				photoPKs.add(photo.getPk());
+			}
+			photoDao.modifyDeleted(modelPK,1);
+			photoDao.modifyModelPK(modelPK, photoPKs);
+		}
 	}
 	/**
 	 * 删除背衬实体
@@ -43,6 +83,7 @@ public class BaseMetaBackingService{
 	 */
 	public void deleteEntity(String pk){
 		if(Toolkit.notEmpty(pk)){
+			photoDao.modifyDeleted(pk,1);
 			dao.delete(pk);
 		}
 	}

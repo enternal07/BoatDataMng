@@ -9,7 +9,7 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
-import com.wisely.domain.common.BaseModel;
+import com.wisely.domain.common.BasePhotoModel;
 
 
 /**
@@ -19,7 +19,7 @@ import com.wisely.domain.common.BaseModel;
 @Entity
 @Inheritance
 @Table(name="laying_scheme")
-public class LayingSchemePO  extends BaseModel{
+public class LayingSchemePO  extends BasePhotoModel{
 	
 	@Id //2
 	@GeneratedValue(generator = "mcid")

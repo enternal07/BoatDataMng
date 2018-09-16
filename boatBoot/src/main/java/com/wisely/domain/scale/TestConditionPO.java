@@ -9,7 +9,7 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
-import com.wisely.domain.common.BaseModel;
+import com.wisely.domain.common.BasePhotoModel;
 
 /**
  * 试验情况
@@ -17,7 +17,7 @@ import com.wisely.domain.common.BaseModel;
 @Entity
 @Inheritance
 @Table(name="test_condition")
-public class TestConditionPO  extends BaseModel{
+public class TestConditionPO  extends BasePhotoModel{
 	
 	@Id //2
 	@GeneratedValue(generator = "mcid")
