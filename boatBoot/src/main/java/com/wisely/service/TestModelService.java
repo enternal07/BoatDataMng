@@ -71,7 +71,7 @@ public class TestModelService{
 	
 	private void updatePhoto(String modelPK,List<Photo> photos ){
 		List<String> photoPKs = new ArrayList<>();
-		if(Toolkit.notEmpty(photos) || photos.size()>0){
+		if(Toolkit.notEmpty(photos) && photos.size()>0){
 			for (Photo photo : photos) {
 				photoPKs.add(photo.getPk());
 			}

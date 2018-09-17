@@ -6,17 +6,20 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.UUID;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+
 import com.wisely.Constants;
 import com.wisely.domain.common.Photo;
 import com.wisely.domainVO.ResultVO;
@@ -89,10 +92,8 @@ public class PhotoController {
 		return re;
 	}
 	
-	@RequestMapping(value="/deletePhoto",method = RequestMethod.POST)
-	public @ResponseBody  ResultVO deletePhoto(
-			@RequestParam("pk") String pk,
-			HttpServletRequest request) throws IOException{
+	@RequestMapping(value="/deletePhoto/{pk}",method = RequestMethod.POST)
+	public @ResponseBody  ResultVO deletePhoto(@PathVariable(value="pk") String pk,HttpServletRequest req) throws IOException{
 		ResultVO re = new ResultVO(false);
 		if(Toolkit.notEmpty(pk)){
 			try {

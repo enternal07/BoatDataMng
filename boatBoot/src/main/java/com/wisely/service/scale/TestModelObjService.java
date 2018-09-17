@@ -55,7 +55,7 @@ public class TestModelObjService{
 	 */
 	public TestModelObjPO updateEntity(TestModelObjPO entity){
 		TestModelObjPO result = null ; 
-		if(Toolkit.notEmpty(entity)||Toolkit.notEmpty(entity.getPk())){
+		if(Toolkit.notEmpty(entity)&&Toolkit.notEmpty(entity.getPk())){
 			List<Photo> photos = entity.getPhotos();
 			TestModelObjPO temp = dao.findOne(entity.getPk());
 			if(Toolkit.notEmpty(temp)){
@@ -71,7 +71,7 @@ public class TestModelObjService{
 	
 	private void updatePhoto(String modelPK,List<Photo> photos ){
 		List<String> photoPKs = new ArrayList<>();
-		if(Toolkit.notEmpty(photos) || photos.size()>0){
+		if(Toolkit.notEmpty(photos) && photos.size()>0){
 			for (Photo photo : photos) {
 				photoPKs.add(photo.getPk());
 			}

@@ -54,7 +54,7 @@ public class TestConditionService{
 	 */
 	public TestConditionPO updateEntity(TestConditionPO entity){
 		TestConditionPO result = null ; 
-		if(Toolkit.notEmpty(entity)||Toolkit.notEmpty(entity.getPk())){
+		if(Toolkit.notEmpty(entity)&&Toolkit.notEmpty(entity.getPk())){
 			List<Photo> photos = entity.getPhotos();
 			TestConditionPO temp = dao.findOne(entity.getPk());
 			if(Toolkit.notEmpty(temp)){
@@ -70,7 +70,7 @@ public class TestConditionService{
 	
 	private void updatePhoto(String modelPK,List<Photo> photos ){
 		List<String> photoPKs = new ArrayList<>();
-		if(Toolkit.notEmpty(photos) || photos.size()>0){
+		if(Toolkit.notEmpty(photos) && photos.size()>0){
 			for (Photo photo : photos) {
 				photoPKs.add(photo.getPk());
 			}

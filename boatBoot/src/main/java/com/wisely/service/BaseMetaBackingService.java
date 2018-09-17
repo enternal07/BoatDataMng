@@ -57,7 +57,7 @@ public class BaseMetaBackingService{
 	 */
 	public BaseMetaBacking updateEntity(BaseMetaBacking entity){
 		BaseMetaBacking result = null ; 
-		if(Toolkit.notEmpty(entity)||Toolkit.notEmpty(entity.getPk())){
+		if(Toolkit.notEmpty(entity)&&Toolkit.notEmpty(entity.getPk())){
 			List<Photo> photos = entity.getPhotos();
 			BaseMetaBacking temp = dao.findOne(entity.getPk());
 			if(Toolkit.notEmpty(temp)){
@@ -73,7 +73,7 @@ public class BaseMetaBackingService{
 	
 	private void updatePhoto(String modelPK,List<Photo> photos ){
 		List<String> photoPKs = new ArrayList<>();
-		if(Toolkit.notEmpty(photos) || photos.size()>0){
+		if(Toolkit.notEmpty(photos) && photos.size()>0){
 			for (Photo photo : photos) {
 				photoPKs.add(photo.getPk());
 			}

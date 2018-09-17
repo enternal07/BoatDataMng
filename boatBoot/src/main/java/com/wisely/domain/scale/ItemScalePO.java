@@ -61,14 +61,6 @@ public class ItemScalePO  extends BaseModel{
 	@JoinColumn(name="scalemata_pk")
 	private ScaleMataPO scaleMataPO;
 
-	public ScaleMataPO getScaleMataPO() {
-		return scaleMataPO;
-	}
-
-	public void setScaleMataPO(ScaleMataPO scaleMataPO) {
-		this.scaleMataPO = scaleMataPO;
-	}
-
 	public String getPk() {
 		return pk;
 	}
@@ -131,6 +123,14 @@ public class ItemScalePO  extends BaseModel{
 
 	public void setReductionSP(float reductionSP) {
 		this.reductionSP = reductionSP;
+	}
+
+	public ScaleMataPO getScaleMataPO() {
+		return scaleMataPO;
+	}
+
+	public void setScaleMataPO(ScaleMataPO scaleMataPO) {
+		this.scaleMataPO = scaleMataPO;
 	}
 	
 	

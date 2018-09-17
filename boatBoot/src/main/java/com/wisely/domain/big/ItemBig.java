@@ -59,30 +59,6 @@ public class ItemBig  extends BaseModel{
 	
 	//辐射声功率插入损失
 	private Float radiationlose;
-	
-	public Float getEchoes() {
-		return echoes;
-	}
-
-	public void setEchoes(Float echoes) {
-		this.echoes = echoes;
-	}
-
-	public int getRadiation() {
-		return radiation;
-	}
-
-	public void setRadiation(int radiation) {
-		this.radiation = radiation;
-	}
-
-	public Float getRadiationlose() {
-		return radiationlose;
-	}
-
-	public void setRadiationlose(Float radiationlose) {
-		this.radiationlose = radiationlose;
-	}
 
 	public String getPk() {
 		return pk;
@@ -131,6 +107,31 @@ public class ItemBig  extends BaseModel{
 	public void setBondacust(Float bondacust) {
 		this.bondacust = bondacust;
 	}
+
+	public Float getEchoes() {
+		return echoes;
+	}
+
+	public void setEchoes(Float echoes) {
+		this.echoes = echoes;
+	}
+
+	public int getRadiation() {
+		return radiation;
+	}
+
+	public void setRadiation(int radiation) {
+		this.radiation = radiation;
+	}
+
+	public Float getRadiationlose() {
+		return radiationlose;
+	}
+
+	public void setRadiationlose(Float radiationlose) {
+		this.radiationlose = radiationlose;
+	}
+	
 
 	
 	
