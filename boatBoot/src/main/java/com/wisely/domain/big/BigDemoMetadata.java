@@ -71,7 +71,11 @@ public class BigDemoMetadata  extends BaseModel{
 	@Transient
 	TestSystem  testSystem;
 	
-	
+	public String toString() {
+		return "样品名称："+this.getSampleName()+",温度："+this.getTemparture()+",压力："+this.getPress();
+		
+	}
+
 	public String getPk() {
 		return pk;
 	}
@@ -80,66 +84,28 @@ public class BigDemoMetadata  extends BaseModel{
 		this.pk = pk;
 	}
 
-
-
-	public float getTemparture() {
+	public Float getTemparture() {
 		return temparture;
 	}
 
-	public void setTemparture(float temparture) {
-		this.temparture = temparture;
-	}
-
-	public int getPress() {
-		return press;
-	}
-
-	public void setPress(int press) {
-		this.press = press;
-	}
-
-
-
-
-
-
 	public void setTemparture(Float temparture) {
 		this.temparture = temparture;
+	}
+
+	public Integer getPress() {
+		return press;
 	}
 
 	public void setPress(Integer press) {
 		this.press = press;
 	}
 
-	public String toString() {
-		return "样品名称："+this.getSampleName()+",温度："+this.getTemparture()+",压力："+this.getPress();
-		
-	}
-
-	public BaseMetaSample getSample() {
-		return sample;
-	}
-
-	public void setSample(BaseMetaSample sample) {
-		this.sample = sample;
-	}
-
-	
-
-	public String getSamplepk() {
-		return samplepk;
-	}
-
-	public void setSamplepk(String samplepk) {
-		this.samplepk = samplepk;
-	}
-
 	public String getSampleName() {
 		return sampleName;
 	}
 
-	public void setSampleName(String sampleNme) {
-		this.sampleName = sampleNme;
+	public void setSampleName(String sampleName) {
+		this.sampleName = sampleName;
 	}
 
 	public String getTestmodelName() {
@@ -150,7 +116,21 @@ public class BigDemoMetadata  extends BaseModel{
 		this.testmodelName = testmodelName;
 	}
 
-	
+	public String getTestsystemName() {
+		return testsystemName;
+	}
+
+	public void setTestsystemName(String testsystemName) {
+		this.testsystemName = testsystemName;
+	}
+
+	public String getSamplepk() {
+		return samplepk;
+	}
+
+	public void setSamplepk(String samplepk) {
+		this.samplepk = samplepk;
+	}
 
 	public String getTestModelPk() {
 		return testModelPk;
@@ -168,6 +148,14 @@ public class BigDemoMetadata  extends BaseModel{
 		this.testSystemPk = testSystemPk;
 	}
 
+	public BaseMetaSample getSample() {
+		return sample;
+	}
+
+	public void setSample(BaseMetaSample sample) {
+		this.sample = sample;
+	}
+
 	public TestModel getTestModel() {
 		return testModel;
 	}
@@ -183,14 +171,5 @@ public class BigDemoMetadata  extends BaseModel{
 	public void setTestSystem(TestSystem testSystem) {
 		this.testSystem = testSystem;
 	}
-
-	public String getTestsystemName() {
-		return testsystemName;
-	}
-
-	public void setTestsystemName(String testsystemName) {
-		this.testsystemName = testsystemName;
-	}
-
 
 }

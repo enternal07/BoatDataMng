@@ -359,7 +359,7 @@ CREATE TABLE if not exists spha_photo (
   model_pk varchar(50) comment '模型pk',
   name varchar(200) default null comment '文件名', 
   prevname varchar(200) default null comment '源文件名' , 
-  location varchar(255) not null comment '文件路径',
+  url varchar(255) not null comment '文件路径',
   deleted int default 0 comment '是否删除，默认未删除',
   updatetime varchar(20) comment '更新时间',
   ts timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP()

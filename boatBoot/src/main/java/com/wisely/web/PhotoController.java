@@ -5,6 +5,8 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -39,12 +41,12 @@ public class PhotoController {
 	
 	@RequestMapping(value="/uploadPhoto",method = RequestMethod.POST)
 	public @ResponseBody  ResultVO uploadPhoto(
-			@RequestParam("file") MultipartFile file, //MultipartFile  CommonsMultipartFile
+			@RequestParam("file") MultipartFile[] files, //MultipartFile  CommonsMultipartFile
 			@RequestParam("type") int type,
 			HttpServletRequest request) throws IOException{
 		
 		ResultVO re = new ResultVO(true);
-		if(Toolkit.isEmpty(file) || type<1 || type >7){
+		if(Toolkit.isEmpty(files)  || files.length==0 || type<1 || type >7){
 			re.setSuccess(false);
 			re.setMessage("参数错误");
 			return re;
@@ -52,30 +54,34 @@ public class PhotoController {
 		int realTypeIndex = type-1 ; 
 		String dir = FileUtil.getSecondDir(realTypeIndex);
 		String result = null ; 
+		List<String> pks = new ArrayList<>();
 		try {
 			//定义输出流 将文件保存在D盘    file.getOriginalFilename()为获得文件的名字 
-			String nameUUID = UUID.randomUUID().toString() ; 
-			String fileName = dir+File.separator+nameUUID+Constants.POSTFIX;
-			FileOutputStream os = new FileOutputStream(fileName);
-			InputStream in = file.getInputStream();
-			int b = 0;
-			while((b=in.read())!=-1){ //读取文件 
-				os.write(b);
-			}
-			os.flush(); //关闭流 
-			in.close();
-			os.close();
-			Photo photo = new Photo();
-			photo.setPrevName(file.getOriginalFilename());
-			photo.setName(nameUUID);
-			photo.setLocation(fileName);
-			photo.setInfotype(Constants.MODEL_TYPES[realTypeIndex]);
-			result = photoService.saveEntity(photo);
-			if(Toolkit.isEmpty(result)){
-				File tempFile = new File(fileName);
-				if(tempFile.exists()){
-					tempFile.delete();
+			for (MultipartFile multipartFile : files) {
+				String nameUUID = UUID.randomUUID().toString() ; 
+				String fileName = dir+File.separator+nameUUID+Constants.POSTFIX;
+				FileOutputStream os = new FileOutputStream(fileName);
+				InputStream in = multipartFile.getInputStream();
+				int b = 0;
+				while((b=in.read())!=-1){ //读取文件 
+					os.write(b);
 				}
+				os.flush(); //关闭流 
+				in.close();
+				os.close();
+				Photo photo = new Photo();
+				photo.setPrevName(multipartFile.getOriginalFilename());
+				photo.setName(nameUUID);
+				photo.setUrl(fileName);
+				photo.setInfotype(Constants.MODEL_TYPES[realTypeIndex]);
+				result = photoService.saveEntity(photo);
+				if(Toolkit.isEmpty(result)){
+					File tempFile = new File(fileName);
+					if(tempFile.exists()){
+						tempFile.delete();
+					}
+				}
+				pks.add(result);
 			}
 		} catch (FileNotFoundException e) {
 			logger.error("file not found", e);
@@ -84,10 +90,10 @@ public class PhotoController {
 		}catch (Exception e) {
 			logger.error("other error", e);
 		}
-		if(Toolkit.isEmpty(result)){
+		if(Toolkit.isEmpty(pks)){
 			re.setSuccess(false);
 		}else{
-			re.setData(result);
+			re.setData(pks);
 		}
 		return re;
 	}

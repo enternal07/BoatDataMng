@@ -37,8 +37,8 @@ public class Photo extends BaseModel{
 	@Column(name = "model_pk")
 	private String modelPK;
 	
-	@Column(name = "location")
-	private String location;
+	@Column(name = "url")
+	private String url;
 	
 	@Column(name = "deleted") //1删除 0 未删除
 	private int deleted;
@@ -78,12 +78,12 @@ public class Photo extends BaseModel{
 		this.modelPK = modelPK;
 	}
 
-	public String getLocation() {
-		return location;
+	public String getUrl() {
+		return url;
 	}
 
-	public void setLocation(String location) {
-		this.location = location;
+	public void setUrl(String url) {
+		this.url = url;
 	}
 
 	public String getPrevName() {
