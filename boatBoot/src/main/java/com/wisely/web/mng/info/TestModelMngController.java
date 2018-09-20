@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.wisely.domain.big.TestModel;
 import com.wisely.domainVO.ResultVO;
@@ -51,8 +52,8 @@ public class TestModelMngController {
 		return re;
 	}
 	
-	@RequestMapping(value = "/deleteTestModel/{pk}",method = RequestMethod.POST)
-	public @ResponseBody ResultVO deleteTestModel(@PathVariable(value="pk")String pk,HttpServletRequest req){
+	@RequestMapping(value = "/deleteTestModel",method = RequestMethod.POST)
+	public @ResponseBody ResultVO deleteTestModel(@RequestParam("pk") String pk,HttpServletRequest req){
 		ResultVO re = new ResultVO(true);
 		try {
 			testModelService.deleteEntity(pk) ;

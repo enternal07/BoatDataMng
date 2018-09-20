@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.wisely.domain.scale.ItemScalePO;
@@ -60,8 +61,8 @@ public class ScaleMngController {
 		return re;
 	}
 	
-	@RequestMapping(value = "/deleteScale/{pk}",method = RequestMethod.POST)
-	public @ResponseBody ResultVO deleteScale(@PathVariable(value="pk")String pk,HttpServletRequest req){
+	@RequestMapping(value = "/deleteScale",method = RequestMethod.POST)
+	public @ResponseBody ResultVO deleteScale(@RequestParam("pk") String pk,HttpServletRequest req){
 		ResultVO re = new ResultVO(true);
 		try {
 			service.deleteEntity(pk) ;
@@ -101,8 +102,8 @@ public class ScaleMngController {
 		return re;
 	}
 	
-	@RequestMapping(value = "/deleteItem/{pk}",method = RequestMethod.POST)
-	public @ResponseBody ResultVO deleteItem(@PathVariable(value="pk") String pk,HttpServletRequest req){
+	@RequestMapping(value = "/deleteItem",method = RequestMethod.POST)
+	public @ResponseBody ResultVO deleteItem(@RequestParam("pk") String pk,HttpServletRequest req){
 		ResultVO re = new ResultVO(true);
 		try {
 			service.deleteItem(pk);

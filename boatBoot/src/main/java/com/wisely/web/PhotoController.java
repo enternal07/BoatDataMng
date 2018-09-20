@@ -98,8 +98,9 @@ public class PhotoController {
 		return re;
 	}
 	
-	@RequestMapping(value="/deletePhoto/{pk}",method = RequestMethod.POST)
-	public @ResponseBody  ResultVO deletePhoto(@PathVariable(value="pk") String pk,HttpServletRequest req) throws IOException{
+	@RequestMapping(value="/deletePhoto",method = RequestMethod.POST)
+	public @ResponseBody  ResultVO deletePhoto(
+			@RequestParam("pk") String pk,HttpServletRequest req) throws IOException{
 		ResultVO re = new ResultVO(false);
 		if(Toolkit.notEmpty(pk)){
 			try {

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.wisely.domain.small.Demometadata;
@@ -61,8 +62,8 @@ public class SmallMngController {
 		return re;
 	}
 	
-	@RequestMapping(value = "/deleteSmall/{pk}",method = RequestMethod.POST)
-	public @ResponseBody ResultVO deleteSmall(@PathVariable(value="pk")String pk,HttpServletRequest req){
+	@RequestMapping(value = "/deleteSmall",method = RequestMethod.POST)
+	public @ResponseBody ResultVO deleteSmall(@RequestParam("pk") String pk,HttpServletRequest req){
 		ResultVO re = new ResultVO(true);
 		try {
 			service.deleteEntity(pk) ;
@@ -104,8 +105,8 @@ public class SmallMngController {
 		return re;
 	}
 	
-	@RequestMapping(value = "/deleteItem/{pk}",method = RequestMethod.POST)
-	public @ResponseBody ResultVO deleteItem(@PathVariable(value="pk") String pk,HttpServletRequest req){
+	@RequestMapping(value = "/deleteItem",method = RequestMethod.POST)
+	public @ResponseBody ResultVO deleteItem(@RequestParam("pk") String pk,HttpServletRequest req){
 		ResultVO re = new ResultVO(true);
 		try {
 			service.deleteItem(pk);

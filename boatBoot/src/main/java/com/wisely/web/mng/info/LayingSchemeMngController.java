@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.wisely.domain.scale.LayingSchemePO;
 import com.wisely.domainVO.ResultVO;
@@ -52,8 +53,8 @@ public class LayingSchemeMngController {
 		return re;
 	}
 	
-	@RequestMapping(value = "/deleteLayingSchemePO/{pk}",method = RequestMethod.POST)
-	public @ResponseBody ResultVO deleteLayingSchemePO(@PathVariable(value="pk")String pk,HttpServletRequest req){
+	@RequestMapping(value = "/deleteLayingSchemePO",method = RequestMethod.POST)
+	public @ResponseBody ResultVO deleteLayingSchemePO(@RequestParam("pk") String pk,HttpServletRequest req){
 		ResultVO re = new ResultVO(true);
 		try {
 			layingSchemeService.deleteEntity(pk) ;
