@@ -1,5 +1,6 @@
 package com.wisely.web;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -7,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.transaction.Transactional;
 
 import org.apache.poi.ss.usermodel.Cell;
@@ -17,8 +19,11 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -35,6 +40,8 @@ import com.wisely.domain.scale.TestModelObjPO;
 import com.wisely.domain.small.BaseMetaBacking;
 import com.wisely.domain.small.Demometadata;
 import com.wisely.domain.small.Item;
+import com.wisely.domainVO.ItemBaseVO;
+import com.wisely.domainVO.QueryVO;
 import com.wisely.domainVO.ResultVO;
 import com.wisely.service.BaseMetaBackingService;
 import com.wisely.service.BaseMetaSampleService;
@@ -50,6 +57,7 @@ import com.wisely.service.scale.LayingSchemeService;
 import com.wisely.service.scale.ScaleMataService;
 import com.wisely.service.scale.TestConditionService;
 import com.wisely.service.scale.TestModelObjService;
+import com.wisely.util.FileUtils;
 
 import until.constant.Constants;
 /**
@@ -140,6 +148,30 @@ public class ExcelController {
 		return res;
 		
 	}
+	
+	@RequestMapping("/downloadSmall")
+    public void downloadSmall(
+    		@RequestBody QueryVO queryVO,
+    		HttpServletRequest request,
+    		HttpServletResponse response){
+       
+        
+        String dir = System.getProperty("user.dir");
+		String baseDir = dir+File.separator	+ "sample_file" ; 
+       /* File file=new File(baseDir);
+        if(!file.exists()){
+            file.mkdirs();
+        }*/
+        List<ItemBaseVO> items = serviceItem.findByQueryCondtionOld(queryVO);
+        String fileName="SamoleData.78c5753d.xlsx";
+        String strFileName=baseDir+File.separator+fileName;
+        
+        //TODO new file 
+        
+        //TODO write to file
+        
+        FileUtils.downloadFiles(response, strFileName);
+    }
 	
 	/*
 	 * 判断元数据；
