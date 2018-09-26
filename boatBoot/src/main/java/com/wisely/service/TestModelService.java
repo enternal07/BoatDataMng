@@ -90,8 +90,8 @@ public class TestModelService{
 		}
 	}
 	
-	public TestModel getByName(String pk) {
-		return dao.findOne(pk);
+	public TestModel getByName(String name) {
+		return dao.findByName(name);
 	}
 	
 	public List<TestModel> findAll() {

@@ -10,6 +10,7 @@ import com.wisely.dao.PhotoDao;
 import com.wisely.dao.scale.LayingSchemeDao;
 import com.wisely.domain.common.Photo;
 import com.wisely.domain.scale.LayingSchemePO;
+import com.wisely.domain.scale.TestConditionPO;
 import com.wisely.util.Toolkit;
 
 @Service
@@ -96,5 +97,9 @@ public class LayingSchemeService {
 	
 	public List<LayingSchemePO> findAll() {
 		return  dao.findAll();
+	}
+	
+	public LayingSchemePO getByName(String name) {
+		return dao.findByName(name);
 	}
 }

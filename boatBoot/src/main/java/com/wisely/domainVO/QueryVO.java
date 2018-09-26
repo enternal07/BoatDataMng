@@ -23,7 +23,7 @@ public class QueryVO implements Serializable{
     private  Integer rateMin;
 	
 	private  Integer rateMax;
-
+	
 	public String getSamplename() {
 		return samplename;
 	}
@@ -71,9 +71,6 @@ public class QueryVO implements Serializable{
 	public void setPress(Integer press) {
 		this.press = press;
 	}
-	
-	
-	
 	
 
 }

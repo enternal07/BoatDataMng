@@ -5,5 +5,5 @@ import com.wisely.support.CustomRepository;
 
 public interface TestModelObjDao extends CustomRepository<TestModelObjPO, String> {
 	
-
+	TestModelObjPO findByName(String name);
 }

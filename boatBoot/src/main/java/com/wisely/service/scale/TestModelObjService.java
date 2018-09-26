@@ -94,6 +94,10 @@ public class TestModelObjService{
 		return dao.findOne(pk);
 	}
 	
+	public TestModelObjPO getByName(String name) {
+		return dao.findByName(name);
+	}
+	
 	public List<TestModelObjPO> findAll() {
 		return  dao.findAll();
 	}

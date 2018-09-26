@@ -1,6 +1,5 @@
 package com.wisely.web;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -22,11 +21,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.google.gson.Gson;
 import com.wisely.domain.big.BigDemoMetadata;
 import com.wisely.domain.big.ItemBig;
 import com.wisely.domain.big.TestModel;
@@ -41,8 +39,12 @@ import com.wisely.domain.small.BaseMetaBacking;
 import com.wisely.domain.small.Demometadata;
 import com.wisely.domain.small.Item;
 import com.wisely.domainVO.ItemBaseVO;
+import com.wisely.domainVO.ItemBigVO;
+import com.wisely.domainVO.ItemScaleVO;
+import com.wisely.domainVO.QueryBigVO;
 import com.wisely.domainVO.QueryVO;
 import com.wisely.domainVO.ResultVO;
+import com.wisely.domainVO.SacleQueryVO;
 import com.wisely.service.BaseMetaBackingService;
 import com.wisely.service.BaseMetaSampleService;
 import com.wisely.service.BigDemoMetadataService;
@@ -57,7 +59,7 @@ import com.wisely.service.scale.LayingSchemeService;
 import com.wisely.service.scale.ScaleMataService;
 import com.wisely.service.scale.TestConditionService;
 import com.wisely.service.scale.TestModelObjService;
-import com.wisely.util.FileUtils;
+import com.wisely.util.Toolkit;
 
 import until.constant.Constants;
 /**
@@ -114,8 +116,6 @@ public class ExcelController {
 	@Autowired
 	private ItemScaleService itemScaleService;
 	
-	
-	
 	  private Sheet sheet;
 	  private List<List<String>> listData;
 	  private List<Map<String,String>> mapData;
@@ -149,28 +149,105 @@ public class ExcelController {
 		
 	}
 	
-	@RequestMapping("/downloadSmall")
+	/*
+	 * {
+			"samplename":"阿波罗02",
+			"backgroundtype":"30mm钢02",
+			"temparture":15,
+			"press":1,
+			"rateMin":10,
+			"rateMax":200
+		}
+	 */
+	@RequestMapping(value="/downloadSmall",method = RequestMethod.POST)
     public void downloadSmall(
     		@RequestBody QueryVO queryVO,
     		HttpServletRequest request,
-    		HttpServletResponse response){
+    		HttpServletResponse response) throws IOException{
        
-        
-        String dir = System.getProperty("user.dir");
-		String baseDir = dir+File.separator	+ "sample_file" ; 
-       /* File file=new File(baseDir);
-        if(!file.exists()){
-            file.mkdirs();
-        }*/
+		/*QueryVO queryVO = new QueryVO();
+		queryVO.setBackgroundtype("30mm钢02");
+		queryVO.setPress(1);
+		queryVO.setRateMax(200);
+		queryVO.setRateMin(10);
+		queryVO.setSamplename("阿波罗02");
+		queryVO.setTemparture(15.0f);*/
         List<ItemBaseVO> items = serviceItem.findByQueryCondtionOld(queryVO);
-        String fileName="SamoleData.78c5753d.xlsx";
-        String strFileName=baseDir+File.separator+fileName;
-        
-        //TODO new file 
-        
-        //TODO write to file
-        
-        FileUtils.downloadFiles(response, strFileName);
+        if(Toolkit.notEmpty(items)&&items.size()>0){
+        	BaseMetaSample bms = baseMetaSampleService.getBySampleName(queryVO.getSamplename());
+        	BaseMetaBacking backing = baseMetaBackingService.getByName(queryVO.getBackgroundtype());
+            excelService.downloadSmall(response, queryVO, bms, backing, items);
+        }
+    }
+	
+	/**
+	 * {
+			"samplename": "阿波罗",
+			"testModelName": "双层局域实尺度模型",
+			"testSystemName": "时间反转",
+			"temparture": 15.0,
+			"press": 1,
+			"rateMin": 0,
+			"rateMax": 300
+		}
+	 * @param request
+	 * @param response
+	 * @throws IOException
+	 */
+	@RequestMapping(value="/downloadBig",method = RequestMethod.POST)
+    public void downloadBig(
+    		@RequestBody QueryBigVO queryBigVO,
+    		HttpServletRequest request,
+    		HttpServletResponse response) throws IOException{
+		
+	/*	QueryBigVO queryBigVO = new QueryBigVO();
+		queryBigVO.setSamplename("阿波罗");
+		queryBigVO.setTestModelName("双层局域实尺度模型");
+		queryBigVO.setTestSystemName("时间反转");
+		queryBigVO.setPress(1);
+		queryBigVO.setTemparture(15.0f);
+		queryBigVO.setRateMin(0);
+		queryBigVO.setRateMax(300);*/
+		
+        List<ItemBigVO> items = serviceItemBig.getItemBigList(queryBigVO);
+        if(Toolkit.notEmpty(items)&&items.size()>0){
+        	BaseMetaSample bms = baseMetaSampleService.getBySampleName(queryBigVO.getSamplename());
+        	TestModel tm = testmodelService.getByName(queryBigVO.getTestModelName());
+        	TestSystem ts = testSysService.getByName(queryBigVO.getTestSystemName());
+            excelService.downloadBig(response, queryBigVO, bms, tm,ts,items);
+        }
+    }
+	/**
+	 * {
+			"layingSchemeName": "文字文字",
+			"testConditionName": "201708杭州",
+			"testModelObjName": "中尺度模型",
+			"rateMin": 0,
+			"rateMax": 1000
+		}
+	 * @param sacleQueryVO
+	 * @param request
+	 * @param response
+	 * @throws IOException
+	 */
+	@RequestMapping(value="/downloadScale",method = RequestMethod.POST)
+    public void downloadScale(
+    		@RequestBody SacleQueryVO sacleQueryVO,
+    		HttpServletRequest request,
+    		HttpServletResponse response) throws IOException{
+/*		SacleQueryVO sacleQueryVO = new SacleQueryVO();
+		sacleQueryVO.setTestModelObjName("中尺度模型");
+		sacleQueryVO.setTestConditionName("201708杭州");
+		sacleQueryVO.setLayingSchemeName("文字文字");
+		sacleQueryVO.setRateMin(0);
+		sacleQueryVO.setRateMax(1000);*/
+		List<ItemScaleVO>  items = (List<ItemScaleVO> )itemScaleService.getItemScaleList(sacleQueryVO);
+        if(Toolkit.notEmpty(items)&&items.size()>0){
+        	TestModelObjPO tmobj = testModelObjService.getByName(sacleQueryVO.getTestModelObjName());
+        	TestConditionPO tc = testConditionService.getByName(sacleQueryVO.getTestConditionName());
+        	LayingSchemePO ls = layingSchemeService.getByName(sacleQueryVO.getLayingSchemeName());
+            excelService.downloadScale(response, sacleQueryVO, tmobj, tc,ls,items);
+        }
     }
 	
 	/*

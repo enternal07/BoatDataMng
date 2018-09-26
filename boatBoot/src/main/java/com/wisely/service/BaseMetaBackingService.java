@@ -23,6 +23,12 @@ public class BaseMetaBackingService{
 	
 	@Autowired
 	private PhotoDao photoDao;
+	
+	
+	public BaseMetaBacking findByID(String pk){
+		return dao.findOne(pk);
+	}
+	
 	/**
 	 * 保存实体
 	 * @param entity
@@ -95,4 +101,10 @@ public class BaseMetaBackingService{
 	public List<BaseMetaBacking> findAll() {
 		return dao.findAll();
 	}
+	
+	public BaseMetaBacking getByName(String name){
+		return dao.findByName(name);
+	}
+	
+	
 }

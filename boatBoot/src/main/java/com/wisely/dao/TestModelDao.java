@@ -7,5 +7,7 @@ import com.wisely.support.CustomRepository;
 
 public interface TestModelDao extends CustomRepository<TestModel, String> {
 	
-	List<TestModel> findByName(String name);
+	List<TestModel> findListByName(String name);
+	
+	TestModel findByName(String name);
 }

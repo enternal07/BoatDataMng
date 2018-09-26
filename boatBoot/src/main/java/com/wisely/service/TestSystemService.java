@@ -89,8 +89,8 @@ public class TestSystemService{
 		}
 	}
 	
-	public TestSystem getByName(String pk) {
-		return dao.findOne(pk);
+	public TestSystem getByName(String name) {
+		return dao.findByName(name);
 	}
 	
 	public List<TestSystem> findAll() {

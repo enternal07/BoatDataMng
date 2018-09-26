@@ -7,5 +7,7 @@ import com.wisely.support.CustomRepository;
 
 public interface BaseMetaBackingDao extends CustomRepository<BaseMetaBacking, String> {
 	
-	List<BaseMetaBacking> findByName(String small);
+	List<BaseMetaBacking> findListByName(String small);
+	
+	BaseMetaBacking findByName(String name);
 }

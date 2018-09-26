@@ -105,4 +105,9 @@ public class BaseMetaSampleService{
 	public List<BaseMetaSample> findBig() {
 		return  dao.findBySmall(false);
 	}
+	
+	public BaseMetaSample getBySampleName(String name) {
+		return dao.findByName(name);
+	}
+	
 }

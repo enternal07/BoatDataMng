@@ -7,5 +7,9 @@ import com.wisely.support.CustomRepository;
 
 public interface TestSystemDao extends CustomRepository<TestSystem, String> {
 	
-	List<TestSystem> findByName(String name);
+	List<TestSystem> findListByName(String name);
+	
+	TestSystem findByName(String name);
+	
+	
 }

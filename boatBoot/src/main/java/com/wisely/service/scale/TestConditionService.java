@@ -10,6 +10,7 @@ import com.wisely.dao.PhotoDao;
 import com.wisely.dao.scale.TestConditionDao;
 import com.wisely.domain.common.Photo;
 import com.wisely.domain.scale.TestConditionPO;
+import com.wisely.domain.scale.TestModelObjPO;
 import com.wisely.util.Toolkit;
 
 @Service
@@ -95,6 +96,10 @@ public class TestConditionService{
 	
 	public List<TestConditionPO> findAll() {
 		return  dao.findAll();
+	}
+	
+	public TestConditionPO getByName(String name) {
+		return dao.findByName(name);
 	}
 
 }

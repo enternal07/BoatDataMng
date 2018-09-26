@@ -5,6 +5,6 @@ import com.wisely.support.CustomRepository;
 
 public interface TestConditionDao extends CustomRepository<TestConditionPO, String> {
 	
-
+	TestConditionPO findByName(String name);
 	
 }
