@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.wisely.domain.big.TestSystem;
+import com.wisely.domainVO.DeleteVO;
 import com.wisely.domainVO.ResultVO;
 import com.wisely.service.TestSystemService;
 
@@ -54,10 +55,10 @@ public class TestSystemMngController {
 	}
 	
 	@RequestMapping(value = "/deleteTestSystem",method = RequestMethod.POST)
-	public @ResponseBody ResultVO deleteTestSystem(@RequestParam("pk") String pk,HttpServletRequest req){
+	public @ResponseBody ResultVO deleteTestSystem(@RequestBody DeleteVO delVO,HttpServletRequest req){
 		ResultVO re = new ResultVO(true);
 		try {
-			testModelService.deleteEntity(pk) ;
+			testModelService.deleteEntity(delVO.getPk()) ;
 		} catch (Exception e) {
 			re.setSuccess(false);
 			logger.error("delete entity error", e);

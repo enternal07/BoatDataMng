@@ -10,7 +10,6 @@ import com.wisely.dao.BigDemoMetadataDao;
 import com.wisely.dao.ItemBigDao;
 import com.wisely.domain.big.BigDemoMetadata;
 import com.wisely.domain.big.ItemBig;
-import com.wisely.domain.small.Item;
 import com.wisely.domainVO.ResultVO;
 import com.wisely.domainVO.mng.data.BigItemVO;
 import com.wisely.util.Toolkit;
@@ -132,6 +131,14 @@ public class BigDemoMetadataService{
 		if(Toolkit.notEmpty(pks)){
 			itemDao.deleteByPks(pks);
 		}
+	}
+	
+	public List<BigDemoMetadata> queryFull(){
+		return dao.findAll();
+	}
+	
+	public BigDemoMetadata queryDetail(String pk){
+		return dao.findOne(pk);
 	}
 	
 }

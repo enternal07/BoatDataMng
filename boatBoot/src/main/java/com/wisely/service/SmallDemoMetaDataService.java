@@ -149,4 +149,12 @@ public class SmallDemoMetaDataService {
 		}
 	}
 	
+	public List<Demometadata> queryFull(){
+		return dao.findAll();
+	}
+	
+	public Demometadata queryDetail(String pk){
+		return dao.findOne(pk);
+	}
+	
 }

@@ -29,13 +29,14 @@ public class ItemScaleService {
 		dao.flush();
 	}
 
-
 	public Object getItemScaleList(SacleQueryVO queryVO) {
 		List<ItemScalePO> list = dao.getItemScaleListByContions(queryVO.getRateMin(), queryVO.getRateMax(), queryVO.getTestModelObjName(),
 				queryVO.getLayingSchemeName(), queryVO.getTestConditionName());
 		List<ItemScaleVO> vos =  new ArrayList<ItemScaleVO>();
 		for(ItemScalePO li:list) {
 			ItemScaleVO vo = new ItemScaleVO();
+			vo.setPk(li.getPk());
+			vo.setMetaPK(li.getScaleMataPO().getPk()); 
 			vo.setLayingShellSP(li.getLayingShellSP());
 			vo.setLayingShellTS(li.getLayingShellTS());
 			vo.setLayingShellTS(li.getLightShellTS());

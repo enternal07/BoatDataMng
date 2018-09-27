@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.wisely.domain.scale.LayingSchemePO;
+import com.wisely.domainVO.DeleteVO;
 import com.wisely.domainVO.ResultVO;
 import com.wisely.service.scale.LayingSchemeService;
 
@@ -54,10 +55,10 @@ public class LayingSchemeMngController {
 	}
 	
 	@RequestMapping(value = "/deleteLayingSchemePO",method = RequestMethod.POST)
-	public @ResponseBody ResultVO deleteLayingSchemePO(@RequestParam("pk") String pk,HttpServletRequest req){
+	public @ResponseBody ResultVO deleteLayingSchemePO(@RequestBody DeleteVO delVO,HttpServletRequest req){
 		ResultVO re = new ResultVO(true);
 		try {
-			layingSchemeService.deleteEntity(pk) ;
+			layingSchemeService.deleteEntity(delVO.getPk()) ;
 		} catch (Exception e) {
 			re.setSuccess(false);
 			logger.error("delete entity error", e);

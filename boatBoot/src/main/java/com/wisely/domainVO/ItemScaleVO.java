@@ -10,88 +10,110 @@ public class ItemScaleVO  implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	    
-	    //光壳声目标强度
-		@Column(name = "light_shell_ts")
-		private float lightShellTS;
-		
-		//光壳辐射声功率
-		@Column(name = "light_shell_sp")
-		private float lightShellSP;
-		
-		//敷瓦声目标强度
-		@Column(name = "laying_shell_ts")
-		private float layingShellTS;
-		
-		//敷瓦辐射声功率
-		@Column(name = "laying_shell_sp")
-		private float layingShellSP;
-		
-		//声目标强度降低量
-		@Column(name = "reduction_ts")
-		private float reductionTS;
-		
-		//辐射声功率插入损失
-		@Column(name = "reduction_sp")
-		private float reductionSP ;
-		
-		private int  rate;
+	
+	private String pk;
+	
+	private String metaPK;
 
-		public float getLightShellTS() {
-			return lightShellTS;
-		}
+    //光壳声目标强度
+	@Column(name = "light_shell_ts")
+	private float lightShellTS;
+	
+	//光壳辐射声功率
+	@Column(name = "light_shell_sp")
+	private float lightShellSP;
+	
+	//敷瓦声目标强度
+	@Column(name = "laying_shell_ts")
+	private float layingShellTS;
+	
+	//敷瓦辐射声功率
+	@Column(name = "laying_shell_sp")
+	private float layingShellSP;
+	
+	//声目标强度降低量
+	@Column(name = "reduction_ts")
+	private float reductionTS;
+	
+	//辐射声功率插入损失
+	@Column(name = "reduction_sp")
+	private float reductionSP ;
+	
+	private int  rate;
 
-		public void setLightShellTS(float lightShellTS) {
-			this.lightShellTS = lightShellTS;
-		}
+	public float getLightShellTS() {
+		return lightShellTS;
+	}
 
-		public float getLightShellSP() {
-			return lightShellSP;
-		}
+	public void setLightShellTS(float lightShellTS) {
+		this.lightShellTS = lightShellTS;
+	}
 
-		public void setLightShellSP(float lightShellSP) {
-			this.lightShellSP = lightShellSP;
-		}
+	public float getLightShellSP() {
+		return lightShellSP;
+	}
 
-		public float getLayingShellTS() {
-			return layingShellTS;
-		}
+	public void setLightShellSP(float lightShellSP) {
+		this.lightShellSP = lightShellSP;
+	}
 
-		public void setLayingShellTS(float layingShellTS) {
-			this.layingShellTS = layingShellTS;
-		}
+	public float getLayingShellTS() {
+		return layingShellTS;
+	}
 
-		public float getLayingShellSP() {
-			return layingShellSP;
-		}
+	public void setLayingShellTS(float layingShellTS) {
+		this.layingShellTS = layingShellTS;
+	}
 
-		public void setLayingShellSP(float layingShellSP) {
-			this.layingShellSP = layingShellSP;
-		}
+	public float getLayingShellSP() {
+		return layingShellSP;
+	}
 
-		public float getReductionTS() {
-			return reductionTS;
-		}
+	public void setLayingShellSP(float layingShellSP) {
+		this.layingShellSP = layingShellSP;
+	}
 
-		public void setReductionTS(float reductionTS) {
-			this.reductionTS = reductionTS;
-		}
+	public float getReductionTS() {
+		return reductionTS;
+	}
 
-		public float getReductionSP() {
-			return reductionSP;
-		}
+	public void setReductionTS(float reductionTS) {
+		this.reductionTS = reductionTS;
+	}
 
-		public void setReductionSP(float reductionSP) {
-			this.reductionSP = reductionSP;
-		}
+	public float getReductionSP() {
+		return reductionSP;
+	}
 
-		public int getRate() {
-			return rate;
-		}
+	public void setReductionSP(float reductionSP) {
+		this.reductionSP = reductionSP;
+	}
 
-		public void setRate(int rate) {
-			this.rate = rate;
-		}
+	public int getRate() {
+		return rate;
+	}
+
+	public void setRate(int rate) {
+		this.rate = rate;
+	}
+
+	public String getPk() {
+		return pk;
+	}
+
+	public void setPk(String pk) {
+		this.pk = pk;
+	}
+
+	public String getMetaPK() {
+		return metaPK;
+	}
+
+	public void setMetaPK(String metaPK) {
+		this.metaPK = metaPK;
+	}
+
+
 
 
 }

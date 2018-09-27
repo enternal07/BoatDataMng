@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.wisely.dao.scale.ItemScaleDao;
 import com.wisely.dao.scale.ScaleMataDao;
+import com.wisely.domain.big.BigDemoMetadata;
 import com.wisely.domain.scale.ItemScalePO;
 import com.wisely.domain.scale.ScaleMataPO;
 import com.wisely.domain.small.Item;
@@ -127,6 +128,12 @@ public class ScaleMataService {
 		}
 	}
 	
+	public List<ScaleMataPO> queryFull(){
+		return dao.findAll();
+	}
 	
+	public ScaleMataPO queryDetail(String pk){
+		return dao.findOne(pk);
+	}
 	
 }

@@ -28,6 +28,8 @@ public class ItemBigService {
 		List<ItemBigVO> vos =  new ArrayList<ItemBigVO>();
 		for(ItemBig li:list) {
 			ItemBigVO vo = new ItemBigVO();
+			vo.setPk(li.getPk());
+			vo.setMetaPK(li.getBigDemoMetadata().getPk()); 
 			vo.setBondacust(li.getBondacust());
 			vo.setEchoes(li.getEchoes());
 			vo.setRadiation(li.getRadiation());

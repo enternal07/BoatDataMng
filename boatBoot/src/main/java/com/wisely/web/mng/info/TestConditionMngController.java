@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.wisely.domain.scale.TestConditionPO;
+import com.wisely.domainVO.DeleteVO;
 import com.wisely.domainVO.ResultVO;
 import com.wisely.service.scale.TestConditionService;
 
@@ -54,10 +55,10 @@ public class TestConditionMngController {
 	}
 	
 	@RequestMapping(value = "/deleteTestCondition",method = RequestMethod.POST)
-	public @ResponseBody ResultVO deleteTestCondition(@RequestParam("pk") String pk,HttpServletRequest req){
+	public @ResponseBody ResultVO deleteTestCondition(@RequestBody DeleteVO delVO,HttpServletRequest req){
 		ResultVO re = new ResultVO(true);
 		try {
-			testConditionService.deleteEntity(pk) ;
+			testConditionService.deleteEntity(delVO.getPk()) ;
 		} catch (Exception e) {
 			re.setSuccess(false);
 			logger.error("delete entity error", e);

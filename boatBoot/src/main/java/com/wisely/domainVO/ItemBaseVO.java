@@ -1,8 +1,6 @@
 package com.wisely.domainVO;
 
 import java.io.Serializable;
-import java.util.List;
-import java.util.Map;
 
 public class ItemBaseVO  implements Serializable{
 	    /**
@@ -10,6 +8,9 @@ public class ItemBaseVO  implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 
+		private String pk;
+		
+		private String metaPK;
 		//反射系数
 		private Float refect;
 		
@@ -60,6 +61,22 @@ public class ItemBaseVO  implements Serializable{
 
 		public void setRate(Integer rate) {
 			this.rate = rate;
+		}
+
+		public String getPk() {
+			return pk;
+		}
+
+		public void setPk(String pk) {
+			this.pk = pk;
+		}
+
+		public String getMetaPK() {
+			return metaPK;
+		}
+
+		public void setMetaPK(String metaPK) {
+			this.metaPK = metaPK;
 		}
 
 //		public List<Integer> getRates() {

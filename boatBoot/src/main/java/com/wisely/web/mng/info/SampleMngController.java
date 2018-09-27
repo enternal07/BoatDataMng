@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.wisely.domain.common.BaseMetaSample;
+import com.wisely.domainVO.DeleteVO;
 import com.wisely.domainVO.ResultVO;
 import com.wisely.service.BaseMetaSampleService;
 
@@ -55,10 +56,10 @@ public class SampleMngController {
 	}
 	
 	@RequestMapping(value = "/deleteSample",method = RequestMethod.POST)
-	public @ResponseBody ResultVO deleteSample(@RequestParam("pk") String pk,HttpServletRequest req){
+	public @ResponseBody ResultVO deleteSample(@RequestBody DeleteVO delVO,HttpServletRequest req){
 		ResultVO re = new ResultVO(true);
 		try {
-			sampleService.deleteEntity(pk) ;
+			sampleService.deleteEntity(delVO.getPk()) ;
 		} catch (Exception e) {
 			re.setSuccess(false);
 			logger.error("delete entity error", e);

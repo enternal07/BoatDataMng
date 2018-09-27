@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.wisely.domain.big.TestModel;
+import com.wisely.domainVO.DeleteVO;
 import com.wisely.domainVO.ResultVO;
 import com.wisely.service.TestModelService;
 
@@ -53,10 +54,10 @@ public class TestModelMngController {
 	}
 	
 	@RequestMapping(value = "/deleteTestModel",method = RequestMethod.POST)
-	public @ResponseBody ResultVO deleteTestModel(@RequestParam("pk") String pk,HttpServletRequest req){
+	public @ResponseBody ResultVO deleteTestModel(@RequestBody DeleteVO delVO,HttpServletRequest req){
 		ResultVO re = new ResultVO(true);
 		try {
-			testModelService.deleteEntity(pk) ;
+			testModelService.deleteEntity(delVO.getPk()) ;
 		} catch (Exception e) {
 			re.setSuccess(false);
 			logger.error("delete entity error", e);

@@ -16,6 +16,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -24,6 +25,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.wisely.Constants;
 import com.wisely.domain.common.Photo;
+import com.wisely.domainVO.DeleteVO;
 import com.wisely.domainVO.ResultVO;
 import com.wisely.service.IPhotoService;
 import com.wisely.util.FileUtil;
@@ -100,11 +102,11 @@ public class PhotoController {
 	
 	@RequestMapping(value="/deletePhoto",method = RequestMethod.POST)
 	public @ResponseBody  ResultVO deletePhoto(
-			@RequestParam("pk") String pk,HttpServletRequest req) throws IOException{
+			@RequestBody DeleteVO delVO,HttpServletRequest req) throws IOException{
 		ResultVO re = new ResultVO(false);
-		if(Toolkit.notEmpty(pk)){
+		if(Toolkit.notEmpty(delVO.getPk())){
 			try {
-				photoService.deleteEntity(pk);
+				photoService.deleteEntity(delVO.getPk());
 				re.setSuccess(true);
 			} catch (Exception e) {
 				logger.error("delete entity error", e);

@@ -8,7 +8,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -17,6 +16,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.wisely.domain.small.Demometadata;
 import com.wisely.domain.small.Item;
+import com.wisely.domainVO.DeleteVO;
+import com.wisely.domainVO.PKVO;
 import com.wisely.domainVO.ResultVO;
 import com.wisely.service.SmallDemoMetaDataService;
 
@@ -63,10 +64,10 @@ public class SmallMngController {
 	}
 	
 	@RequestMapping(value = "/deleteSmall",method = RequestMethod.POST)
-	public @ResponseBody ResultVO deleteSmall(@RequestParam("pk") String pk,HttpServletRequest req){
+	public @ResponseBody ResultVO deleteSmall(@RequestBody DeleteVO delVO,HttpServletRequest req){
 		ResultVO re = new ResultVO(true);
 		try {
-			service.deleteEntity(pk) ;
+			service.deleteEntity(delVO.getPk()) ;
 		} catch (Exception e) {
 			re.setSuccess(false);
 			logger.error("delete entity error", e);
@@ -74,6 +75,29 @@ public class SmallMngController {
 		return re;
 	}
 	
+	@RequestMapping(value = "/queryFull",method = RequestMethod.POST)
+	public @ResponseBody ResultVO queryFull(HttpServletRequest req){
+		ResultVO re = new ResultVO(true);
+		try {
+			re.setData(service.queryFull()) ;
+		} catch (Exception e) {
+			re.setSuccess(false);
+			logger.error("query all entity error", e);
+		} 
+		return re;
+	}
+	
+	@RequestMapping(value = "/queryDetail",method = RequestMethod.POST)
+	public @ResponseBody ResultVO queryDetail(@RequestBody PKVO pKVO,HttpServletRequest req){
+		ResultVO re = new ResultVO(true);
+		try {
+			re.setData(service.queryDetail(pKVO.getPk())) ;
+		} catch (Exception e) {
+			re.setSuccess(false);
+			logger.error("query detail entity error", e);
+		} 
+		return re;
+	}
 	
 	/*Items Action*/
 	
@@ -106,10 +130,10 @@ public class SmallMngController {
 	}
 	
 	@RequestMapping(value = "/deleteItem",method = RequestMethod.POST)
-	public @ResponseBody ResultVO deleteItem(@RequestParam("pk") String pk,HttpServletRequest req){
+	public @ResponseBody ResultVO deleteItem(@RequestBody DeleteVO delVO,HttpServletRequest req){
 		ResultVO re = new ResultVO(true);
 		try {
-			service.deleteItem(pk);
+			service.deleteItem(delVO.getPk());
 		} catch (Exception e) {
 			re.setSuccess(false);
 			logger.error("delete entity error", e);
@@ -118,10 +142,10 @@ public class SmallMngController {
 	}
 	
 	@RequestMapping(value = "/deleteItems",method = RequestMethod.POST)
-	public @ResponseBody ResultVO deleteItem(@RequestBody List<String> pks,HttpServletRequest req){
+	public @ResponseBody ResultVO deleteItems(@RequestBody DeleteVO delVO,HttpServletRequest req){
 		ResultVO re = new ResultVO(true);
 		try {
-			service.deleteItems(pks);
+			service.deleteItems(delVO.getPks());
 		} catch (Exception e) {
 			re.setSuccess(false);
 			logger.error("delete entity error", e);
