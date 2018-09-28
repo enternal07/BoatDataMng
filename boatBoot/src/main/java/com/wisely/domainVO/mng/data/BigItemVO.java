@@ -12,6 +12,7 @@ public class BigItemVO implements java.io.Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	
+	private String pk;
 	private String sampleName;
 	private String samplepk;
 	private String testModelName;
@@ -118,7 +119,12 @@ public class BigItemVO implements java.io.Serializable {
 	public void setTestSystemPk(String testSystemPk) {
 		this.testSystemPk = testSystemPk;
 	}
-	
+	public String getPk() {
+		return pk;
+	}
+	public void setPk(String pk) {
+		this.pk = pk;
+	}
 	
 
 }

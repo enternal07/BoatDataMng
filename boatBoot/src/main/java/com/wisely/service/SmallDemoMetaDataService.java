@@ -87,6 +87,7 @@ public class SmallDemoMetaDataService {
 				SmallItemVO smallItemVO = new SmallItemVO();
 				Demometadata smallVO = item.getSmallPO(); 
 				BaseMetaBacking backingVO = backingDao.findOne(smallVO.getBakingpk());
+				smallItemVO.setPk(item.getPk()); 
 				smallItemVO.setSamplename(smallVO.getSamplename());
 				smallItemVO.setSamplepk(smallVO.getSamplepk());
 				smallItemVO.setBackingname(backingVO.getName());

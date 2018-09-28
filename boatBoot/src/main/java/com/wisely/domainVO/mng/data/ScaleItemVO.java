@@ -12,6 +12,7 @@ public class ScaleItemVO implements java.io.Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	
+	private String  pk; 
 	private String  testModelObjName ; 
 	private String  testModelObjPk ; 
 	private String  layingSchemeName ; 
@@ -96,8 +97,13 @@ public class ScaleItemVO implements java.io.Serializable {
 	}
 	public void setReductionSP(Float reductionSP) {
 		this.reductionSP = reductionSP;
+	}
+	public String getPk() {
+		return pk;
+	}
+	public void setPk(String pk) {
+		this.pk = pk;
 	} 
-
 	
 
 }

@@ -83,6 +83,7 @@ public class ScaleMataService {
 			for (ItemScalePO item : allItems) {
 				ScaleItemVO bigItemVO = new ScaleItemVO();
 				ScaleMataPO bigVO = item.getScaleMataPO();
+				bigItemVO.setPk(item.getPk());
 				bigItemVO.setTestModelObjName(bigVO.getTestModelObjName());
 				bigItemVO.setTestModelObjPk(bigVO.getTestModelObjPk());
 				bigItemVO.setLayingSchemeName(bigVO.getLayingSchemeName());
