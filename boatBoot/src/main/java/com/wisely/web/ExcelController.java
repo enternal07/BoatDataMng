@@ -175,7 +175,7 @@ public class ExcelController {
         List<ItemBaseVO> items = serviceItem.findByQueryCondtionOld(queryVO);
         if(Toolkit.notEmpty(items)&&items.size()>0){
         	BaseMetaSample bms = baseMetaSampleService.getBySampleName(queryVO.getSamplename());
-        	BaseMetaBacking backing = baseMetaBackingService.getByName(queryVO.getBackgroundtype());
+        	BaseMetaBacking backing = baseMetaBackingService.getByName(queryVO.getBackingname());
             excelService.downloadSmall(response, queryVO, bms, backing, items);
         }
     }
@@ -460,7 +460,7 @@ public class ExcelController {
         		   Row row4 = sheet.getRow(3);
         		   Cell cell4 = row4.getCell(1);
         		   smallDemoMetaData.setPress(Integer.parseInt(getCellValue(cell4)));
-        		   System.out.println("元数据："+smallDemoMetaData.getSamplename()+smallDemoMetaData.getTemparture()+smallDemoMetaData.getPress()+smallDemoMetaData.getBackgroundtype());
+        		   System.out.println("元数据："+smallDemoMetaData.getSamplename()+smallDemoMetaData.getTemparture()+smallDemoMetaData.getPress()+smallDemoMetaData.getBackingname());
 			   smallDemoMetaData.setSmall(isSmall);
 			   
 			   smallDemoMetaData.setBacking(backing);

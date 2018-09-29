@@ -55,8 +55,8 @@ public class PhotoController {
 		}
 		int realTypeIndex = type-1 ; 
 		String dir = FileUtil.getSecondDir(realTypeIndex);
-		String result = null ; 
-		List<String> pks = new ArrayList<>();
+		Photo result = null ; 
+		List<Photo> pts = new ArrayList<>();
 		try {
 			//定义输出流 将文件保存在D盘    file.getOriginalFilename()为获得文件的名字 
 			for (MultipartFile multipartFile : files) {
@@ -83,7 +83,7 @@ public class PhotoController {
 						tempFile.delete();
 					}
 				}
-				pks.add(result);
+				pts.add(result);
 			}
 		} catch (FileNotFoundException e) {
 			logger.error("file not found", e);
@@ -92,10 +92,10 @@ public class PhotoController {
 		}catch (Exception e) {
 			logger.error("other error", e);
 		}
-		if(Toolkit.isEmpty(pks)){
+		if(Toolkit.isEmpty(pts)){
 			re.setSuccess(false);
 		}else{
-			re.setData(pks);
+			re.setData(pts);
 		}
 		return re;
 	}

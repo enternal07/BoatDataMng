@@ -14,7 +14,8 @@ public class QueryVO implements Serializable{
 	
 	private String samplename;
 	
-	private String backgroundtype;
+	//private String backgroundtype;
+	private String backingname;
 	
 	private  Float temparture;
 	
@@ -32,12 +33,12 @@ public class QueryVO implements Serializable{
 		this.samplename = samplename;
 	}
 
-	public String getBackgroundtype() {
-		return backgroundtype;
+	public String getBackingname() {
+		return backingname;
 	}
 
-	public void setBackgroundtype(String backgroundtype) {
-		this.backgroundtype = backgroundtype;
+	public void setBackingname(String backingname) {
+		this.backingname = backingname;
 	}
 
 	public Integer getRateMin() {

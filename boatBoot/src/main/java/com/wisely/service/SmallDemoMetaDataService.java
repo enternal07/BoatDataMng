@@ -32,7 +32,7 @@ public class SmallDemoMetaDataService {
 	private BaseMetaBackingDao backingDao;
 	
 	public ResultVO ifExits(Demometadata entity) {
-		List<Object> resObj = dao.CountBySamplenameAndTempartureAndPressAndBackgroundType(entity.getSamplename(), entity.getTemparture(), entity.getPress(), entity.getBackgroundtype(),entity.isSmall());
+		List<Object> resObj = dao.CountBySamplenameAndTempartureAndPressAndBackgroundType(entity.getSamplename(), entity.getTemparture(), entity.getPress(), entity.getBackingname(),entity.isSmall());
 		ResultVO res = new ResultVO();
 			
 			for(Object met:resObj) {
@@ -114,7 +114,7 @@ public class SmallDemoMetaDataService {
 			JSONObject sample = new JSONObject();
 			JSONObject back = new JSONObject();
 			sample.put("samplename", li.getSamplename());
-			back.put("backgroundtype", li.getBackgroundtype());
+			back.put("backingname", li.getBackingname());
 			arraySample.add(sample);
 			arrayBack.add(back);
 		}

@@ -58,19 +58,13 @@ public class Demometadata  extends BaseModel{
 	
 	private String samplename; 
 	
-	private String backgroundtype;
-	
-	
-
-	
+	//private String backgroundtype;
+	@Column(name="backgroundtype")
+	private String backingname ;
 	
 	public String getPk() {
 		return pk;
 	}
-
-
-
-
 
 	public void setPk(String pk) {
 		this.pk = pk;
@@ -204,28 +198,32 @@ public class Demometadata  extends BaseModel{
 		this.samplename = samplename;
 	}
 
-
-
-
-
-	public String getBackgroundtype() {
+/*	public String getBackgroundtype() {
 		return backgroundtype;
 	}
 
-
-
-
-
 	public void setBackgroundtype(String backgroundtype) {
 		this.backgroundtype = backgroundtype;
+	}*/
+
+	public String toString() {
+		return "样品名称："+this.getSamplename()+",背衬："+this.getBackingname()+",温度："+this.getTemparture()+",压力："+this.getPress();
+		
 	}
 
 
 
 
 
-	public String toString() {
-		return "样品名称："+this.getSamplename()+",背衬："+this.getBackgroundtype()+",温度："+this.getTemparture()+",压力："+this.getPress();
-		
+	public String getBackingname() {
+		return backingname;
+	}
+
+
+
+
+
+	public void setBackingname(String backingname) {
+		this.backingname = backingname;
 	}
 }

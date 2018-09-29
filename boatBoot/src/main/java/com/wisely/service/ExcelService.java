@@ -509,9 +509,9 @@ public class ExcelService {
 		bigDemoMetaData.setSample(sample);
 		bigDemoMetaData.setSampleName(sample.getName());
 		bigDemoMetaData.setTestModel(testModel);
-		bigDemoMetaData.setTestmodelName(testModel.getName());
+		bigDemoMetaData.setTestModelName(testModel.getName());
 		bigDemoMetaData.setTestSystem(testSystem);
-		bigDemoMetaData.setTestsystemName(testSystem.getName());
+		bigDemoMetaData.setTestSystemName(testSystem.getName());
 		return bigDemoMetaData;
 	}
     /**系统测试
@@ -581,7 +581,7 @@ public class ExcelService {
         		   smallDemoMetaData.setPress(Integer.parseInt(getCellValue(cell13)));
 			   smallDemoMetaData.setSmall(isSmall);
 			   smallDemoMetaData.setSamplename(sample.getName());
-			   smallDemoMetaData.setBackgroundtype(backing.getName());
+			   smallDemoMetaData.setBackingname(backing.getName());
 			   smallDemoMetaData.setBacking(backing);
 			   smallDemoMetaData.setSample(sample);
         		   return smallDemoMetaData;

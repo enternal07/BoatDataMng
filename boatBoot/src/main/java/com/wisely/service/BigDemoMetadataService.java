@@ -59,7 +59,7 @@ public class BigDemoMetadataService{
 	public ResultVO ifExist(BigDemoMetadata entity) {
 		
 		List<Object> resEntity = dao.CountBySamplenameAndTempartureAndPressAndTestNames(entity.getSampleName(), entity.getTemparture(), 
-				entity.getPress(), entity.getTestmodelName(), entity.getTestsystemName());
+				entity.getPress(), entity.getTestModelName(), entity.getTestSystemName());
 		ResultVO res = new ResultVO();
 		  Object ress=resEntity.get(0);
 			Object[] arry = (Object[]) ress;
@@ -88,9 +88,9 @@ public class BigDemoMetadataService{
 				bigItemVO.setPk(item.getPk());
 				bigItemVO.setSampleName(bigVO.getSampleName());
 				bigItemVO.setSamplepk(bigVO.getSamplepk());
-				bigItemVO.setTestModelName(bigVO.getTestmodelName());
+				bigItemVO.setTestModelName(bigVO.getTestModelName());
 				bigItemVO.setTestModelPk(bigVO.getTestModelPk());
-				bigItemVO.setTestSystemName(bigVO.getTestsystemName());
+				bigItemVO.setTestSystemName(bigVO.getTestSystemName());
 				bigItemVO.setTestSystemPk(bigVO.getTestSystemPk());
 				bigItemVO.setTemparture(bigVO.getTemparture());
 				bigItemVO.setPress(bigVO.getPress());

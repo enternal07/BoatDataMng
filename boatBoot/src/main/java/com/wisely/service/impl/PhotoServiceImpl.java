@@ -23,15 +23,14 @@ public class PhotoServiceImpl implements IPhotoService{
 	private PhotoDao photoDao; 
 	
 	@Override
-	public String saveEntity(Photo photo) {
-		String result = null;
+	public Photo saveEntity(Photo photo) {
+		Photo pht = null ; 
 		try {
-			Photo pht  = photoDao.save(photo);
-			result = pht.getPk();
+			pht  = photoDao.save(photo);
 		} catch (Exception e) {
 			logger.error("save entity error", e);
 		}
-		return result;
+		return pht;
 	}
 
 	@Override

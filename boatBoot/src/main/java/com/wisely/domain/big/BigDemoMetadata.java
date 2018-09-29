@@ -41,10 +41,10 @@ public class BigDemoMetadata  extends BaseModel{
 	private String sampleName;
 	
 	@Column(name="testmodel_name")
-	private String testmodelName;
+	private String testModelName;
 	
 	@Column(name="testsystem_name")
-	private String testsystemName;
+	private String testSystemName;
 	
 	
 	@Column(name="sample_pk")
@@ -108,22 +108,6 @@ public class BigDemoMetadata  extends BaseModel{
 		this.sampleName = sampleName;
 	}
 
-	public String getTestmodelName() {
-		return testmodelName;
-	}
-
-	public void setTestmodelName(String testmodelName) {
-		this.testmodelName = testmodelName;
-	}
-
-	public String getTestsystemName() {
-		return testsystemName;
-	}
-
-	public void setTestsystemName(String testsystemName) {
-		this.testsystemName = testsystemName;
-	}
-
 	public String getSamplepk() {
 		return samplepk;
 	}
@@ -171,5 +155,22 @@ public class BigDemoMetadata  extends BaseModel{
 	public void setTestSystem(TestSystem testSystem) {
 		this.testSystem = testSystem;
 	}
+
+	public String getTestModelName() {
+		return testModelName;
+	}
+
+	public void setTestModelName(String testModelName) {
+		this.testModelName = testModelName;
+	}
+
+	public String getTestSystemName() {
+		return testSystemName;
+	}
+
+	public void setTestSystemName(String testSystemName) {
+		this.testSystemName = testSystemName;
+	}
+	
 
 }
