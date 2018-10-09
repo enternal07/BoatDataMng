@@ -45,6 +45,9 @@ public class Photo extends BaseModel{
 	
 	@Column(name = "updatetime") //1删除 0 未删除
 	private String updatetime;
+	
+	@Column(name = "absurl") //1删除 0 未删除
+	private String absurl;
 
 	public String getPk() {
 		return pk;
@@ -108,6 +111,14 @@ public class Photo extends BaseModel{
 
 	public void setUpdatetime(String updatetime) {
 		this.updatetime = updatetime;
+	}
+
+	public String getAbsurl() {
+		return absurl;
+	}
+
+	public void setAbsurl(String absurl) {
+		this.absurl = absurl;
 	}
 	
 	

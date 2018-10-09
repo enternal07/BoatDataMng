@@ -6,6 +6,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 import java.util.UUID;
 
@@ -15,7 +16,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.thoughtworks.xstream.core.util.Base64Encoder;
 import com.wisely.Constants;
 import com.wisely.domain.common.Photo;
 import com.wisely.domainVO.DeleteVO;
@@ -71,11 +72,14 @@ public class PhotoController {
 				os.flush(); //关闭流 
 				in.close();
 				os.close();
+		        Base64Encoder encoder = new Base64Encoder();
+		        String base64 =  new String(encoder.encode(multipartFile.getBytes()));
 				Photo photo = new Photo();
 				photo.setPrevName(multipartFile.getOriginalFilename());
 				photo.setName(nameUUID);
-				photo.setUrl(fileName);
+				photo.setAbsurl(fileName);
 				photo.setInfotype(Constants.MODEL_TYPES[realTypeIndex]);
+				photo.setUrl("data:image/png;base64,"+base64);
 				result = photoService.saveEntity(photo);
 				if(Toolkit.isEmpty(result)){
 					File tempFile = new File(fileName);
