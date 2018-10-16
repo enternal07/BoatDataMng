@@ -25,6 +25,22 @@ public class QueryVO implements Serializable{
 	
 	private  Integer rateMax;
 	
+	public QueryVO(){}
+	
+	
+	public QueryVO(String samplename, String backingname, Float temparture, Integer press, Integer rateMin,
+			Integer rateMax) {
+		super();
+		this.samplename = samplename;
+		this.backingname = backingname;
+		this.temparture = temparture;
+		this.press = press;
+		this.rateMin = rateMin;
+		this.rateMax = rateMax;
+	}
+
+
+
 	public String getSamplename() {
 		return samplename;
 	}

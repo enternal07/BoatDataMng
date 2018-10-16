@@ -21,6 +21,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -159,19 +160,17 @@ public class ExcelController {
 			"rateMax":200
 		}
 	 */
-	@RequestMapping(value="/downloadSmall",method = RequestMethod.POST)
+	@RequestMapping(value="/downloadSmall",method = RequestMethod.GET)
     public void downloadSmall(
-    		@RequestBody QueryVO queryVO,
-    		HttpServletRequest request,
+    		@RequestParam(value = "samplename") String samplename,
+    		@RequestParam(value = "backingname") String backingname,
+    		@RequestParam(value = "temparture")  Float temparture,
+    		@RequestParam(value = "press") Integer press,
+    		@RequestParam(value = "rateMin") Integer rateMin,
+    		@RequestParam(value = "rateMax") Integer rateMax,
     		HttpServletResponse response) throws IOException{
        
-		/*QueryVO queryVO = new QueryVO();
-		queryVO.setBackgroundtype("30mm钢02");
-		queryVO.setPress(1);
-		queryVO.setRateMax(200);
-		queryVO.setRateMin(10);
-		queryVO.setSamplename("阿波罗02");
-		queryVO.setTemparture(15.0f);*/
+		QueryVO queryVO = new QueryVO(samplename,backingname,temparture,press,rateMin,rateMax);
         List<ItemBaseVO> items = serviceItem.findByQueryCondtionOld(queryVO);
         if(Toolkit.notEmpty(items)&&items.size()>0){
         	BaseMetaSample bms = baseMetaSampleService.getBySampleName(queryVO.getSamplename());
@@ -194,21 +193,19 @@ public class ExcelController {
 	 * @param response
 	 * @throws IOException
 	 */
-	@RequestMapping(value="/downloadBig",method = RequestMethod.POST)
+	@RequestMapping(value="/downloadBig",method = RequestMethod.GET)
     public void downloadBig(
-    		@RequestBody QueryBigVO queryBigVO,
+    		@RequestParam(value = "samplename") String samplename,
+    		@RequestParam(value = "testModelName") String testModelName,
+    		@RequestParam(value = "testSystemName") String testSystemName,
+    		@RequestParam(value = "temparture")  Float temparture,
+    		@RequestParam(value = "press") Integer press,
+    		@RequestParam(value = "rateMin") Integer rateMin,
+    		@RequestParam(value = "rateMax") Integer rateMax,
     		HttpServletRequest request,
     		HttpServletResponse response) throws IOException{
 		
-	/*	QueryBigVO queryBigVO = new QueryBigVO();
-		queryBigVO.setSamplename("阿波罗");
-		queryBigVO.setTestModelName("双层局域实尺度模型");
-		queryBigVO.setTestSystemName("时间反转");
-		queryBigVO.setPress(1);
-		queryBigVO.setTemparture(15.0f);
-		queryBigVO.setRateMin(0);
-		queryBigVO.setRateMax(300);*/
-		
+		QueryBigVO queryBigVO = new QueryBigVO(samplename,testModelName,testSystemName,temparture,press,rateMin,rateMax);
         List<ItemBigVO> items = serviceItemBig.getItemBigList(queryBigVO);
         if(Toolkit.notEmpty(items)&&items.size()>0){
         	BaseMetaSample bms = baseMetaSampleService.getBySampleName(queryBigVO.getSamplename());
@@ -230,17 +227,17 @@ public class ExcelController {
 	 * @param response
 	 * @throws IOException
 	 */
-	@RequestMapping(value="/downloadScale",method = RequestMethod.POST)
+	@RequestMapping(value="/downloadScale",method = RequestMethod.GET)
     public void downloadScale(
-    		@RequestBody SacleQueryVO sacleQueryVO,
+    		@RequestParam(value = "layingSchemeName") String layingSchemeName,
+    		@RequestParam(value = "testConditionName") String testConditionName,
+    		@RequestParam(value = "testModelObjName")  String testModelObjName,
+    	    @RequestParam(value = "rateMin")  Integer rateMin,
+    		@RequestParam(value = "rateMax")  Integer rateMax,
     		HttpServletRequest request,
     		HttpServletResponse response) throws IOException{
-/*		SacleQueryVO sacleQueryVO = new SacleQueryVO();
-		sacleQueryVO.setTestModelObjName("中尺度模型");
-		sacleQueryVO.setTestConditionName("201708杭州");
-		sacleQueryVO.setLayingSchemeName("文字文字");
-		sacleQueryVO.setRateMin(0);
-		sacleQueryVO.setRateMax(1000);*/
+		
+		SacleQueryVO sacleQueryVO = new SacleQueryVO(layingSchemeName,testConditionName,testModelObjName,rateMin,rateMax);
 		List<ItemScaleVO>  items = (List<ItemScaleVO> )itemScaleService.getItemScaleList(sacleQueryVO);
         if(Toolkit.notEmpty(items)&&items.size()>0){
         	TestModelObjPO tmobj = testModelObjService.getByName(sacleQueryVO.getTestModelObjName());

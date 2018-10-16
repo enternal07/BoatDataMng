@@ -22,8 +22,21 @@ public class SacleQueryVO implements Serializable{
 	
 	private  Integer rateMax;
 
+	public SacleQueryVO(){}
 	
-    public String getLayingSchemeName() {
+    public SacleQueryVO(String layingSchemeName, String testConditionName, String testModelObjName, Integer rateMin,
+			Integer rateMax) {
+		super();
+		this.layingSchemeName = layingSchemeName;
+		this.testConditionName = testConditionName;
+		this.testModelObjName = testModelObjName;
+		this.rateMin = rateMin;
+		this.rateMax = rateMax;
+	}
+
+
+
+	public String getLayingSchemeName() {
 		return layingSchemeName;
 	}
 

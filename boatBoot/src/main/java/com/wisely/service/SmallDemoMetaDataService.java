@@ -86,19 +86,23 @@ public class SmallDemoMetaDataService {
 			for (Item item : allItems) {
 				SmallItemVO smallItemVO = new SmallItemVO();
 				Demometadata smallVO = item.getSmallPO(); 
-				BaseMetaBacking backingVO = backingDao.findOne(smallVO.getBakingpk());
-				smallItemVO.setPk(item.getPk()); 
-				smallItemVO.setSamplename(smallVO.getSamplename());
-				smallItemVO.setSamplepk(smallVO.getSamplepk());
-				smallItemVO.setBackingname(backingVO.getName());
-				smallItemVO.setBakingpk(smallVO.getBakingpk());
-				smallItemVO.setTemparture(smallVO.getTemparture());
-				smallItemVO.setPress(smallVO.getPress());
-				smallItemVO.setBondacust(item.getBondacust());
-				smallItemVO.setRate(item.getRate());
-				smallItemVO.setRefect(item.getRefect());
-				smallItemVO.setTransmission(item.getTransmission());
-				result.add(smallItemVO);
+				if(Toolkit.notEmpty(smallVO)){
+					BaseMetaBacking backingVO = backingDao.findOne(smallVO.getBakingpk());
+					if(Toolkit.notEmpty(backingVO)){
+						smallItemVO.setPk(item.getPk()); 
+						smallItemVO.setSamplename(smallVO.getSamplename());
+						smallItemVO.setSamplepk(smallVO.getSamplepk());
+						smallItemVO.setBackingname(backingVO.getName());
+						smallItemVO.setBakingpk(smallVO.getBakingpk());
+						smallItemVO.setTemparture(smallVO.getTemparture());
+						smallItemVO.setPress(smallVO.getPress());
+						smallItemVO.setBondacust(item.getBondacust());
+						smallItemVO.setRate(item.getRate());
+						smallItemVO.setRefect(item.getRefect());
+						smallItemVO.setTransmission(item.getTransmission());
+						result.add(smallItemVO);
+					}
+				}
 			}
 		}
 		return result;
