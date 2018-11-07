@@ -55,13 +55,13 @@ public class PhotoController {
 			return re;
 		}
 		int realTypeIndex = type-1 ; 
-		String dir = FileUtil.getSecondDir(realTypeIndex);
+		//String dir = FileUtil.getSecondDir(realTypeIndex);
 		Photo result = null ; 
 		List<Photo> pts = new ArrayList<>();
 		try {
 			//定义输出流 将文件保存在D盘    file.getOriginalFilename()为获得文件的名字 
 			for (MultipartFile multipartFile : files) {
-				String nameUUID = UUID.randomUUID().toString() ; 
+				/*String nameUUID = UUID.randomUUID().toString() ; 
 				String fileName = dir+File.separator+nameUUID+Constants.POSTFIX;
 				FileOutputStream os = new FileOutputStream(fileName);
 				InputStream in = multipartFile.getInputStream();
@@ -71,22 +71,22 @@ public class PhotoController {
 				}
 				os.flush(); //关闭流 
 				in.close();
-				os.close();
+				os.close();*/
 		        Base64Encoder encoder = new Base64Encoder();
 		        String base64 =  new String(encoder.encode(multipartFile.getBytes()));
 				Photo photo = new Photo();
 				photo.setPrevName(multipartFile.getOriginalFilename());
-				photo.setName(nameUUID);
-				photo.setAbsurl(fileName);
+				/*photo.setName(nameUUID);
+				photo.setAbsurl(fileName);*/
 				photo.setInfotype(Constants.MODEL_TYPES[realTypeIndex]);
 				photo.setUrl("data:image/png;base64,"+base64);
 				result = photoService.saveEntity(photo);
-				if(Toolkit.isEmpty(result)){
+				/*if(Toolkit.isEmpty(result)){
 					File tempFile = new File(fileName);
 					if(tempFile.exists()){
 						tempFile.delete();
 					}
-				}
+				}*/
 				pts.add(result);
 			}
 		} catch (FileNotFoundException e) {
