@@ -48,6 +48,9 @@ public class Photo extends BaseModel{
 	
 	@Column(name = "absurl") //1删除 0 未删除
 	private String absurl;
+	
+	@Column(name = "ts",insertable=false,updatable=false)
+	private String ats;
 
 	public String getPk() {
 		return pk;
@@ -119,6 +122,14 @@ public class Photo extends BaseModel{
 
 	public void setAbsurl(String absurl) {
 		this.absurl = absurl;
+	}
+
+	public String getAts() {
+		return ats;
+	}
+
+	public void setAts(String ats) {
+		this.ats = ats;
 	}
 	
 	

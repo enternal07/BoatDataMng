@@ -8,6 +8,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.JoinColumn;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 
@@ -20,6 +21,7 @@ public class BasePhotoModel implements Serializable{
 	
 	@OneToMany(targetEntity=Photo.class,cascade={CascadeType.MERGE})
 	@JoinColumn(name="model_pk")
+	@OrderBy("ts ASC")
 	protected List<Photo> photos;
 	
 	public List<Photo> getPhotos() {
