@@ -35,7 +35,8 @@ public class BigDemoMetadata  extends BaseModel{
 	
 	private Float temparture;
 	
-	private Integer press;
+	//private Integer press;
+	private Float press;
 	
 	@Column(name="sample_name")
 	private String sampleName;
@@ -92,11 +93,11 @@ public class BigDemoMetadata  extends BaseModel{
 		this.temparture = temparture;
 	}
 
-	public Integer getPress() {
+	public Float getPress() {
 		return press;
 	}
 
-	public void setPress(Integer press) {
+	public void setPress(Float press) {
 		this.press = press;
 	}
 

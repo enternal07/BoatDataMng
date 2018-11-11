@@ -16,7 +16,8 @@ public class SmallItemVO implements java.io.Serializable {
 	private String samplename ; 
 	private String bakingpk ; 
 	private String backingname ; 
-	private Integer press ; 
+	//private Integer press ; 
+	private Float press ; 
 	private Float temparture ; 
 	private Float refect ; 
 	private Float transmission ; 
@@ -47,10 +48,10 @@ public class SmallItemVO implements java.io.Serializable {
 	public void setBackingname(String backingname) {
 		this.backingname = backingname;
 	}
-	public Integer getPress() {
+	public Float getPress() {
 		return press;
 	}
-	public void setPress(Integer press) {
+	public void setPress(Float press) {
 		this.press = press;
 	}
 	public Float getTemparture() {

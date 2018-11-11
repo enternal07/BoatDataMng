@@ -165,7 +165,7 @@ public class ExcelController {
     		@RequestParam(value = "samplename") String samplename,
     		@RequestParam(value = "backingname") String backingname,
     		@RequestParam(value = "temparture")  Float temparture,
-    		@RequestParam(value = "press") Integer press,
+    		@RequestParam(value = "press") Float press, //Integer
     		@RequestParam(value = "rateMin") Integer rateMin,
     		@RequestParam(value = "rateMax") Integer rateMax,
     		HttpServletResponse response) throws IOException{
@@ -199,7 +199,7 @@ public class ExcelController {
     		@RequestParam(value = "testModelName") String testModelName,
     		@RequestParam(value = "testSystemName") String testSystemName,
     		@RequestParam(value = "temparture")  Float temparture,
-    		@RequestParam(value = "press") Integer press,
+    		@RequestParam(value = "press") Float press,
     		@RequestParam(value = "rateMin") Integer rateMin,
     		@RequestParam(value = "rateMax") Integer rateMax,
     		HttpServletRequest request,
@@ -456,7 +456,7 @@ public class ExcelController {
         		   smallDemoMetaData.setTemparture(Float.parseFloat(getCellValue(cell3)));
         		   Row row4 = sheet.getRow(3);
         		   Cell cell4 = row4.getCell(1);
-        		   smallDemoMetaData.setPress(Integer.parseInt(getCellValue(cell4)));
+        		   smallDemoMetaData.setPress(Float.parseFloat(getCellValue(cell4)));
         		   System.out.println("元数据："+smallDemoMetaData.getSamplename()+smallDemoMetaData.getTemparture()+smallDemoMetaData.getPress()+smallDemoMetaData.getBackingname());
 			   smallDemoMetaData.setSmall(isSmall);
 			   

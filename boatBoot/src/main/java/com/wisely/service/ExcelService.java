@@ -501,7 +501,8 @@ public class ExcelService {
 
 		Row row16 = sheet.getRow(16);
 		Cell cell16 = row16.getCell(1);
-		bigDemoMetaData.setPress(Integer.parseInt(getCellValue(cell16)));
+		//bigDemoMetaData.setPress(Integer.parseInt(getCellValue(cell16)));
+		bigDemoMetaData.setPress(Float.parseFloat(getCellValue(cell16)));
 
 		Row row17 = sheet.getRow(17);
 		Cell cell17 = row17.getCell(1);
@@ -578,7 +579,8 @@ public class ExcelService {
         		   smallDemoMetaData.setTemparture(Float.parseFloat(getCellValue(cell12)));
         		   Row row13 = sheet.getRow(12);
         		   Cell cell13 = row13.getCell(1);
-        		   smallDemoMetaData.setPress(Integer.parseInt(getCellValue(cell13)));
+        		   //smallDemoMetaData.setPress(Integer.parseInt(getCellValue(cell13)));
+        		   smallDemoMetaData.setPress(Float.parseFloat(getCellValue(cell13)));
 			   smallDemoMetaData.setSmall(isSmall);
 			   smallDemoMetaData.setSamplename(sample.getName());
 			   smallDemoMetaData.setBackingname(backing.getName());

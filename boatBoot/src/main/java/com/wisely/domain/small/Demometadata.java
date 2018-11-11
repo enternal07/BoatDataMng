@@ -35,7 +35,8 @@ public class Demometadata  extends BaseModel{
 	
 	private Float temparture;
 	
-	private Integer press;
+	//private Integer press;
+	private Float press;
 	
 	//区分大小样元数据
 	private boolean small=false;
@@ -70,17 +71,9 @@ public class Demometadata  extends BaseModel{
 		this.pk = pk;
 	}
 
-
-
-
-
 	public Float getTemparture() {
 		return temparture;
 	}
-
-
-
-
 
 	public void setTemparture(Float temparture) {
 		this.temparture = temparture;
@@ -88,39 +81,21 @@ public class Demometadata  extends BaseModel{
 
 
 
-
-
-	public Integer getPress() {
+	public Float getPress() {
 		return press;
 	}
 
-
-
-
-
-	public void setPress(Integer press) {
+	public void setPress(Float press) {
 		this.press = press;
 	}
-
-
-
-
 
 	public boolean isSmall() {
 		return small;
 	}
 
-
-
-
-
 	public void setSmall(boolean small) {
 		this.small = small;
 	}
-
-
-
-
 
 	public String getSamplepk() {
 		return samplepk;

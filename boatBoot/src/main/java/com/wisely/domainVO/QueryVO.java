@@ -19,7 +19,8 @@ public class QueryVO implements Serializable{
 	
 	private  Float temparture;
 	
-	private Integer press;
+	//private Integer press;
+	private Float press;
 	
     private  Integer rateMin;
 	
@@ -28,7 +29,7 @@ public class QueryVO implements Serializable{
 	public QueryVO(){}
 	
 	
-	public QueryVO(String samplename, String backingname, Float temparture, Integer press, Integer rateMin,
+	public QueryVO(String samplename, String backingname, Float temparture, Float press, Integer rateMin,
 			Integer rateMax) {
 		super();
 		this.samplename = samplename;
@@ -81,13 +82,15 @@ public class QueryVO implements Serializable{
 		this.temparture = temparture;
 	}
 
-	public Integer getPress() {
+
+	public Float getPress() {
 		return press;
 	}
 
-	public void setPress(Integer press) {
+
+	public void setPress(Float press) {
 		this.press = press;
 	}
-	
+
 
 }

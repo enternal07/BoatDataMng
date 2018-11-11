@@ -19,7 +19,8 @@ public class BigItemVO implements java.io.Serializable {
 	private String testModelPk;
 	private String testSystemName;
 	private String testSystemPk;
-	private Integer press ; 
+	//private Integer press ; 
+	private Float press ; 
 	private Float temparture ; 
 	private Float refect ; 
 	private Float transmission ; 
@@ -59,10 +60,11 @@ public class BigItemVO implements java.io.Serializable {
 	public void setTestSystemName(String testSystemName) {
 		this.testSystemName = testSystemName;
 	}
-	public Integer getPress() {
+
+	public Float getPress() {
 		return press;
 	}
-	public void setPress(Integer press) {
+	public void setPress(Float press) {
 		this.press = press;
 	}
 	public Float getTemparture() {

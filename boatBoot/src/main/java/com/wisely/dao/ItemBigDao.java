@@ -12,7 +12,7 @@ import com.wisely.support.CustomRepository;
 public interface ItemBigDao extends CustomRepository<ItemBig, String> {
 	
 	@Query("select item from ItemBig item where item.rate between ?1 and ?2 and item.bigDemoMetadata.sampleName =?3 and item.bigDemoMetadata.testModelName = ?4 and item.bigDemoMetadata.testSystemName = ?5 and item.bigDemoMetadata.press=?6 and item.bigDemoMetadata.temparture=?7 order by item.rate ASC")
-	List<ItemBig> getItemBigListByContions(int rateMin,int rateMax,String sampleName,String testModelname,String testSysName,int press,float temparture);
+	List<ItemBig> getItemBigListByContions(int rateMin,int rateMax,String sampleName,String testModelname,String testSysName,float press,float temparture);
 
 	@Modifying
 	@Transactional

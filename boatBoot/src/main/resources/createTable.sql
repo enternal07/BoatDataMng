@@ -367,3 +367,7 @@ CREATE TABLE `spha_photo` (
   PRIMARY KEY (`pk`)
 ) ; 
 
+
+alter  table smallmetadata modify press FLOAT ; 
+
+alter  table bigmetadata modify press FLOAT ; 
