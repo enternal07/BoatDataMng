@@ -111,6 +111,7 @@ public class ScaleMataService {
 		if(Toolkit.notEmpty(item.getPk())){
 			ItemScalePO temp = itemDao.findOne(item.getPk());
 			if(Toolkit.notEmpty(temp)){
+				item.setScaleMataPO(temp.getScaleMataPO());
 				result = itemDao.save(item);
 			}
 		}

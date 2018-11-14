@@ -116,6 +116,7 @@ public class BigDemoMetadataService{
 		if(Toolkit.notEmpty(item.getPk())){
 			ItemBig temp = itemDao.findOne(item.getPk());
 			if(Toolkit.notEmpty(temp)){
+				item.setBigDemoMetadata(temp.getBigDemoMetadata());
 				result = itemDao.save(item);
 			}
 		}

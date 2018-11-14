@@ -371,3 +371,5 @@ CREATE TABLE `spha_photo` (
 alter  table smallmetadata modify press FLOAT ; 
 
 alter  table bigmetadata modify press FLOAT ; 
+
+alter table spha_photo modify infotype varchar(60) not null ; 

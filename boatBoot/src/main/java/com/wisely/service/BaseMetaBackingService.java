@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import com.wisely.dao.BaseMetaBackingDao;
@@ -99,7 +101,7 @@ public class BaseMetaBackingService{
 	}
 	
 	public List<BaseMetaBacking> findAll() {
-		return dao.findAll();
+		return dao.findAll(new Sort(Direction.DESC,"ts"));
 	}
 	
 	public BaseMetaBacking getByName(String name){

@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import com.wisely.dao.PhotoDao;
@@ -96,7 +98,7 @@ public class LayingSchemeService {
 	}
 	
 	public List<LayingSchemePO> findAll() {
-		return  dao.findAll();
+		return  dao.findAll(new Sort(Direction.DESC,"ts"));
 	}
 	
 	public LayingSchemePO getByName(String name) {

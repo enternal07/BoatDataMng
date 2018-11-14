@@ -136,6 +136,7 @@ public class SmallDemoMetaDataService {
 		if(Toolkit.notEmpty(item.getPk())){
 			Item temp = itemDao.findOne(item.getPk());
 			if(Toolkit.notEmpty(temp)){
+				item.setSmallPO(temp.getSmallPO());
 				result = itemDao.save(item);
 			}
 		}
