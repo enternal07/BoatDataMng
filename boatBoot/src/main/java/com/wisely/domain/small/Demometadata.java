@@ -33,6 +33,9 @@ public class Demometadata  extends BaseModel{
 	@GenericGenerator(name="mcid",strategy="uuid2")
 	private String pk;
 	
+	@Column(name="name")
+    private String name;
+	
 	private Float temparture;
 	
 	//private Integer press;

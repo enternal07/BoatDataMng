@@ -33,6 +33,9 @@ public class BigDemoMetadata  extends BaseModel{
 	@GenericGenerator(name="mcid",strategy="uuid2")
 	private String pk;
 	
+	@Column(name="name")
+	private String name;
+	
 	private Float temparture;
 	
 	//private Integer press;
@@ -172,6 +175,16 @@ public class BigDemoMetadata  extends BaseModel{
 	public void setTestSystemName(String testSystemName) {
 		this.testSystemName = testSystemName;
 	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+	
 	
 
 }

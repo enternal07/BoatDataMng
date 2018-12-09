@@ -12,6 +12,8 @@ public class QueryVO implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	
+	private String name;
+	
 	private String samplename;
 	
 	//private String backgroundtype;
@@ -27,7 +29,6 @@ public class QueryVO implements Serializable{
 	private  Integer rateMax;
 	
 	public QueryVO(){}
-	
 	
 	public QueryVO(String samplename, String backingname, Float temparture, Float press, Integer rateMin,
 			Integer rateMax) {
@@ -92,5 +93,12 @@ public class QueryVO implements Serializable{
 		this.press = press;
 	}
 
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
 
 }

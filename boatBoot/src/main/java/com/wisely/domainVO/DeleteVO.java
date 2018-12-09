@@ -5,6 +5,7 @@ import java.util.List;
 public class DeleteVO {
 	
 	private String pk;
+	private String name;
 	private List<String> pks;
 
 	public String getPk() {
@@ -21,6 +22,13 @@ public class DeleteVO {
 	public void setPks(List<String> pks) {
 		this.pks = pks;
 	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	
 	
 	
 }

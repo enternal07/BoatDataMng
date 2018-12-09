@@ -27,6 +27,9 @@ public class ScaleMataPO extends BaseModel{
 	@GenericGenerator(name="mcid",strategy="uuid2")
 	private String pk;
 	
+	@Column(name = "name")
+	private String name;
+	
 	@Column(name = "test_model_obj_name")
 	private String testModelObjName;
 	
