@@ -9,5 +9,5 @@ public interface BaseMetaBackingDao extends CustomRepository<BaseMetaBacking, St
 	
 	List<BaseMetaBacking> findListByName(String small);
 	
-	BaseMetaBacking findByName(String name);
+	List<BaseMetaBacking> findByName(String name);
 }

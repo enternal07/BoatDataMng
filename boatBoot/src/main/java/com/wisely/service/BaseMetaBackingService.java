@@ -105,7 +105,11 @@ public class BaseMetaBackingService{
 	}
 	
 	public BaseMetaBacking getByName(String name){
-		return dao.findByName(name);
+		List<BaseMetaBacking> result =  dao.findByName(name);
+		if(Toolkit.notEmpty(result)&&result.size()>0){
+			return result.get(0);
+		}
+		return null;
 	}
 	
 	

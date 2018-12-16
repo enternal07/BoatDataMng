@@ -8,10 +8,8 @@ import org.springframework.stereotype.Service;
 
 import com.wisely.dao.scale.ItemScaleDao;
 import com.wisely.dao.scale.ScaleMataDao;
-import com.wisely.domain.big.BigDemoMetadata;
 import com.wisely.domain.scale.ItemScalePO;
 import com.wisely.domain.scale.ScaleMataPO;
-import com.wisely.domain.small.Item;
 import com.wisely.domainVO.ResultVO;
 import com.wisely.domainVO.mng.data.ScaleItemVO;
 import com.wisely.util.Toolkit;
@@ -24,6 +22,62 @@ public class ScaleMataService {
 
 	@Autowired
 	private ItemScaleDao itemDao;
+	
+	
+	//出我之外名称是否存在
+	public ScaleMataPO existName(ScaleMataPO dt){
+		List<ScaleMataPO> results =  dao.findByName(dt.getName());
+		ScaleMataPO result = null ; 
+		if(Toolkit.notEmpty(results) && results.size()>0){
+			for (ScaleMataPO demometadata : results) {
+				if(!demometadata.getPk().equals(dt.getPk())){
+					result = demometadata;
+					break;
+				}
+			}
+		}
+		return result ; 
+	}
+	//出我之外重复是否存在
+	public ScaleMataPO existUniqueCondition(ScaleMataPO entity){
+		List<ScaleMataPO> results = dao.
+				findByCondition(
+						entity.getTestModelObjName(),entity.getLayingSchemeName(),entity.getTestConditionName());
+		ScaleMataPO result = null ; 
+		if(Toolkit.notEmpty(results) && results.size()>0){
+			for (ScaleMataPO demometadata : results) {
+				if(!demometadata.getPk().equals(entity.getPk())){
+					result = demometadata;
+					break;
+				}
+			}
+		}
+		return result ; 
+	}
+	
+	public ScaleMataPO findByName(String name){
+		List<ScaleMataPO> results =  dao.findByName(name);
+		if(Toolkit.notEmpty(results)&&results.size()>0){
+			return results.get(0);
+		}
+		return null;
+	}
+	
+	public ScaleMataPO findByUniqueCondition(ScaleMataPO entity){
+		List<ScaleMataPO> results = dao.
+				findByCondition(
+						entity.getTestModelObjName(),entity.getLayingSchemeName(),entity.getTestConditionName());ScaleMataPO result = null ; 
+		if(Toolkit.notEmpty(results)&&results.size()>0){
+			result = results.get(0);
+		}
+		return result ; 
+	}
+	//删除所有的样本数据
+	public void deleteAllItems(String metaPk){
+		itemDao.deleteByScaleMetaPK(metaPk);
+		itemDao.flush();
+	}
+	
 	
 	public ResultVO ifExist(ScaleMataPO entity) {
 		

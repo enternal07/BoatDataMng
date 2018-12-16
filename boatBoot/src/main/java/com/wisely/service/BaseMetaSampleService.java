@@ -109,7 +109,11 @@ public class BaseMetaSampleService{
 	}
 	
 	public BaseMetaSample getBySampleName(String name) {
-		return dao.findByName(name);
+		List<BaseMetaSample> result =  dao.findByName(name);
+		if(Toolkit.notEmpty(result)&&result.size()>0){
+			return result.get(0);
+		}
+		return null ; 
 	}
 	
 }

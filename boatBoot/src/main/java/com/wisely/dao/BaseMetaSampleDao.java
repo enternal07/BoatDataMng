@@ -10,5 +10,5 @@ public interface BaseMetaSampleDao extends CustomRepository<BaseMetaSample, Stri
 	
 	List<BaseMetaSample> findBySmall(boolean small);
 	
-	BaseMetaSample findByName(String name);
+	List<BaseMetaSample> findByName(String name);
 }

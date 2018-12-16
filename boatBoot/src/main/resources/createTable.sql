@@ -373,3 +373,10 @@ alter  table smallmetadata modify press FLOAT ;
 alter  table bigmetadata modify press FLOAT ; 
 
 alter table spha_photo modify infotype varchar(60) not null ; 
+--添加名称
+alter table smallmetadata add column name varchar(200) ; 
+alter table bigmetadata add column name varchar(200); 
+alter table scale_mata add column name varchar(200) ; 
+
+
+

@@ -31,6 +31,61 @@ public class SmallDemoMetaDataService {
 	@Autowired
 	private BaseMetaBackingDao backingDao;
 	
+	//出我之外名称是否存在
+	public Demometadata existName(Demometadata dt){
+		List<Demometadata> results =  dao.findByName(dt.getName());
+		Demometadata result = null ; 
+		if(Toolkit.notEmpty(results) && results.size()>0){
+			for (Demometadata demometadata : results) {
+				if(!demometadata.getPk().equals(dt.getPk())){
+					result = demometadata;
+					break;
+				}
+			}
+		}
+		return result ; 
+	}
+	//出我之外重复是否存在
+	public Demometadata existUniqueCondition(Demometadata entity){
+		List<Demometadata> results = dao.
+				findBySamplenameAndTempartureAndPressAndBackgroundType(
+						entity.getSamplename(), entity.getTemparture(), 
+						entity.getPress(), entity.getBackingname(),entity.isSmall());
+		Demometadata result = null ; 
+		if(Toolkit.notEmpty(results) && results.size()>0){
+			for (Demometadata demometadata : results) {
+				if(!demometadata.getPk().equals(entity.getPk())){
+					result = demometadata;
+					break;
+				}
+			}
+		}
+		return result ; 
+	}
+	
+	public Demometadata findByName(String name){
+		List<Demometadata> results =  dao.findByName(name);
+		if(Toolkit.notEmpty(results)&&results.size()>0){
+			return results.get(0);
+		}
+		return null;
+	}
+	
+	public Demometadata findByUniqueCondition(Demometadata entity){
+		List<Demometadata> resObj = dao.findBySamplenameAndTempartureAndPressAndBackgroundType(entity.getSamplename(), entity.getTemparture(), entity.getPress(), entity.getBackingname(),entity.isSmall());
+		Demometadata result = null ; 
+		if(Toolkit.notEmpty(resObj)&&resObj.size()>0){
+			result = resObj.get(0);
+		}
+		return result ; 
+	}
+	//删除所有的样本数据
+	public void deleteAllItems(String metaPk){
+		itemDao.deleteByMetaPK(metaPk);
+		itemDao.flush();
+	}
+	
+	/*********************************************/
 	public ResultVO ifExits(Demometadata entity) {
 		List<Object> resObj = dao.CountBySamplenameAndTempartureAndPressAndBackgroundType(entity.getSamplename(), entity.getTemparture(), entity.getPress(), entity.getBackingname(),entity.isSmall());
 		ResultVO res = new ResultVO();

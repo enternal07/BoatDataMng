@@ -13,4 +13,11 @@ public interface SmallDemoMetaDataDao extends CustomRepository<Demometadata, Str
 	List<Object> CountBySamplenameAndTempartureAndPressAndBackgroundType(String SmapleName,float Temparture ,float press,String backgroudType,boolean small );
 	
 	List<Demometadata> findBySmall(boolean small);
+	
+	List<Demometadata> findByName(String name);
+	
+	@Query("select meta from Demometadata meta where meta.samplename=?1 and meta.temparture=?2 and meta.press=?3 and meta.backingname=?4 and meta.small=?5")
+	List<Demometadata> findBySamplenameAndTempartureAndPressAndBackgroundType(String SmapleName,float Temparture ,float press,String backgroudType,boolean small );
+	
+	
 }

@@ -137,6 +137,15 @@ public class ScaleMataPO extends BaseModel{
 	public void setTestModelObjPO(TestModelObjPO testModelObjPO) {
 		this.testModelObjPO = testModelObjPO;
 	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+	
 	
 
 }

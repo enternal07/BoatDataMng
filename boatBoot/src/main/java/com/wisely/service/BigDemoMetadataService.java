@@ -23,6 +23,63 @@ public class BigDemoMetadataService{
 	@Autowired
 	private  ItemBigDao itemDao;
 	
+	//出我之外名称是否存在
+		public BigDemoMetadata existName(BigDemoMetadata dt){
+			List<BigDemoMetadata> results =  dao.findByName(dt.getName());
+			BigDemoMetadata result = null ; 
+			if(Toolkit.notEmpty(results) && results.size()>0){
+				for (BigDemoMetadata demometadata : results) {
+					if(!demometadata.getPk().equals(dt.getPk())){
+						result = demometadata;
+						break;
+					}
+				}
+			}
+			return result ; 
+		}
+		//出我之外重复是否存在
+		public BigDemoMetadata existUniqueCondition(BigDemoMetadata entity){
+			List<BigDemoMetadata> results = dao.
+					findBySamplenameAndTempartureAndPressAndTestNames(
+							entity.getSampleName(), entity.getTemparture(), 
+							entity.getPress(), entity.getTestModelName(),entity.getTestSystemName());
+			BigDemoMetadata result = null ; 
+			if(Toolkit.notEmpty(results) && results.size()>0){
+				for (BigDemoMetadata demometadata : results) {
+					if(!demometadata.getPk().equals(entity.getPk())){
+						result = demometadata;
+						break;
+					}
+				}
+			}
+			return result ; 
+		}
+		
+		public BigDemoMetadata findByName(String name){
+			List<BigDemoMetadata> results =  dao.findByName(name);
+			if(Toolkit.notEmpty(results)&&results.size()>0){
+				return results.get(0);
+			}
+			return null;
+		}
+		
+		public BigDemoMetadata findByUniqueCondition(BigDemoMetadata entity){
+			BigDemoMetadata result = null ; 
+			List<BigDemoMetadata> results = dao.
+					findBySamplenameAndTempartureAndPressAndTestNames(
+							entity.getSampleName(), entity.getTemparture(), 
+							entity.getPress(), entity.getTestModelName(),entity.getTestSystemName());		
+			if(Toolkit.notEmpty(results)&&results.size()>0){
+				result = results.get(0);
+			}
+			return result ; 
+		}
+		//删除所有的样本数据
+		public void deleteAllItems(String metaPk){
+			itemDao.deleteByBigMetaPK(metaPk);
+			itemDao.flush();
+		}
+	
 	/**
 	 * 添加大样数据实体
 	 * @param entity
