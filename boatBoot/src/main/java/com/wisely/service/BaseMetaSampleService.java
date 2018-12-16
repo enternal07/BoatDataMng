@@ -4,24 +4,30 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
 import com.wisely.dao.BaseMetaSampleDao;
 import com.wisely.dao.PhotoDao;
 import com.wisely.domain.common.BaseMetaSample;
 import com.wisely.domain.common.Photo;
+import com.wisely.domainVO.ResultVO;
 import com.wisely.util.Toolkit;
 
 @Service
 public class BaseMetaSampleService{
-
+	
 	@Autowired
 	private BaseMetaSampleDao dao;
 	
 	@Autowired
 	private PhotoDao photoDao;
+	
+	@Autowired
+	private UpdateColumnService updateColumnService;
 	/**
 	 * 保存实体
 	 * @param entity
@@ -64,10 +70,16 @@ public class BaseMetaSampleService{
 				result = dao.save(entity); 
 				if(Toolkit.notEmpty(result)){
 					updatePhoto(result.getPk(), photos);
+					//修改引用到的名称
+					updateColumnService.updateValue("smallmetadata", "samplename", result.getName(), "sample_pk", result.getPk());
+					updateColumnService.updateValue("bigmetadata", "sample_name", result.getName(), "sample_pk", result.getPk());
 				}
 			}
 		}
 		return result;
+	}
+	public int queryOtherNameCount(BaseMetaSample entity){
+		return dao.findOtherName(entity.getName(), entity.getPk());
 	}
 	
 	private void updatePhoto(String modelPK,List<Photo> photos ){
@@ -84,13 +96,22 @@ public class BaseMetaSampleService{
 	 * 删除实体
 	 * @param pk
 	 */
-	public void deleteEntity(String pk){
+	public ResultVO deleteEntity(String pk){
+		ResultVO re = new ResultVO(false);
+		int count = updateColumnService.queryByColumn("smallmetadata", "sample_pk", pk);
 		if(Toolkit.notEmpty(pk)){
-			photoDao.modifyDeleted(pk,1);
-			dao.delete(pk);
+			if(count == 0){
+				photoDao.modifyDeleted(pk,1);
+				dao.delete(pk);
+				re.setSuccess(true);
+			}else{
+				re.setMessage("该数据被引用，不能直接删除");
+			}
+		}else{
+			re.setMessage("参数不能为空");
 		}
+		return re;
 	}
-	
 	
 	public BaseMetaSample getByName(String pk) {
 		return dao.findOne(pk);

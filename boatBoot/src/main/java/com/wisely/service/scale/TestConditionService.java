@@ -12,7 +12,8 @@ import com.wisely.dao.PhotoDao;
 import com.wisely.dao.scale.TestConditionDao;
 import com.wisely.domain.common.Photo;
 import com.wisely.domain.scale.TestConditionPO;
-import com.wisely.domain.scale.TestModelObjPO;
+import com.wisely.domainVO.ResultVO;
+import com.wisely.service.UpdateColumnService;
 import com.wisely.util.Toolkit;
 
 @Service
@@ -23,6 +24,10 @@ public class TestConditionService{
 	
 	@Autowired
 	private PhotoDao photoDao;
+	
+	@Autowired
+	private UpdateColumnService updateColumnService;
+	
 	/**
 	 * 保存实体
 	 * @param entity
@@ -65,6 +70,7 @@ public class TestConditionService{
 				result = dao.save(entity); 
 				if(Toolkit.notEmpty(result)){
 					updatePhoto(result.getPk(), photos);
+					updateColumnService.updateValue("scale_mata", "test_condition_name", result.getName(), "test_condition_pk", result.getPk());
 				}
 			}
 		}
@@ -85,11 +91,22 @@ public class TestConditionService{
 	 * 删除实体
 	 * @param pk
 	 */
-	public void deleteEntity(String pk){
+	public ResultVO deleteEntity(String pk){
+		ResultVO re = new ResultVO(false);
+		int count = updateColumnService.queryByColumn("scale_mata", "test_condition_pk", pk);
 		if(Toolkit.notEmpty(pk)){
-			photoDao.modifyDeleted(pk,1);
-			dao.delete(pk);
+			if(count == 0){
+				photoDao.modifyDeleted(pk,1);
+				dao.delete(pk);
+				re.setSuccess(true);
+			}else{
+				re.setMessage("该数据被引用，不能直接删除");
+			}
+		}else{
+			re.setMessage("参数不能为空");
 		}
+		return re;
+		
 	}
 	
 	public TestConditionPO getByPK(String pk) {
@@ -103,5 +120,10 @@ public class TestConditionService{
 	public TestConditionPO getByName(String name) {
 		return dao.findByName(name);
 	}
+	
+	public int queryOtherNameCount(TestConditionPO entity){
+		return dao.findOtherName(entity.getName(), entity.getPk());
+	}
+	
 
 }

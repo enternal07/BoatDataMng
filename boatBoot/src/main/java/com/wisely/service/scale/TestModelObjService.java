@@ -12,6 +12,8 @@ import com.wisely.dao.PhotoDao;
 import com.wisely.dao.scale.TestModelObjDao;
 import com.wisely.domain.common.Photo;
 import com.wisely.domain.scale.TestModelObjPO;
+import com.wisely.domainVO.ResultVO;
+import com.wisely.service.UpdateColumnService;
 import com.wisely.util.Toolkit;
 
 @Service
@@ -19,10 +21,10 @@ public class TestModelObjService{
 
 	@Autowired
 	private TestModelObjDao dao;
-	
-	
 	@Autowired
 	private PhotoDao photoDao;
+	@Autowired
+	private UpdateColumnService updateColumnService;
 	/**
 	 * 保存实体
 	 * @param entity
@@ -65,6 +67,7 @@ public class TestModelObjService{
 				result = dao.save(entity); 
 				if(Toolkit.notEmpty(result)){
 					updatePhoto(result.getPk(), photos);
+					updateColumnService.updateValue("scale_mata", "test_model_obj_name", result.getName(), "test_model_obj_pk", result.getPk());
 				}
 			}
 		}
@@ -85,11 +88,21 @@ public class TestModelObjService{
 	 * 删除实体
 	 * @param pk
 	 */
-	public void deleteEntity(String pk){
+	public ResultVO deleteEntity(String pk){
+		ResultVO re = new ResultVO(false);
+		int count = updateColumnService.queryByColumn("scale_mata", "test_model_obj_pk", pk);
 		if(Toolkit.notEmpty(pk)){
-			photoDao.modifyDeleted(pk,1);
-			dao.delete(pk);
+			if(count == 0){
+				photoDao.modifyDeleted(pk,1);
+				dao.delete(pk);
+				re.setSuccess(true);
+			}else{
+				re.setMessage("该数据被引用，不能直接删除");
+			}
+		}else{
+			re.setMessage("参数不能为空");
 		}
+		return re;
 	}
 	
 	public TestModelObjPO getByPK(String pk) {
@@ -102,6 +115,10 @@ public class TestModelObjService{
 	
 	public List<TestModelObjPO> findAll() {
 		return  dao.findAll(new Sort(Direction.DESC,"ts"));
+	}
+	
+	public int queryOtherNameCount(TestModelObjPO entity){
+		return dao.findOtherName(entity.getName(), entity.getPk());
 	}
 
 }
