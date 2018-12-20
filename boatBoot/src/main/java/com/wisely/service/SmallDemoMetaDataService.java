@@ -79,6 +79,12 @@ public class SmallDemoMetaDataService {
 		}
 		return result ; 
 	}
+	
+	public List<Demometadata> findByUniqueConditionList(Demometadata entity){
+		List<Demometadata> resObj = dao.findBySamplenameAndTempartureAndPressAndBackgroundType(entity.getSamplename(), entity.getTemparture(), entity.getPress(), entity.getBackingname(),entity.isSmall());
+		return resObj ; 
+	}
+	
 	//删除所有的样本数据
 	public void deleteAllItems(String metaPk){
 		itemDao.deleteByMetaPK(metaPk);

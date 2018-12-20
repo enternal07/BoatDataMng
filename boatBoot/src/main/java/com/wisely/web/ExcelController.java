@@ -18,14 +18,11 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
 
-import com.google.gson.Gson;
 import com.wisely.domain.big.BigDemoMetadata;
 import com.wisely.domain.big.ItemBig;
 import com.wisely.domain.big.TestModel;
@@ -61,8 +58,6 @@ import com.wisely.service.scale.ScaleMataService;
 import com.wisely.service.scale.TestConditionService;
 import com.wisely.service.scale.TestModelObjService;
 import com.wisely.util.Toolkit;
-
-import until.constant.Constants;
 /**
  * 小样模型
  * 大样模型
@@ -122,7 +117,7 @@ public class ExcelController {
 	  private List<Map<String,String>> mapData;
 	  private boolean flag;
 	  
-	
+	/*
 	@RequestMapping(value="uploadExcle",method = RequestMethod.POST)
 	public  ResultVO UploadExcle(MultipartFile file, String catalog,  HttpServletRequest request) throws IOException{
 		ResultVO res = new ResultVO(false,"",null);
@@ -149,6 +144,7 @@ public class ExcelController {
 		return res;
 		
 	}
+	*/
 	
 	/*
 	 * {
@@ -175,7 +171,14 @@ public class ExcelController {
         if(Toolkit.notEmpty(items)&&items.size()>0){
         	BaseMetaSample bms = baseMetaSampleService.getBySampleName(queryVO.getSamplename());
         	BaseMetaBacking backing = baseMetaBackingService.getByName(queryVO.getBackingname());
-            excelService.downloadSmall(response, queryVO, bms, backing, items);
+        	Demometadata entity = new Demometadata();
+        	entity.setBackingname(backingname);
+        	entity.setSamplename(samplename);
+        	entity.setTemparture(temparture);
+        	entity.setPress(press);
+        	entity.setSmall(true); 
+        	Demometadata d = service.findByUniqueCondition(entity) ; 
+            excelService.downloadSmall(response,d.getName(), queryVO, bms, backing, items);
         }
     }
 	
@@ -211,7 +214,14 @@ public class ExcelController {
         	BaseMetaSample bms = baseMetaSampleService.getBySampleName(queryBigVO.getSamplename());
         	TestModel tm = testmodelService.getByName(queryBigVO.getTestModelName());
         	TestSystem ts = testSysService.getByName(queryBigVO.getTestSystemName());
-            excelService.downloadBig(response, queryBigVO, bms, tm,ts,items);
+        	BigDemoMetadata bdm = new BigDemoMetadata();
+        	bdm.setSampleName(samplename);
+        	bdm.setTestModelName(testModelName);
+        	bdm.setTestSystemName(testSystemName);
+        	bdm.setTemparture(temparture);
+        	bdm.setPress(press);
+        	BigDemoMetadata bdt = bigDemoMetadataService.findByUniqueCondition(bdm);
+            excelService.downloadBig(response, bdt.getName(),queryBigVO, bms, tm,ts,items);
         }
     }
 	/**
@@ -243,7 +253,12 @@ public class ExcelController {
         	TestModelObjPO tmobj = testModelObjService.getByName(sacleQueryVO.getTestModelObjName());
         	TestConditionPO tc = testConditionService.getByName(sacleQueryVO.getTestConditionName());
         	LayingSchemePO ls = layingSchemeService.getByName(sacleQueryVO.getLayingSchemeName());
-            excelService.downloadScale(response, sacleQueryVO, tmobj, tc,ls,items);
+        	ScaleMataPO sm = new ScaleMataPO();
+        	sm.setLayingSchemeName(layingSchemeName);
+        	sm.setTestConditionName(testConditionName);
+        	sm.setTestModelObjName(testModelObjName);
+        	ScaleMataPO newSm = scaleMataService.findByUniqueCondition(sm);
+            excelService.downloadScale(response,newSm.getName(), sacleQueryVO, tmobj, tc,ls,items);
         }
     }
 	

@@ -449,7 +449,7 @@ public class ExcelNewService {
     public List<Item> getItemData(Demometadata demoMeta) {
    	 List<Item> pos = new  ArrayList<Item>();
    	 int numOfRows = sheet.getLastRowNum() ;
-   	 for (int i = 2; i < numOfRows; i++) {
+   	 for (int i = 1; i < numOfRows; i++) {
             Row row = sheet.getRow(i);
             if (row != null) {
             	Item item = new Item();
@@ -648,7 +648,7 @@ public class ExcelNewService {
 		 List<ItemBig> pos = new  ArrayList<ItemBig>();
 	   	 int numOfRows = sheet.getLastRowNum() ;
 	   	 System.out.println("带持久化的大样数据有"+numOfRows);
-	   	 for (int i = 2; i < numOfRows; i++) {
+	   	 for (int i = 1; i < numOfRows; i++) {
 	            Row row = sheet.getRow(i);
 	            if (row != null) {
 	            	ItemBig item = new ItemBig();
@@ -796,7 +796,7 @@ public class ExcelNewService {
 	public List<ItemScalePO> getItemScaleData(ScaleMataPO demoMeta) {
 		 List<ItemScalePO> pos = new  ArrayList<ItemScalePO>();
 	   	 int numOfRows = sheet.getLastRowNum() ;
-	   	 for (int i = 2; i < numOfRows; i++) {
+	   	 for (int i = 1; i < numOfRows; i++) {
 	            Row row = sheet.getRow(i);
 	            if (row != null) {
 	            	ItemScalePO item = new ItemScalePO();

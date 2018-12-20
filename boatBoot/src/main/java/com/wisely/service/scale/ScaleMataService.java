@@ -66,12 +66,22 @@ public class ScaleMataService {
 	public ScaleMataPO findByUniqueCondition(ScaleMataPO entity){
 		List<ScaleMataPO> results = dao.
 				findByCondition(
-						entity.getTestModelObjName(),entity.getLayingSchemeName(),entity.getTestConditionName());ScaleMataPO result = null ; 
+						entity.getTestModelObjName(),entity.getLayingSchemeName(),entity.getTestConditionName());
+		ScaleMataPO result = null ; 
 		if(Toolkit.notEmpty(results)&&results.size()>0){
 			result = results.get(0);
 		}
 		return result ; 
 	}
+	
+	public List<ScaleMataPO> findByUniqueConditionList(ScaleMataPO entity){
+		List<ScaleMataPO> results = dao.
+				findByCondition(
+						entity.getTestModelObjName(),entity.getLayingSchemeName(),entity.getTestConditionName());
+		ScaleMataPO result = null ; 
+		return results ; 
+	}
+	
 	//删除所有的样本数据
 	public void deleteAllItems(String metaPk){
 		itemDao.deleteByScaleMetaPK(metaPk);

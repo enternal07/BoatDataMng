@@ -26,7 +26,7 @@ public class UploadManager {
 	private UploadService  uploadService;
 	
 	@RequestMapping(value="uploadItems",method = RequestMethod.POST)
-	public  ResultVO UploadExcle(MultipartFile file, String catalog,  HttpServletRequest request) throws IOException{
+	public  ResultVO UploadExcle(MultipartFile file, String catalog,String pk,  HttpServletRequest request) throws IOException{
 		ResultVO res = new ResultVO(false,"",null);
 		if(file==null) {
 			res.setMessage("没有上传文件，请选着文件上传");
@@ -34,14 +34,14 @@ public class UploadManager {
 		}
 		//小样数据加载，一共8个属性，根据样品名称、温度、压力、背衬四个固定，其他4个属性（频率、反射系数、投射系数、吸声系数）变动
 		if(Constants.SMALLDEMO.equals(catalog)) {
-			res = uploadService.getSmallDemo(file);
+			res = uploadService.getSmallDemo(file,pk);
 			//res.setSuccess(true);
 		}else if(Constants.BIGDEMO.equals(catalog)) {
-			res = uploadService.getBigDemo(file);
+			res = uploadService.getBigDemo(file,pk);
 			//res.setSuccess(true);
 		}else if(Constants.CONDEMO.equals(catalog)){
 			excelNewService.load(file,"缩比模型数据");
-			res = uploadService.getConDemo(file);
+			res = uploadService.getConDemo(file,pk);
 			//res.setSuccess(true);
 		}else {
 			res.setMessage("不支持的模型数据");

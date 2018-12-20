@@ -1,5 +1,7 @@
 package com.wisely.web.mng.data;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
@@ -187,9 +189,9 @@ public class BigManger {
 	@RequestMapping(value = "/queryByCondition",method = RequestMethod.POST)
 	public @ResponseBody ResultVO queryByCondition(@RequestBody BigDemoMetadata demometadata,HttpServletRequest req){
 		ResultVO re = new ResultVO(true);
-		BigDemoMetadata tempDemoData = null ; 
+		List<BigDemoMetadata> tempDemoData = null ;
 		if(Toolkit.notEmpty(demometadata)){
-			tempDemoData = service.findByUniqueCondition(demometadata);
+			tempDemoData = service.findByUniqueConditionList(demometadata);
 		}
 		re.setData(tempDemoData);
 		return re;

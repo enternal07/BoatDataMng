@@ -79,7 +79,7 @@ public class ExcelService {
         }
     }
     
-    public void downloadSmall(HttpServletResponse response,QueryVO queryVO,
+    public void downloadSmall(HttpServletResponse response,String entityName,QueryVO queryVO,
     		BaseMetaSample bms,BaseMetaBacking backing,List<ItemBaseVO> items){
     	
     	response.reset();
@@ -108,51 +108,70 @@ public class ExcelService {
               }
          }
   		if(Toolkit.notEmpty(sheet)){
+  			
   			Row row1 = sheet.createRow(0);
-  			row1.createCell(0).setCellValue("样品名称");
-  			row1.createCell(1).setCellValue(bms.getName());
+  			row1.createCell(0).setCellValue("小样数据名称");
+  			row1.createCell(1).setCellValue(entityName);
+  			
   			Row row2 = sheet.createRow(1);
-  			row2.createCell(0).setCellValue("密度");
-  			row2.createCell(1).setCellValue(bms.getDensity());
+  			row2.createCell(0).setCellValue("样品名称");
+  			row2.createCell(1).setCellValue(bms.getName());
+  			
   			Row row3 = sheet.createRow(2);
-  			row3.createCell(0).setCellValue("弹性模量");
-  			row3.createCell(1).setCellValue(bms.getFlexibleModel());
+  			row3.createCell(0).setCellValue("密度");
+  			row3.createCell(1).setCellValue(bms.getDensity());
+  			
   			Row row4 = sheet.createRow(3);
-  			row4.createCell(0).setCellValue("泊松比");
-  			row4.createCell(1).setCellValue(bms.getPoissonRatio());
+  			row4.createCell(0).setCellValue("弹性模量");
+  			row4.createCell(1).setCellValue(bms.getFlexibleModel());
+  			
   			Row row5 = sheet.createRow(4);
-  			row5.createCell(0).setCellValue("声速");
-  			row5.createCell(1).setCellValue(bms.getSoundSpeed());
+  			row5.createCell(0).setCellValue("泊松比");
+  			row5.createCell(1).setCellValue(bms.getPoissonRatio());
+  			
   			Row row6 = sheet.createRow(5);
-  			row6.createCell(0).setCellValue("厚度");
-  			row6.createCell(1).setCellValue(bms.getThickness());
+  			row6.createCell(0).setCellValue("声速");
+  			row6.createCell(1).setCellValue(bms.getSoundSpeed());
+  			
   			Row row7 = sheet.createRow(6);
-  			row7.createCell(0).setCellValue("其他");
-  			row7.createCell(1).setCellValue(bms.getOther());
+  			row7.createCell(0).setCellValue("厚度");
+  			row7.createCell(1).setCellValue(bms.getThickness());
+  			
   			Row row8 = sheet.createRow(7);
-  			row8.createCell(0).setCellValue("背衬名称");
-  			row8.createCell(1).setCellValue(backing.getName());
+  			row8.createCell(0).setCellValue("其他");
+  			row8.createCell(1).setCellValue(bms.getOther());
+  			
   			Row row9 = sheet.createRow(8);
-  			row9.createCell(0).setCellValue("样品前端介质");
-  			row9.createCell(1).setCellValue(backing.getFrontMedium());
+  			row9.createCell(0).setCellValue("背衬名称");
+  			row9.createCell(1).setCellValue(backing.getName());
+  			
   			Row row10 = sheet.createRow(9);
-  			row10.createCell(0).setCellValue("背衬后端介质");
-  			row10.createCell(1).setCellValue(backing.getEndMedium());
+  			row10.createCell(0).setCellValue("样品前端介质");
+  			row10.createCell(1).setCellValue(backing.getFrontMedium());
+  			
   			Row row11 = sheet.createRow(10);
-  			row11.createCell(0).setCellValue("其他");
-  			row11.createCell(1).setCellValue(backing.getOther());
+  			row11.createCell(0).setCellValue("背衬后端介质");
+  			row11.createCell(1).setCellValue(backing.getEndMedium());
+  			
   			Row row12 = sheet.createRow(11);
-  			row12.createCell(0).setCellValue("温度/︒");
-  			row12.createCell(1).setCellValue(queryVO.getTemparture());
+  			row12.createCell(0).setCellValue("其他");
+  			row12.createCell(1).setCellValue(backing.getOther());
+  			
   			Row row13 = sheet.createRow(12);
-  			row13.createCell(0).setCellValue("压力/Mpa");
-  			row13.createCell(1).setCellValue(queryVO.getPress());
+  			row13.createCell(0).setCellValue("温度/︒");
+  			row13.createCell(1).setCellValue(queryVO.getTemparture());
+  			
   			Row row14 = sheet.createRow(13);
-  			row14.createCell(0).setCellValue("频率/Hz");
-  			row14.createCell(1).setCellValue("反射系数");
-  			row14.createCell(2).setCellValue("透射系数");
-  			row14.createCell(3).setCellValue("吸声系数");
-  			int i = 14 ; 
+  			row14.createCell(0).setCellValue("压力/Mpa");
+  			row14.createCell(1).setCellValue(queryVO.getPress());
+  			
+  			Row row15 = sheet.createRow(14);
+  			row15.createCell(0).setCellValue("频率/Hz");
+  			row15.createCell(1).setCellValue("反射系数");
+  			row15.createCell(2).setCellValue("透射系数");
+  			row15.createCell(3).setCellValue("吸声系数");
+  			
+  			int i = 15 ; 
   			for (ItemBaseVO item:items) {
   				Row myRow = sheet.createRow(i);
   				myRow.createCell(0).setCellValue(item.getRate());
@@ -179,7 +198,7 @@ public class ExcelService {
     
     
     
-    public void downloadBig(HttpServletResponse response,QueryBigVO queryVO,
+    public void downloadBig(HttpServletResponse response,String entityName,QueryBigVO queryVO,
     		BaseMetaSample bms,TestModel tm,TestSystem ts,List<ItemBigVO>  items){
     	
     	response.reset();
@@ -208,78 +227,93 @@ public class ExcelService {
               }
          }
   		if(Toolkit.notEmpty(sheet)){
+  			
   			Row row1 = sheet.createRow(0);
   			row1.createCell(0).setCellValue("样品名称");
-  			row1.createCell(1).setCellValue(bms.getName());
+  			row1.createCell(1).setCellValue(entityName);
+  			
   			Row row2 = sheet.createRow(1);
-  			row2.createCell(0).setCellValue("密度");
-  			row2.createCell(1).setCellValue(bms.getDensity());
+  			row2.createCell(0).setCellValue("样品名称");
+  			row2.createCell(1).setCellValue(bms.getName());
+  			
   			Row row3 = sheet.createRow(2);
-  			row3.createCell(0).setCellValue("弹性模量");
-  			row3.createCell(1).setCellValue(bms.getFlexibleModel());
+  			row3.createCell(0).setCellValue("密度");
+  			row3.createCell(1).setCellValue(bms.getDensity());
+  			
   			Row row4 = sheet.createRow(3);
-  			row4.createCell(0).setCellValue("泊松比");
-  			row4.createCell(1).setCellValue(bms.getPoissonRatio());
+  			row4.createCell(0).setCellValue("弹性模量");
+  			row4.createCell(1).setCellValue(bms.getFlexibleModel());
+  			
   			Row row5 = sheet.createRow(4);
-  			row5.createCell(0).setCellValue("声速");
-  			row5.createCell(1).setCellValue(bms.getSoundSpeed());
+  			row5.createCell(0).setCellValue("泊松比");
+  			row5.createCell(1).setCellValue(bms.getPoissonRatio());
+  			
   			Row row6 = sheet.createRow(5);
-  			row6.createCell(0).setCellValue("厚度");
-  			row6.createCell(1).setCellValue(bms.getThickness());
+  			row6.createCell(0).setCellValue("声速");
+  			row6.createCell(1).setCellValue(bms.getSoundSpeed());
+  			
   			Row row7 = sheet.createRow(6);
-  			row7.createCell(0).setCellValue("其他");
-  			row7.createCell(1).setCellValue(bms.getOther());
+  			row7.createCell(0).setCellValue("厚度");
+  			row7.createCell(1).setCellValue(bms.getThickness());
+  			
   			Row row8 = sheet.createRow(7);
-  			row8.createCell(0).setCellValue("试验模型名称");
-  			row8.createCell(1).setCellValue(tm.getName());
+  			row8.createCell(0).setCellValue("其他");
+  			row8.createCell(1).setCellValue(bms.getOther());
+  			
   			Row row9 = sheet.createRow(8);
-  			row9.createCell(0).setCellValue("尺寸");
-  			row9.createCell(1).setCellValue(tm.getSize());
+  			row9.createCell(0).setCellValue("试验模型名称");
+  			row9.createCell(1).setCellValue(tm.getName());
+  			
   			Row row10 = sheet.createRow(9);
-  			row10.createCell(0).setCellValue("双层壳间距");
-  			row10.createCell(1).setCellValue(tm.getDoubleShellSpacing());
+  			row10.createCell(0).setCellValue("尺寸");
+  			row10.createCell(1).setCellValue(tm.getSize());
+  			
   			Row row11 = sheet.createRow(10);
-  			row11.createCell(0).setCellValue("内壳厚度");
-  			row11.createCell(1).setCellValue(tm.getInnerShellThickness());
+  			row11.createCell(0).setCellValue("双层壳间距");
+  			row11.createCell(1).setCellValue(tm.getDoubleShellSpacing());
   			
   			Row row12 = sheet.createRow(11);
-  			row12.createCell(0).setCellValue("外壳厚度");
-  			row12.createCell(1).setCellValue(tm.getShellThickness());
+  			row12.createCell(0).setCellValue("内壳厚度");
+  			row12.createCell(1).setCellValue(tm.getInnerShellThickness());
   			
   			Row row13 = sheet.createRow(12);
-  			row13.createCell(0).setCellValue("内壳后端");
-  			row13.createCell(1).setCellValue(tm.getInnerShellBackend());
+  			row13.createCell(0).setCellValue("外壳厚度");
+  			row13.createCell(1).setCellValue(tm.getShellThickness());
   			
   			Row row14 = sheet.createRow(13);
-  			row14.createCell(0).setCellValue("其他");
-  			row14.createCell(1).setCellValue(tm.getOther());
+  			row14.createCell(0).setCellValue("内壳后端");
+  			row14.createCell(1).setCellValue(tm.getInnerShellBackend());
   			
   			Row row15 = sheet.createRow(14);
-  			row15.createCell(0).setCellValue("测试系统名称");
-  			row15.createCell(1).setCellValue(ts.getName());
+  			row15.createCell(0).setCellValue("其他");
+  			row15.createCell(1).setCellValue(tm.getOther());
   			
   			Row row16 = sheet.createRow(15);
-  			row16.createCell(0).setCellValue("介绍");
-  			row16.createCell(1).setCellValue(ts.getDescribe());
+  			row16.createCell(0).setCellValue("测试系统名称");
+  			row16.createCell(1).setCellValue(ts.getName());
   			
   			Row row17 = sheet.createRow(16);
-  			row17.createCell(0).setCellValue("压力/Mpa");
-  			row17.createCell(1).setCellValue(queryVO.getPress());
+  			row17.createCell(0).setCellValue("介绍");
+  			row17.createCell(1).setCellValue(ts.getDescribe());
   			
   			Row row18 = sheet.createRow(17);
-  			row18.createCell(0).setCellValue("温度/︒");
-  			row18.createCell(1).setCellValue(queryVO.getTemparture());
+  			row18.createCell(0).setCellValue("压力/Mpa");
+  			row18.createCell(1).setCellValue(queryVO.getPress());
   			
   			Row row19 = sheet.createRow(18);
-  			row19.createCell(0).setCellValue("频率/Hz");
-  			row19.createCell(1).setCellValue("反射系数");
-  			row19.createCell(2).setCellValue("透射系数");
-  			row19.createCell(3).setCellValue("吸声系数");
-  			row19.createCell(4).setCellValue("回声降低/dB");
-  			row19.createCell(5).setCellValue("辐射声功率/dB");
-  			row19.createCell(6).setCellValue("辐射声功率插入损失/dB");
+  			row19.createCell(0).setCellValue("温度/︒");
+  			row19.createCell(1).setCellValue(queryVO.getTemparture());
   			
-  			int i = 19 ; 
+  			Row row20 = sheet.createRow(19);
+  			row20.createCell(0).setCellValue("频率/Hz");
+  			row20.createCell(1).setCellValue("反射系数");
+  			row20.createCell(2).setCellValue("透射系数");
+  			row20.createCell(3).setCellValue("吸声系数");
+  			row20.createCell(4).setCellValue("回声降低/dB");
+  			row20.createCell(5).setCellValue("辐射声功率/dB");
+  			row20.createCell(6).setCellValue("辐射声功率插入损失/dB");
+  			
+  			int i = 20 ; 
   			for (ItemBigVO item:items) {
   				Row myRow = sheet.createRow(i);
   				myRow.createCell(0).setCellValue(item.getRate());
@@ -308,7 +342,7 @@ public class ExcelService {
     }
     
     
-    public void downloadScale(HttpServletResponse response,SacleQueryVO queryVO,
+    public void downloadScale(HttpServletResponse response,String entityName,SacleQueryVO queryVO,
     		TestModelObjPO tm,TestConditionPO tc,LayingSchemePO ls,List<ItemScaleVO>  items){
     	
     	response.reset();
@@ -339,81 +373,95 @@ public class ExcelService {
          }
   		if(Toolkit.notEmpty(sheet)){
   			Row row1 = sheet.createRow(0);
-  			row1.createCell(0).setCellValue("外场试验模型名称");
-  			row1.createCell(1).setCellValue(tm.getName());
+  			row1.createCell(0).setCellValue("缩放比模型名称");
+  			row1.createCell(1).setCellValue(entityName);
+  			
   			Row row2 = sheet.createRow(1);
-  			row2.createCell(0).setCellValue("壳体类型");
-  			row2.createCell(1).setCellValue(tm.getShellType());
+  			row2.createCell(0).setCellValue("外场试验模型名称");
+  			row2.createCell(1).setCellValue(tm.getName());
+  			
   			Row row3 = sheet.createRow(2);
-  			row3.createCell(0).setCellValue("尺寸");
-  			row3.createCell(1).setCellValue(tm.getShapeSize());
+  			row3.createCell(0).setCellValue("壳体类型");
+  			row3.createCell(1).setCellValue(tm.getShellType());
+  			
   			Row row4 = sheet.createRow(3);
-  			row4.createCell(0).setCellValue("重量");
-  			row4.createCell(1).setCellValue(tm.getWeight());
+  			row4.createCell(0).setCellValue("尺寸");
+  			row4.createCell(1).setCellValue(tm.getShapeSize());
+  			
   			Row row5 = sheet.createRow(4);
-  			row5.createCell(0).setCellValue("排水量");
-  			row5.createCell(1).setCellValue(tm.getDisplacement());
+  			row5.createCell(0).setCellValue("重量");
+  			row5.createCell(1).setCellValue(tm.getWeight());
+  			
   			Row row6 = sheet.createRow(5);
-  			row6.createCell(0).setCellValue("其他");
-  			row6.createCell(1).setCellValue(tm.getOther());
+  			row6.createCell(0).setCellValue("排水量");
+  			row6.createCell(1).setCellValue(tm.getDisplacement());
+  			
   			Row row7 = sheet.createRow(6);
-  			row7.createCell(0).setCellValue("试验名称");
-  			row7.createCell(1).setCellValue(tc.getName());
+  			row7.createCell(0).setCellValue("其他");
+  			row7.createCell(1).setCellValue(tm.getOther());
+  			
   			Row row8 = sheet.createRow(7);
-  			row8.createCell(0).setCellValue("试验时间");
-  			row8.createCell(1).setCellValue(tc.getTestTime());
+  			row8.createCell(0).setCellValue("试验名称");
+  			row8.createCell(1).setCellValue(tc.getName());
+  			
   			Row row9 = sheet.createRow(8);
-  			row9.createCell(0).setCellValue("试验地点");
-  			row9.createCell(1).setCellValue(tc.getTestPlace());
+  			row9.createCell(0).setCellValue("试验时间");
+  			row9.createCell(1).setCellValue(tc.getTestTime());
+  			
   			Row row10 = sheet.createRow(9);
-  			row10.createCell(0).setCellValue("试验时长");
-  			row10.createCell(1).setCellValue(tc.getDuration());
+  			row10.createCell(0).setCellValue("试验地点");
+  			row10.createCell(1).setCellValue(tc.getTestPlace());
+  			
   			Row row11 = sheet.createRow(10);
-  			row11.createCell(0).setCellValue("水域深度");
-  			row11.createCell(1).setCellValue(tc.getWaterDepth());
+  			row11.createCell(0).setCellValue("试验时长");
+  			row11.createCell(1).setCellValue(tc.getDuration());
   			
   			Row row12 = sheet.createRow(11);
-  			row12.createCell(0).setCellValue("试验深度");
-  			row12.createCell(1).setCellValue(tc.getTestDepth());
+  			row12.createCell(0).setCellValue("水域深度");
+  			row12.createCell(1).setCellValue(tc.getWaterDepth());
   			
   			Row row13 = sheet.createRow(12);
-  			row13.createCell(0).setCellValue("其他");
-  			row13.createCell(1).setCellValue(tc.getOther());
+  			row13.createCell(0).setCellValue("试验深度");
+  			row13.createCell(1).setCellValue(tc.getTestDepth());
   			
   			Row row14 = sheet.createRow(13);
-  			row14.createCell(0).setCellValue("敷设方案名称");
-  			row14.createCell(1).setCellValue(ls.getName());
+  			row14.createCell(0).setCellValue("其他");
+  			row14.createCell(1).setCellValue(tc.getOther());
   			
   			Row row15 = sheet.createRow(14);
-  			row15.createCell(0).setCellValue("外壳外表面");
-  			row15.createCell(1).setCellValue(ls.getShellSurfaceOuter());
+  			row15.createCell(0).setCellValue("敷设方案名称");
+  			row15.createCell(1).setCellValue(ls.getName());
   			
   			Row row16 = sheet.createRow(15);
-  			row16.createCell(0).setCellValue("外壳内表面");
-  			row16.createCell(1).setCellValue(ls.getShellSurfaceIner());
+  			row16.createCell(0).setCellValue("外壳外表面");
+  			row16.createCell(1).setCellValue(ls.getShellSurfaceOuter());
   			
   			Row row17 = sheet.createRow(16);
-  			row17.createCell(0).setCellValue("内壳");
-  			row17.createCell(1).setCellValue(ls.getInnerShell());
+  			row17.createCell(0).setCellValue("外壳内表面");
+  			row17.createCell(1).setCellValue(ls.getShellSurfaceIner());
   			
   			Row row18 = sheet.createRow(17);
-  			row18.createCell(0).setCellValue("肋骨");
-  			row18.createCell(1).setCellValue(ls.getRibs());
+  			row18.createCell(0).setCellValue("内壳");
+  			row18.createCell(1).setCellValue(ls.getInnerShell());
   			
   			Row row19 = sheet.createRow(18);
-  			row19.createCell(0).setCellValue("其他");
-  			row19.createCell(1).setCellValue(ls.getOther());
+  			row19.createCell(0).setCellValue("肋骨");
+  			row19.createCell(1).setCellValue(ls.getRibs());
   			
   			Row row20 = sheet.createRow(19);
-  			row20.createCell(0).setCellValue("频率/Hz");
-  			row20.createCell(1).setCellValue("光壳声目标强度");
-  			row20.createCell(2).setCellValue("敷瓦声目标强度");
-  			row20.createCell(3).setCellValue("声目标强度降低量");
-  			row20.createCell(4).setCellValue("光壳辐射声功率");
-  			row20.createCell(5).setCellValue("敷瓦辐射声功率");
-  			row20.createCell(6).setCellValue("辐射声功率插入损失");
+  			row20.createCell(0).setCellValue("其他");
+  			row20.createCell(1).setCellValue(ls.getOther());
   			
-  			int i = 20 ; 
+  			Row row21 = sheet.createRow(20);
+  			row21.createCell(0).setCellValue("频率/Hz");
+  			row21.createCell(1).setCellValue("光壳声目标强度");
+  			row21.createCell(2).setCellValue("敷瓦声目标强度");
+  			row21.createCell(3).setCellValue("声目标强度降低量");
+  			row21.createCell(4).setCellValue("光壳辐射声功率");
+  			row21.createCell(5).setCellValue("敷瓦辐射声功率");
+  			row21.createCell(6).setCellValue("辐射声功率插入损失");
+  			
+  			int i = 21 ; 
   			for (ItemScaleVO item:items) {
   				Row myRow = sheet.createRow(i);
   				myRow.createCell(0).setCellValue(item.getRate());

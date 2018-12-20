@@ -74,6 +74,15 @@ public class BigDemoMetadataService{
 			}
 			return result ; 
 		}
+		
+		public List<BigDemoMetadata> findByUniqueConditionList(BigDemoMetadata entity){
+			List<BigDemoMetadata> results = dao.
+					findBySamplenameAndTempartureAndPressAndTestNames(
+							entity.getSampleName(), entity.getTemparture(), 
+							entity.getPress(), entity.getTestModelName(),entity.getTestSystemName());		
+			return results ; 
+		}
+		
 		//删除所有的样本数据
 		public void deleteAllItems(String metaPk){
 			itemDao.deleteByBigMetaPK(metaPk);
