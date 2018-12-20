@@ -1,14 +1,17 @@
 package com.wisely.web.mng.data;
 
 import java.io.IOException;
+
 import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
+
 import com.wisely.domainVO.ResultVO;
-import com.wisely.service.ExcelService;
+import com.wisely.service.ExcelNewService;
 import com.wisely.service.UploadService;
 
 import until.constant.Constants;
@@ -18,7 +21,7 @@ import until.constant.Constants;
 public class UploadManager {
 	
 	@Autowired
-	private ExcelService  excelService;
+	private ExcelNewService  excelNewService;
 	@Autowired
 	private UploadService  uploadService;
 	
@@ -31,17 +34,15 @@ public class UploadManager {
 		}
 		//小样数据加载，一共8个属性，根据样品名称、温度、压力、背衬四个固定，其他4个属性（频率、反射系数、投射系数、吸声系数）变动
 		if(Constants.SMALLDEMO.equals(catalog)) {
-			excelService.load(file,"声管小样数据");
-			res = uploadService.getSmallDemo();
-			res.setSuccess(true);
+			res = uploadService.getSmallDemo(file);
+			//res.setSuccess(true);
 		}else if(Constants.BIGDEMO.equals(catalog)) {
-			excelService.load(file,"水罐大样数据");
-			res = uploadService.getBigDemo();
-			res.setSuccess(true);
+			res = uploadService.getBigDemo(file);
+			//res.setSuccess(true);
 		}else if(Constants.CONDEMO.equals(catalog)){
-			excelService.load(file,"缩比模型数据");
-			res = uploadService.getConDemo();
-			res.setSuccess(true);
+			excelNewService.load(file,"缩比模型数据");
+			res = uploadService.getConDemo(file);
+			//res.setSuccess(true);
 		}else {
 			res.setMessage("不支持的模型数据");
 		}
