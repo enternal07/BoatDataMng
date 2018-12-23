@@ -151,6 +151,7 @@ public class SmallDemoMetaDataService {
 					BaseMetaBacking backingVO = backingDao.findOne(smallVO.getBakingpk());
 					if(Toolkit.notEmpty(backingVO)){
 						smallItemVO.setPk(item.getPk()); 
+						smallItemVO.setName(smallVO.getName()); 
 						smallItemVO.setSamplename(smallVO.getSamplename());
 						smallItemVO.setSamplepk(smallVO.getSamplepk());
 						smallItemVO.setBackingname(backingVO.getName());

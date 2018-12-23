@@ -12,6 +12,7 @@ public class SmallItemVO implements java.io.Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	private String pk; 
+	private String name; 
 	private String samplepk; 
 	private String samplename ; 
 	private String bakingpk ; 
@@ -90,6 +91,11 @@ public class SmallItemVO implements java.io.Serializable {
 	public void setPk(String pk) {
 		this.pk = pk;
 	}
-	
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
 	
 }

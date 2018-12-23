@@ -152,6 +152,7 @@ public class BigDemoMetadataService{
 				BigItemVO bigItemVO = new BigItemVO();
 				BigDemoMetadata bigVO = item.getBigDemoMetadata();
 				bigItemVO.setPk(item.getPk());
+				bigItemVO.setName(bigVO.getName()); 
 				bigItemVO.setSampleName(bigVO.getSampleName());
 				bigItemVO.setSamplepk(bigVO.getSamplepk());
 				bigItemVO.setTestModelName(bigVO.getTestModelName());
