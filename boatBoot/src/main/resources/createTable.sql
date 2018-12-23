@@ -257,9 +257,9 @@ alter table testsystem add unique(testsystem_name) ;
 alter table test_model_obj add unique(name) ; 
 alter table laying_scheme add unique(name) ;
 /*名称唯一索引*/
-alter table item add unique(rate,refect,transmission,bondacust) ;
-alter table itembig add unique(rate,refect,transmission,bondacust,echoes,radiation,radiationlose) ; 
-alter table item_scale add unique(rate,light_shell_ts,light_shell_sp,laying_shell_ts,laying_shell_sp,reduction_ts,reduction_sp) ; 
+alter table item add unique(rate,refect,transmission,bondacust,small_pk) ;
+alter table itembig add unique(rate,refect,transmission,bondacust,echoes,radiation,radiationlose,samplepk) ; 
+alter table item_scale add unique(rate,light_shell_ts,light_shell_sp,laying_shell_ts,laying_shell_sp,reduction_ts,reduction_sp,scalemata_pk) ; 
 
 /**/
 alter table spha_photo modify url longtext  ; 

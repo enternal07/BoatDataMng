@@ -24,8 +24,8 @@ public interface ItemBigDao extends CustomRepository<ItemBig, String> {
 	@Query("delete from ItemBig item where item.pk in (?1) ")
 	int deleteByPks(List<String> pks);
 	
-	@Query("select count(1) from ItemBig item where rate = ?1 and refect = ?2 and transmission=?3 and bondacust=?4 and echoes =?5 and radiation=?6 and radiationlose = ?7")
-	int getCount(Integer rate,Float refect,Float transmission,Float bondacust,Float echoes,Integer radiation,Float radiationlose);
+	@Query("select count(1) from ItemBig item where rate = ?1 and refect = ?2 and transmission=?3 and bondacust=?4 and echoes =?5 and radiation=?6 and radiationlose = ?7 and item.bigDemoMetadata.pk = ?8")
+	int getCount(Integer rate,Float refect,Float transmission,Float bondacust,Float echoes,Integer radiation,Float radiationlose,String fpk);
 	
 
 }

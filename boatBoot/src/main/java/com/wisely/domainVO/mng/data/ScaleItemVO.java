@@ -14,6 +14,7 @@ public class ScaleItemVO implements java.io.Serializable {
 	
 	private String  pk; 
 	private String  name; 
+	private int  rate; 
 	private String  testModelObjName ; 
 	private String  testModelObjPk ; 
 	private String  layingSchemeName ; 
@@ -110,6 +111,12 @@ public class ScaleItemVO implements java.io.Serializable {
 	}
 	public void setName(String name) {
 		this.name = name;
+	}
+	public int getRate() {
+		return rate;
+	}
+	public void setRate(int rate) {
+		this.rate = rate;
 	} 
 
 }

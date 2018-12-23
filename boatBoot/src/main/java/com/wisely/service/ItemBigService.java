@@ -25,7 +25,7 @@ public class ItemBigService {
 				if(dao.getCount(item.getRate(), item.getRefect(), 
 						item.getTransmission(), item.getBondacust(),
 						item.getEchoes(),item.getRadiation(),
-						item.getRadiationlose())==0){
+						item.getRadiationlose(),item.getBigDemoMetadata().getPk())==0){
 					items.add(item);
 				}
 			}

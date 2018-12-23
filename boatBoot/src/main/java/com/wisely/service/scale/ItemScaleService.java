@@ -25,7 +25,7 @@ public class ItemScaleService {
 			for (ItemScalePO item:pos) {
 				if(dao.getCount(item.getLightShellTS(),item.getLightShellSP(),
 						item.getLayingShellTS(),item.getLayingShellSP(),
-						item.getReductionTS(),item.getReductionSP())==0){
+						item.getReductionTS(),item.getReductionSP(),item.getScaleMataPO().getPk())==0){
 					items.add(item);
 				}
 			}

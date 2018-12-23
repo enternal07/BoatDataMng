@@ -68,7 +68,7 @@ public class ItemService {
 			List<Item> items = new ArrayList<>(); 
 			for (Item item:pos) {
 				if(dao.getCount(item.getRate(), item.getRefect(), 
-						item.getTransmission(), item.getBondacust())==0){
+						item.getTransmission(), item.getBondacust(),item.getSmallPO().getPk())==0){
 					items.add(item);
 				}
 			}
