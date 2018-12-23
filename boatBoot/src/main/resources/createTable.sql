@@ -261,3 +261,6 @@ alter table item add unique(rate,refect,transmission,bondacust) ;
 alter table itembig add unique(rate,refect,transmission,bondacust,echoes,radiation,radiationlose) ; 
 alter table item_scale add unique(rate,light_shell_ts,light_shell_sp,laying_shell_ts,laying_shell_sp,reduction_ts,reduction_sp) ; 
 
+/**/
+alter table spha_photo modify url longtext  ; 
+
