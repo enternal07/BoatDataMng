@@ -10,6 +10,8 @@ import com.wisely.support.CustomRepository;
 public interface BaseMetaSampleDao extends CustomRepository<BaseMetaSample, String> {
 	
 	
+	//List<BaseMetaSample> findBySmall(boolean small);
+	@Query("select m from BaseMetaSample m  where m.small = ?1 or m.small != ?1 ")
 	List<BaseMetaSample> findBySmall(boolean small);
 	
 	List<BaseMetaSample> findByName(String name);

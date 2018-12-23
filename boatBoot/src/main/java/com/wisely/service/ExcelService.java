@@ -110,7 +110,7 @@ public class ExcelService {
   		if(Toolkit.notEmpty(sheet)){
   			
   			Row row1 = sheet.createRow(0);
-  			row1.createCell(0).setCellValue("小样数据名称");
+  			row1.createCell(0).setCellValue("声管小样名称");
   			row1.createCell(1).setCellValue(entityName);
   			
   			Row row2 = sheet.createRow(1);
@@ -229,7 +229,7 @@ public class ExcelService {
   		if(Toolkit.notEmpty(sheet)){
   			
   			Row row1 = sheet.createRow(0);
-  			row1.createCell(0).setCellValue("样品名称");
+  			row1.createCell(0).setCellValue("水罐大样名称");
   			row1.createCell(1).setCellValue(entityName);
   			
   			Row row2 = sheet.createRow(1);
