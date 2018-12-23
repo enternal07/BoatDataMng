@@ -35,7 +35,6 @@ public class UploadService {
 	private ItemBigService serviceItemBig;
 	@Autowired
 	private ItemScaleService itemScaleService;
-	
 	/*
 	 * 判断元数据；
 	 * 存储没有存储过的数据
@@ -48,7 +47,7 @@ public class UploadService {
 		 //Demometadata demoMeta = excelNewService.getSmallMetaFromExcle(true);
 		 Demometadata temp = service.queryDetail(pk==null?"":pk);
 		 if(Toolkit.notEmpty(temp)){
-			 items= excelNewService.getItemData(temp);
+			 items = excelNewService.getItemData(temp);
 			 serviceItem.saveAll(items);
 			 re.setMessage("处理声管小样"+temp.getName()+"下面的"+items.size()+"条信息完毕");
 			 re.setSuccess(true);
@@ -93,7 +92,7 @@ public class UploadService {
 		//ScaleMataPO demoMeta = excelNewService.getScaleMetaFromExcle();
 		ScaleMataPO temp = scaleMataService.queryDetail(pk==null?"":pk);
 		if(Toolkit.notEmpty(temp)){
-			 items= excelNewService.getItemScaleData(temp);
+			 items = excelNewService.getItemScaleData(temp);
 			 itemScaleService.saveAll(items);
 			 re.setMessage("处理缩比样品"+temp.getTestModelObjName()+"下面的"+items.size()+"条信息完毕");
 			 re.setSuccess(true);

@@ -18,6 +18,7 @@ import com.wisely.dao.ItemDao;
 import com.wisely.domain.small.Item;
 import com.wisely.domainVO.ItemBaseVO;
 import com.wisely.domainVO.QueryVO;
+import com.wisely.util.Toolkit;
 
 import net.minidev.json.JSONArray;
 import net.minidev.json.JSONObject;
@@ -63,7 +64,19 @@ public class ItemService {
 		return vos;
 	}
 	public List<Item> saveAll(List<Item> pos){
-		return dao.save(pos);
+		if(Toolkit.notEmpty(pos)){
+			List<Item> items = new ArrayList<>(); 
+			for (Item item:pos) {
+				if(dao.getCount(item.getRate(), item.getRefect(), 
+						item.getTransmission(), item.getBondacust())==0){
+					items.add(item);
+				}
+			}
+			if(items.size()>0){
+				return dao.save(items);
+			}
+		}
+		return null ; 
 	}
 	public void deleteAll(String metaPk){
 		dao.deleteByMetaPK(metaPk);

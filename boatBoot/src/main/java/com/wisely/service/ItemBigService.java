@@ -10,6 +10,7 @@ import com.wisely.dao.ItemBigDao;
 import com.wisely.domain.big.ItemBig;
 import com.wisely.domainVO.ItemBigVO;
 import com.wisely.domainVO.QueryBigVO;
+import com.wisely.util.Toolkit;
 
 @Service
 public class ItemBigService {
@@ -17,9 +18,22 @@ public class ItemBigService {
 	@Autowired
 	private ItemBigDao dao;
 	
-	
 	public List<ItemBig> saveAll(List<ItemBig> pos){
-		return dao.save(pos);
+		if(Toolkit.notEmpty(pos)){
+			List<ItemBig> items = new ArrayList<>(); 
+			for (ItemBig item:pos) {
+				if(dao.getCount(item.getRate(), item.getRefect(), 
+						item.getTransmission(), item.getBondacust(),
+						item.getEchoes(),item.getRadiation(),
+						item.getRadiationlose())==0){
+					items.add(item);
+				}
+			}
+			if(items.size()>0){
+				return dao.save(items);
+			}
+		}
+		return null ; 
 	}
 	
 	public List<ItemBigVO> getItemBigList(QueryBigVO queryVO){
