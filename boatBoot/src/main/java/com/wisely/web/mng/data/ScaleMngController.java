@@ -150,7 +150,6 @@ public class ScaleMngController {
 		return re;
 	}
 	
-	
 	@RequestMapping(value = "/queryAll",method = RequestMethod.POST)
 	public @ResponseBody ResultVO queryAll(HttpServletRequest req){
 		ResultVO re = new ResultVO(true);

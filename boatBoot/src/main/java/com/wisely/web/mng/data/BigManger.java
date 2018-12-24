@@ -17,6 +17,7 @@ import com.wisely.domain.big.BigDemoMetadata;
 import com.wisely.domain.big.TestModel;
 import com.wisely.domain.big.TestSystem;
 import com.wisely.domain.common.BaseMetaSample;
+import com.wisely.domain.small.Demometadata;
 import com.wisely.domainVO.DeleteVO;
 import com.wisely.domainVO.ResultVO;
 import com.wisely.service.BaseMetaSampleService;
@@ -174,6 +175,29 @@ public class BigManger {
 		}
 		return re;
 	}
+	
+	@RequestMapping(value = "/deleteAll",method = RequestMethod.POST)
+	public @ResponseBody ResultVO deleteAll(@RequestBody DeleteVO delVO,HttpServletRequest req){
+		ResultVO re = new ResultVO(true);
+		StringBuffer sb = new StringBuffer();
+		if(Toolkit.notEmpty(delVO) && Toolkit.notEmpty(delVO.getPks())){
+			for (String pk : delVO.getPks()) {
+				BigDemoMetadata dt = service.queryDetail(pk);
+				if(Toolkit.notEmpty(dt)){
+					service.deleteAllItems(pk);
+					service.deleteEntity(pk);
+				}else{
+					sb.append("["+pk+"]实体不存在!");
+				}
+			}
+		}else{
+			re.setSuccess(false);
+			re.setMessage("数据不能为空！");
+		}
+		re.setMessage(sb.toString());
+		return re;
+	}
+	
 	
 	@RequestMapping(value = "/queryByName",method = RequestMethod.POST)
 	public @ResponseBody ResultVO queryByName(@RequestBody BigDemoMetadata demometadata,HttpServletRequest req){
