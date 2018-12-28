@@ -20,17 +20,16 @@ public class ItemBigService {
 	
 	public List<ItemBig> saveAll(List<ItemBig> pos){
 		if(Toolkit.notEmpty(pos)){
-			List<ItemBig> items = new ArrayList<>(); 
+			List<ItemBig> lists = new ArrayList<>(); 
 			for (ItemBig item:pos) {
-				if(dao.getCount(item.getRate(), item.getRefect(), 
-						item.getTransmission(), item.getBondacust(),
-						item.getEchoes(),item.getRadiation(),
-						item.getRadiationlose(),item.getBigDemoMetadata().getPk())==0){
-					items.add(item);
+				ItemBig temp = dao.getByRate(item.getRate(),item.getBigDemoMetadata().getPk());
+				if(Toolkit.notEmpty(temp)){//存在
+					item.setPk(temp.getPk()); 
 				}
+				lists.add(item);
 			}
-			if(items.size()>0){
-				return dao.save(items);
+			if(lists.size()>0){
+				return dao.save(lists);
 			}
 		}
 		return null ; 

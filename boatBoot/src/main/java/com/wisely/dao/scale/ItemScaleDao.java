@@ -2,8 +2,6 @@ package com.wisely.dao.scale;
 
 import java.util.List;
 
-import javax.persistence.Column;
-
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,5 +26,8 @@ public interface ItemScaleDao extends CustomRepository<ItemScalePO, String> {
 	
 	@Query("select count(1) from ItemScalePO item where light_shell_ts = ?1 and light_shell_sp = ?2 and laying_shell_ts=?3 and laying_shell_sp=?4 and reduction_ts =?5 and reduction_sp=?6 and item.scaleMataPO.pk = ?7")
 	int getCount(float light_shell_ts,float light_shell_sp,float laying_shell_ts,float laying_shell_sp,float reduction_ts,float reduction_sp,String pk);
+	
+	@Query("select item from ItemScalePO item where item.rate = ?1 and item.scaleMataPO.pk = ?2")
+	ItemScalePO getByRate(Integer rate,String fpk);
 	
 }

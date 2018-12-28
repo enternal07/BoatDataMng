@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.wisely.domain.big.ItemBig;
+import com.wisely.domain.small.Item;
 import com.wisely.support.CustomRepository;
 
 public interface ItemBigDao extends CustomRepository<ItemBig, String> {
@@ -26,6 +27,8 @@ public interface ItemBigDao extends CustomRepository<ItemBig, String> {
 	
 	@Query("select count(1) from ItemBig item where rate = ?1 and refect = ?2 and transmission=?3 and bondacust=?4 and echoes =?5 and radiation=?6 and radiationlose = ?7 and item.bigDemoMetadata.pk = ?8")
 	int getCount(Integer rate,Float refect,Float transmission,Float bondacust,Float echoes,Integer radiation,Float radiationlose,String fpk);
-	
 
+	@Query("select item from ItemBig item where item.rate = ?1 and item.bigDemoMetadata.pk = ?2")
+	ItemBig getByRate(Integer rate,String fpk);
+	
 }

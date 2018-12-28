@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.wisely.dao.scale.ItemScaleDao;
+import com.wisely.domain.big.ItemBig;
 import com.wisely.domain.scale.ItemScalePO;
 import com.wisely.domainVO.ItemScaleVO;
 import com.wisely.domainVO.SacleQueryVO;
@@ -21,16 +22,16 @@ public class ItemScaleService {
 	public List<ItemScalePO> saveAll(List<ItemScalePO> pos) {
 		
 		if(Toolkit.notEmpty(pos)){
-			List<ItemScalePO> items = new ArrayList<>(); 
-			for (ItemScalePO item:pos) {
-				if(dao.getCount(item.getLightShellTS(),item.getLightShellSP(),
-						item.getLayingShellTS(),item.getLayingShellSP(),
-						item.getReductionTS(),item.getReductionSP(),item.getScaleMataPO().getPk())==0){
-					items.add(item);
+			List<ItemScalePO> lists = new ArrayList<>(); 
+			for (ItemScalePO item : pos) {
+				ItemScalePO temp = dao.getByRate(item.getRate(),item.getScaleMataPO().getPk());
+				if(Toolkit.notEmpty(temp)){//存在
+					item.setPk(temp.getPk()); 
 				}
+				lists.add(item);
 			}
-			if(items.size()>0){
-				return dao.save(items);
+			if(lists.size()>0){
+				return dao.save(lists);
 			}
 		}
 		return null ; 

@@ -27,4 +27,8 @@ public interface ItemDao extends CustomRepository<Item, String> {
 	@Query("select count(1) from Item item where rate = ?1 and refect = ?2 and transmission=?3 and bondacust=?4 and item.smallPO.pk = ?5")
 	int getCount(Integer rate,Float refect,Float transmission,Float bondacust,String fpk);
 	
+	@Query("select item from Item item where rate = ?1 and item.smallPO.pk = ?2")
+	Item getByRate(Integer rate,String fpk);
+	
+	
 }

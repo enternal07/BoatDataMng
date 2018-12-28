@@ -63,21 +63,24 @@ public class ItemService {
 		}
 		return vos;
 	}
+	
 	public List<Item> saveAll(List<Item> pos){
 		if(Toolkit.notEmpty(pos)){
-			List<Item> items = new ArrayList<>(); 
+			List<Item> lists = new ArrayList<>(); 
 			for (Item item:pos) {
-				if(dao.getCount(item.getRate(), item.getRefect(), 
-						item.getTransmission(), item.getBondacust(),item.getSmallPO().getPk())==0){
-					items.add(item);
+				Item temp = dao.getByRate(item.getRate(),item.getSmallPO().getPk());
+				if(Toolkit.notEmpty(temp)){//存在
+					item.setPk(temp.getPk()); 
 				}
+				lists.add(item);
 			}
-			if(items.size()>0){
-				return dao.save(items);
+			if(lists.size()>0){
+				return dao.save(lists); 
 			}
 		}
 		return null ; 
 	}
+	
 	public void deleteAll(String metaPk){
 		dao.deleteByMetaPK(metaPk);
 		dao.flush();
