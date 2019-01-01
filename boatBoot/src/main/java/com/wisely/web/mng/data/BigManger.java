@@ -56,8 +56,8 @@ public class BigManger {
 			BigDemoMetadata dtname = service.findByName(demometadata.getName()); 
 			if (Toolkit.isEmpty(dt)&&Toolkit.isEmpty(dtname)){//名称不存在也不重复
 				String samplePk = demometadata.getSamplepk() ; 
-				String testModelPk = demometadata.getTestModelName(); 
-				String testSystemPk = demometadata.getTestSystemName();
+				String testModelPk = demometadata.getTestModelPk();
+				String testSystemPk = demometadata.getTestSystemPk();
 				if(Toolkit.isEmpty(samplePk)){
 					BaseMetaSample bms =  sampleService.getBySampleName(demometadata.getSampleName());
 					samplePk = bms!=null?bms.getPk():null;

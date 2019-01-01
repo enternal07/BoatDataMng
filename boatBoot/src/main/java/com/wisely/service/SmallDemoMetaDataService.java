@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import com.wisely.dao.BaseMetaBackingDao;
@@ -141,7 +143,7 @@ public class SmallDemoMetaDataService {
 	 * 查询所有
 	 */
 	public List<SmallItemVO> findAllItem(){
-		List<Item> allItems = itemDao.findAll();
+		List<Item> allItems = itemDao.findAll(new Sort(Direction.DESC,"ts"));
 		List<SmallItemVO> result = new ArrayList<>() ; 
 		if(Toolkit.notEmpty(allItems)){
 			for (Item item : allItems) {
@@ -218,7 +220,7 @@ public class SmallDemoMetaDataService {
 	}
 	
 	public List<Demometadata> queryFull(){
-		return dao.findAll();
+		return dao.findAll(new Sort(Direction.DESC,"ts"));
 	}
 	
 	public Demometadata queryDetail(String pk){

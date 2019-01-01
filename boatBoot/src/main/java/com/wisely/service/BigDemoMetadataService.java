@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import com.wisely.dao.BigDemoMetadataDao;
@@ -139,7 +141,7 @@ public class BigDemoMetadataService{
 			return res;
 		}
 	public List<BigDemoMetadata> findAll() {
-		return  dao.findAll();
+		return  dao.findAll(new Sort(Direction.DESC,"ts"));
 	}
 	/**
 	 * 查询所有
@@ -203,7 +205,7 @@ public class BigDemoMetadataService{
 	}
 	
 	public List<BigDemoMetadata> queryFull(){
-		return dao.findAll();
+		return dao.findAll(new Sort(Direction.DESC,"ts"));
 	}
 	
 	public BigDemoMetadata queryDetail(String pk){

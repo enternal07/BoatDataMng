@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import com.wisely.dao.scale.ItemScaleDao;
@@ -141,7 +143,7 @@ public class ScaleMataService {
 	 * 查询所有
 	 */
 	public List<ScaleItemVO> findAllItem(){
-		List<ItemScalePO> allItems = itemDao.findAll();
+		List<ItemScalePO> allItems = itemDao.findAll(new Sort(Direction.DESC,"ts"));
 		List<ScaleItemVO> result = new ArrayList<>() ; 
 		if(Toolkit.notEmpty(allItems)){
 			for (ItemScalePO item : allItems) {
@@ -197,7 +199,7 @@ public class ScaleMataService {
 	}
 	
 	public List<ScaleMataPO> queryFull(){
-		return dao.findAll();
+		return dao.findAll(new Sort(Direction.DESC,"ts"));
 	}
 	
 	public ScaleMataPO queryDetail(String pk){
