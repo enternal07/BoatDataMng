@@ -67,7 +67,7 @@ public class BigManger {
 					testModelPk = bmb!=null?bmb.getPk():null;
 				}
 				if(Toolkit.isEmpty(testSystemPk)){
-					TestSystem bmb =  testSystemService.getByName(demometadata.getTestModelName());
+					TestSystem bmb =  testSystemService.getByName(demometadata.getTestSystemName());
 					testSystemPk = bmb!=null?bmb.getPk():null;
 				}
 				demometadata.setSamplepk(samplePk);
